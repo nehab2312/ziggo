@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: smp_cfg.xml,v 1.24 2010/05/06 20:09:12 dilekk Exp $ -->
+<smp_config xmlns="http://www.sigma-systems.com/schemas/4.0/SmpConfig" xmlns:cross_tc="http://www.sigma-systems.com/schemas/3.0/CrossTechCartridge" xmlns:network_action="http://www.sigma-systems.com/schemas/3.0/NetworkAction" xmlns:sbcmn="http://www.sigma-systems.com/sb/cmn" xmlns:sdp="http://www.sigma-systems.com/schemas/3.0/sdp" xmlns:tc="http://www.sigma-systems.com/schemas/4.0/TechCartridge" xmlns:ti="http://www.sigma-systems.com/schemas/3.0/TechImpact" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sigma-systems.com/schemas/4.0/SmpConfig ../../../xmlcfg/schemas/smp_cfg.xsd">
+    <xi:include href="../../../xmlcfg/tech_cartridge/__builtin__/__builtin__.xml"/>
+    <xi:include href="sdp/voip/voip.xml"/>
+    <xi:include href="sdp/docsis/docsis.xml"/>
+    <xi:include href="sdp/isp/isp.xml"/>
+    <xi:include href="sdp/resi_sip/resi_sip.xml"/>
+    <xi:include href="sdp/resi_data/resi_data.xml"/>
+    <xi:include href="sdp/resi_vmail/resi_vmail.xml"/>
+    <xi:include href="sdp/resi_clec/resi_clec.xml"/>
+    <xi:include href="sdp/subscriber/subscriber.xml"/>
+    <xi:include href="network_actions/network_actions.xml"/>
+    <xi:include href="../../../shelf/tech_cartridge/nortelsuccessionsn06x/nortelsuccessionsn06x.xml"/>
+    <xi:include href="../../../shelf/tech_cartridge/ipunityharmony2x/ipunity.xml"/>
+    <xi:include href="../../../shelf/tech_cartridge/statemachine_1.0/statemachine.xml"/>
+    <xi:include href="../../../shelf/tech_cartridge/l3_01/l3_01.xml"/>
+    <xi:include href="../../../shelf/tech_cartridge/ciscobac40/ciscobac40.xml"/>
+    <xi:include href="../../../shelf/tech_cartridge/openwavemx/openwavemx.xml"/>
+    <xi:include href="../../../shelf/tech_cartridge/apache_webspace/apache.xml"/>
+    <xi:include href="../../../shelf/tech_cartridge/callingcard/callingcard.xml"/>
+    <xi:include href="../../../shelf/tech_cartridge/tollfree/tollfree.xml"/>
+    <xi:include href="../../../shelf/tech_cartridge/billingnotification/billingnotification.xml"/>
+    <xi:include href="../../../shelf/tech_cartridge/consumableresources/consumableresources.xml"/>
+    <xi:include href="../../../shelf/tech_cartridge/broadsoft/broadsoft.xml"/>
+    <xi:include href="../../../shelf/tech_cartridge/sprint/sprint.xml"/>
+    <xi:include href="../../../shelf/tech_cartridge/alu5529apc/alu5529apc.xml"/>
+    <xi:include href="../../../shelf/tech_cartridge/sigmadpm10/sigmadpm10.xml"/>
+    <xi:include href="tech_impact/nortelsuccessionsn06x/nortelsuccessionsn06x.xml"/>
+    <xi:include href="tech_impact/sigmadpm10/sigmadpm10.xml"/>
+    <xi:include href="tech_impact/ipunityharmony2x/ipunityharmony2x.xml"/>
+    <xi:include href="tech_impact/l3_01/l3_01.xml"/>
+    <xi:include href="tech_impact/broadsoft/broadsoft.xml"/>
+    <xi:include href="tech_impact/alu5529apc/alu5529apc.xml"/>
+    <xi:include href="tech_cartridge/cross_tech/ciscobac40_nortelsuccessionsn06x.xml"/>
+    <xi:include href="tech_cartridge/cross_tech/l301_statemachine.xml"/>
+    <xi:include href="tech_cartridge/cross_tech/consumableresources_nortelsuccessionsn06x.xml"/>
+    <xi:include href="tech_cartridge/cross_tech/consumableresources_broadsoft.xml"/>
+	<xi:include href="tech_cartridge/lgoss/lgoss.xml"/>
+    <xi:include href="tech_impact/ciscobac40/ciscobac40.xml"/>
+    <xi:include href="tech_impact/openwavemx/openwavemx.xml"/>
+    <xi:include href="tech_impact/apache/apache.xml"/>
+    <xi:include href="sdp/commercial_docsis/commercial_docsis.xml"/>
+    <xi:include href="sdp/commercial_voice/commercial_voice.xml"/>
+    <xi:include href="tech_impact/sprint/sprint.xml"/>
+    <jmf_func_lib_lst>
+        <sbcmn:jmfFuncLib jmfFuncLibName="Global_JMF_LIB">
+            <![CDATA[mf string dflt_gateway_subscriber_id (string gateway_subscriber_id?) = if nzlen gateway_subscriber_id 
+then gateway_subscriber_id
+else "Not Available" ;
+mf string failure () = "f" ;
+mf string get_adapter_name (string queue_name) = REReplace(REReplace(queue_name,  "_.*",  "one",  ""),
+          "^prov.jms.dist.queue.", "one", "") ;
+mf boolean is_credit_card_expiry_date_not_null (string credit_card_expiry?) = nzlen credit_card_expiry ;
+mf boolean is_credit_card_number_not_null (string credit_card_number?) = nzlen credit_card_number ;
+mf boolean is_language_not_null (string language?) = nzlen language ;
+mf boolean is_prepaid_ivru_pin_not_null (string ivru_pin?) = nzlen ivru_pin ;
+mf boolean is_sub_sensitive (string sensitive_subscriber_ind) = sensitive_subscriber_ind == 'Y' || sensitive_subscriber_ind == 'y' ;
+mf boolean isDuplicateObjectError (string exceptionType?) = nzlen exceptionType && exceptionType == "DuplicateKeyException" ;
+mf boolean isObjectNotFoundError (string exceptionType?) = nzlen exceptionType && exceptionType == "ObjectNotFoundException" ;
+mf boolean isRetryTask (string retry_task?) = nzlen retry_task && 
+(retry_task == 'y' || retry_task == 'Y' || retry_task == 'yes' || retry_task == 'true') ;
+mf string manual_task_1 () = "#1" ;
+mf string manual_task_2 () = "#2" ;
+mf string manual_task_3 () = "#3" ;
+mf string manual_task_4 () = "#4"	 ;
+mf string manual_task_5 () = "#5" ;
+mf string manual_task_6 () = "#6" ;
+mf string no_reconcile_error_description (string no_reconcile_task_type) = "Failed to execute "+no_reconcile_task_type ;
+mf string nothing () = "" ;
+mf boolean retry_task (string retry_task?) = nzlen retry_task &&
+(retry_task == "y" || retry_task == "Y") ;
+mf string set_isChangeKey (string isChangeKey?) = if nzlen isChangeKey then isChangeKey else "" ;
+mf string set_queue_name (string queue_name?) = if nzlen queue_name then queue_name else "" ;
+mf string set_spm_order_line_item_id (string spm_ordr_line_item_id) = spm_ordr_line_item_id ;
+mf string set_spm_ordr_id (string spm_ordr_id) = spm_ordr_id ;
+mf string std_add_tmplt () = "Standard_Add" ;
+mf string std_changekey_tmplt () = "Standard_ChangeKey" ;
+mf string std_noreconcile_tmplt () = "Standard_NoReconcile" ;
+mf string std_remove_tmplt () = "Standard_Remove" ;
+mf string std_suspend_tmplt () = "Standard_Suspend" ;
+mf string std_update_tmplt () = "Standard_Update"	 ;
+mf int priority1 () = 1 ;
+mf int priority2 () = 2 ;
+mf int priority3 () = 3 ;
+mf int priority4 () = 4 ;
+mf int priority5 () = 5 ;
+]]>
+        </sbcmn:jmfFuncLib>
+    </jmf_func_lib_lst>
+    <xi:include href="sdp/video/video.xml"/>
+    <xi:include href="../../../shelf/tech_cartridge/prepaidacc/prepaidacc.xml"/>
+	<xi:include href="../../../shelf/tech_cartridge/motoroladac6000/motoroladac6000.xml"/>
+	<xi:include href="../../../shelf/tech_cartridge/tandbergbms/tandbergbms.xml"/>
+	<xi:include href="../../../shelf/tech_cartridge/ciscodncs/ciscodncs.xml"/>
+	<xi:include href="../../../shelf/tech_cartridge/vstagupdate/vstagupdate.xml"/>
+	<xi:include href="tech_impact/motoroladac6000/motoroladac6000.xml"/>
+    <xi:include href="tech_impact/prepaidacc/prepaidacc.xml"/>
+	<xi:include href="tech_impact/ciscodncs/ciscodncs.xml"/>
+	<xi:include href="tech_impact/tandbergbms/tandbergbms.xml"/>
+    <xi:include href="tech_impact/vstagupdate/vstagupdate.xml"/>
+    <xi:include href="tech_cartridge/cross_tech/motoroladac6000_vstagupdate.xml"/>
+    <xi:include href="tech_cartridge/cross_tech/ciscodncs_vstagupdate.xml"/>
+    <xi:include href="tech_cartridge/cross_tech/sigmadpm10_nortelsuccessionsn06x.xml"/>
+</smp_config>

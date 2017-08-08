@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: manifest.xml,v 1.2 2010/01/14 15:31:12 dilekk Exp $ -->
+<manifest name="com.sigma.samp.imp.voiceClec.jea.sbjealgoss" type="JeaSpec" xmlns="http://www.sigma-systems.com/schemas/4.0/manifest" xmlns:dist="http://www.sigma-systems.com/schemas/4.0/distribution" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sigma-systems.com/schemas/4.0/manifest com/sigma/samp/xmlcfg/schemas/manifest.xsd">
+    <requiredComponents>
+        <requiredComponent name="com.sigma.hframe"/>
+        <requiredComponent name="com.sigma.vframe"/>
+        <requiredComponent name="com.sigma.jmf2"/>
+        <requiredComponent name="com.sigma.jea"/>
+		<requiredComponent name="com.sigma.jwf.clientapi" />
+    </requiredComponents>
+    <requiredResources>
+        <requiredResource jndiName="com.sigma.jms.jea.JEAQueueConnectionFactory" name="com.sigma.jms.jea.JEAQueueConnectionFactory" type="jmsQueueFactory"/>
+    </requiredResources>
+    <requiredLibraries>
+        <library isClientSpecific="false" name="saaj"/>
+        <library isClientSpecific="false" name="jaxrpc"/>
+        <library isClientSpecific="false" name="wss4j"/>
+        <library isClientSpecific="false" name="xmlsec"/>
+		<library isClientSpecific="false" name="discovery"/>
+		<library isClientSpecific="false" name="logging"/>
+		<library isClientSpecific="false" name="xalan"/>
+	</requiredLibraries>
+    <subComponents/>
+    <buildModules>
+        <module name="shelfProtocols.jar" type="lib"/>
+		<module name="LGOSSreply.war" type="web"/>
+    </buildModules>
+</manifest>

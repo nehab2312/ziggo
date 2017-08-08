@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+//=============================================================================
+//  FILE INFO
+//    $Id: manifest.xml,v 1.56 2010/02/26 14:58:43 jerryc Exp $
+//=============================================================================
+-->
+<manifest name="com.sigma.samp.imp.voiceClec" type="GenericCmpntSpec" xmlns="http://www.sigma-systems.com/schemas/4.0/manifest" xmlns:dist="http://www.sigma-systems.com/schemas/4.0/distribution" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sigma-systems.com/schemas/4.0/manifest ../../xmlcfg/schemas/manifest.xsd">
+    <requiredComponents>
+        <requiredComponent name="com.sigma.hframe"/>
+        <requiredComponent name="com.sigma.vframe"/>
+    </requiredComponents>
+    <requiredResources/>
+    <requiredLibraries>
+    </requiredLibraries>
+    <subComponents>
+        <subComponent name="com.sigma.samp.imp.voiceClec.ejb.VP2ResMap"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.ejb.VLCOSBean"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.ejb.subaddress"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.ejb.subinfovalidator"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.ejb.prcsdepy"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.gwc"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.bss.cmn"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.bss.l3bss"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.bss.sprint"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.bss.expiryDateScheduler"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.bss.collectionScheduler"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.bss.bms"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.csc"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.ejb.portAvailability"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.ISPControl"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.SvcPkgComplexList"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.CallGroupLinkDN"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.XMLListGenerator"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.ReadImplementationXML"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.GetChildServiceParameter"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.VLCompanyFeature"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.VLFeatureValue"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.GetSubnetworkParm"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.LineOptionCommercial"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.portCounter"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.GetChangeAddressInfo"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.SimpleList"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.LineOptionDetermination"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.GetNextSeqNum"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.combinedServices"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.VoiceGroups"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.ServiceCounter"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.COSPkgValidate"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.COSPkgDeleteValidate"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.HuntGroupValidate"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.GetSubnetworkLinkedParm"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.VLFeatureLastChanged"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.VGLastChanged"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.preprocessor"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.LENManager"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.GroupMemberBind"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.SecondaryLineBind"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.stmlabel"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.VLCOSPkg"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.SecondaryLineList"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.TimeZoneGetter"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.ejb.updtOrderState"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.getValueFromCR"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.GetDLQuantity"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.GetSTBModelId"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.videoCasSubnetworkSelection"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.videoEntitlement"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.videoSTBvalidator"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.collectionVideoEntitlement"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.VideoGetExpireDate"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.SharedLineFeatureValidate"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.ValidateGCLID"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jmf_bean.AutoAttendantValidate"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.caweb"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.ejb.adduserline"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.cmn"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.tnm"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.webapp"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jea.sbjeaapache"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jea.sbjeaipunity"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jea.sbjeal3"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jea.sbjeanortelcs2k"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jea.sbjeaopenwave"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jea.sbjeabroadsoft"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jea.sbjeaconsumableresources"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jea.sbjeasprint"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jea.sbjeabillingnotification"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jea.sbjeamotoroladac"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jea.sbjeatandbergbms"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jea.sbjeasigmadpm10"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jea.sbjeaciscodncs"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jea.sbjeaciscobac40"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.jea.sbjeaalu5529apc"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.order.commorderbydaterange"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.order.resorderbydaterange"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.query.ejb"/>
+        <subComponent name="com.sigma.samp.imp.voiceClec.ejb.resource"/>
+        <subComponent name="com.sigma.samp.shelf.boxNmValidator"/>
+        <subComponent name="com.sigma.samp.shelf.jeaProtocols.freemarkerProcessor"/>
+        <subComponent name="com.sigma.samp.shelf.jeaProtocols.jeaFileAdapter"/>
+        <subComponent name="com.sigma.samp.shelf.jeaProtocols.motorolaWirelinkTCP"/>
+        <subComponent name="com.sigma.samp.shelf.jeaProtocols.BMSOncRpcProtocol"/>
+        <subComponent name="com.sigma.samp.shelf.jeaProtocols.DNCSOncRpcProtocol"/>
+        <subComponent name="com.sigma.samp.shelf.jeaProtocols.nortelcs2k"/>
+        <subComponent name="com.sigma.samp.shelf.jeaProtocols.ipunityProtocol"/>
+		<subComponent name="com.sigma.samp.shelf.jeaProtocols.ciscoBAC40"/>
+        <subComponent name="com.sigma.samp.imp.shelf"/>
+		<subComponent name="com.sigma.samp.imp.voiceClec.jeaProtocols.LGOSSAsyncResp"/>
+		<subComponent name="com.sigma.samp.imp.voiceClec.jea.sbjealgoss"/>
+
+    </subComponents>
+    <buildModules>
+    </buildModules>
+</manifest>

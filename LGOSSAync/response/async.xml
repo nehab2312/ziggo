@@ -1,0 +1,14 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.sigma.com/provisioning_ASAPVoice/Schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:provisioning_ASAPVoice_result>
+         <header>
+            <originator>?</originator>
+            <requestID>${requestId}</requestID>
+            <status>?</status>
+            <errorcode>0</errorcode>
+            <errormessage>SUCCESS</errormessage>
+         </header>
+      </sch:provisioning_ASAPVoice_result>
+   </soapenv:Body>
+</soapenv:Envelope>

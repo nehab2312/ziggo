@@ -1,0 +1,860 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ 
+Patch applied 2017/07/21 19:19:42.089
+ Apply message:
+    LGOSS TC developed
+Patch applied 2017/07/21 19:24:34.912
+ Apply message:
+    LGOSS TC developed
+Patch applied 2017/07/21 19:26:50.094
+ Apply message:
+    LGOSS TC developed
+Patch applied 2017/07/21 19:29:00.591
+ Apply message:
+    LGOSS TC developed
+Patch applied 2017/07/21 19:48:47.582
+ Apply message:
+    LGOSS TC developed
+Patch applied 2017/07/21 19:50:38.896
+ Apply message:
+    LGOSS TC developed
+Patch applied 2017/07/24 13:24:43.645
+ Apply message:
+    LGOSS TC developed
+Patch applied 2017/07/24 15:29:51.642
+ Apply message:
+    LGOSS TC developed
+Patch applied 2017/07/24 16:19:20.781
+ Apply message:
+    LGOSS TC developed
+Patch applied 2017/07/24 17:31:10.707
+ Apply message:
+    LGOSS TC developed
+Patch applied 2017/07/25 14:51:20.469
+ Apply message:
+    LGOSS TC developed
+Patch applied 2017/07/26 14:47:52.868
+ Apply message:
+    LGOSS TC developed
+Patch applied 2017/07/26 16:16:08.390
+ Apply message:
+    LGOSS TC developed
+Patch applied 2017/07/26 16:50:07.341
+ Apply message:
+    LGOSS TC developed
+Patch applied 2017/08/02 09:08:12.122
+ Apply message:
+    LGOSS TC developed-->
+<jea name="sbjealgoss" sb.version="4.4.1.0 build 10 B10" valid="true" xmlns="http://www.sigma-systems.com/schemas/3.0/sb/jea" xmlns:mf="http://www.sigma-systems.com/schemas/3.0/sb/mf" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sigma-systems.com/schemas/3.0/sb/jea ../../../../../../xmlcfg/schemas/jea-config.xsd">
+    <properties/>
+    <thirdPartyLibs/>
+    <thirdPartyEJBs/>
+    <taskTypes>
+        <taskType name="lgoss_generate_bootfile" oneWay="false">
+            <description/>
+            <functionArguments>
+                <argument dir="in" name="service_type" required="true" type="string"/>
+                <argument dir="in" name="request_type" required="true" type="string"/>
+                <argument dir="in" name="affiliate" required="true" type="string"/>
+                <argument dir="in" name="trading_partner" required="true" type="string"/>
+                <argument dir="in" name="country_code" required="true" type="string"/>
+                <argument dir="in" name="instance" required="true" type="string"/>
+                <argument dir="in" name="cpe_mta_mac_address" required="false" type="string"/>
+                <argument dir="in" name="customer_id" required="false" type="string"/>
+                <argument dir="in" name="sw_id" required="false" type="string"/>
+                <argument dir="in" name="bf_vendor" required="false" type="string"/>
+                <argument dir="in" name="bf_encryption_variant" required="false" type="string"/>
+                <argument dir="in" name="bf_encryption_type" required="false" type="string"/>
+                <argument dir="in" name="bf_public_key" required="false" type="string"/>
+                <argument dir="in" name="bf_sip_proxy_server" required="false" type="string"/>
+                <argument dir="in" name="bf_model" required="false" type="string"/>
+                <argument dir="in" name="bf_type" required="false" type="string"/>
+                <argument dir="in" name="bf_line_info1_port_id" required="false" type="string"/>
+                <argument dir="in" name="bf_line_info1_sip_username" required="false" type="string"/>
+                <argument dir="in" name="bf_line_info1_sip_password" required="false" type="string"/>
+                <argument dir="in" name="bf_line_info2_port_id" required="false" type="string"/>
+                <argument dir="in" name="bf_line_info2_sip_username" required="false" type="string"/>
+                <argument dir="in" name="bf_line_info2_sip_password" required="false" type="string"/>
+                <argument dir="out" name="err_code" required="true" type="string"/>
+                <argument dir="out" name="err_reason" required="false" type="string"/>
+            </functionArguments>
+            <derived>
+                <var name="simulation_mode" type="boolean">
+                    <expression><![CDATA[jea.protocol.lgosssoap.soap_simulation_mode]]></expression>
+                </var>
+                <var name="xml_request" type="string">
+                    <expression><![CDATA[""]]></expression>
+                </var>
+                <var name="xml_response" type="string">
+                    <expression><![CDATA[""]]></expression>
+                </var>
+                <var name="requestId" type="string">
+                    <expression><![CDATA[control_id]]></expression>
+                </var>
+                <var name="xml_withoutEmptyTags" type="string">
+                    <expression><![CDATA[""]]></expression>
+                </var>
+            </derived>
+            <function_body>
+                <if seq="1">
+                    <condition><![CDATA[simulation_mode]]></condition>
+                    <thenBranch>
+                        <assign ref="err_code" scope="local" seq="1">
+                            <expression><![CDATA["0"]]></expression>
+                        </assign>
+                    </thenBranch>
+                    <elseBranch/>
+                </if>
+                <if seq="2">
+                    <condition><![CDATA[simulation_mode]]></condition>
+                    <thenBranch>
+                        <assign ref="err_reason" scope="local" seq="2">
+                            <expression><![CDATA["Success"]]></expression>
+                        </assign>
+                    </thenBranch>
+                    <elseBranch/>
+                </if>
+                <assign ref="xml_request" scope="local" seq="3">
+                    <expression><![CDATA[join('<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+<soap:Body>
+<ns1:provisioning_ASAPVoice xmlns:ns1="http://www.libertyglobal.com/Provisioning_ASAPVoice/Schema">
+<ns1:header>',if nzlen control_id then join('
+<ns1:requestId>'+control_id+'</ns1:requestId>') else '',if nzlen service_type then join('
+<ns1:serviceType>'+service_type+'</ns1:serviceType>') else '',if nzlen request_type then join('
+<ns1:requestType>'+request_type+'</ns1:requestType>') else '',if nzlen jea.property.WL_SERVER_NAME then join('
+<ns1:originator>SIGMA_SMP_Node_'+jea.property.WL_SERVER_NAME+'</ns1:originator>') else '',if nzlen affiliate then join('
+<ns1:affiliate>'+affiliate+'</ns1:affiliate>') else '',if nzlen trading_partner then join('
+<ns1:tradingPartner>'+trading_partner+'</ns1:tradingPartner>') else '',if nzlen country_code then join('
+<ns1:countryCode>'+country_code+'</ns1:countryCode>') else '',if nzlen instance then join('
+<ns1:instance>'+instance+'</ns1:instance>') else '','
+</ns1:header>
+<ns1:parameters>',if nzlen cpe_mta_mac_address then join('
+<ns1:param>
+<ns1:name>CPE_MTA_MAC_ADDRESS</ns1:name>
+<ns1:value>'+cpe_mta_mac_address+'</ns1:value>
+</ns1:param>') else '',if nzlen customer_id then join('
+<ns1:param>
+<ns1:name>CUSTOMER_ID</ns1:name>
+<ns1:value>'+customer_id+'</ns1:value>
+</ns1:param>') else '',if nzlen sw_id then join('
+<ns1:param>
+<ns1:name>SW_ID</ns1:name>
+<ns1:value>'+sw_id+'</ns1:value>
+</ns1:param>') else '',if nzlen bf_vendor then join('
+<ns1:param>
+<ns1:name>BF_VENDOR</ns1:name>
+<ns1:value>'+bf_vendor+'</ns1:value>
+</ns1:param>') else '',if nzlen bf_encryption_variant then join('
+<ns1:param>
+<ns1:name>BF_ENCRYPTION_VARIANT</ns1:name>
+<ns1:value>'+bf_encryption_variant+'</ns1:value>
+</ns1:param>') else '',if nzlen bf_encryption_type then join('
+<ns1:param>
+<ns1:name>BF_ENCRYPTION_TYPE</ns1:name>
+<ns1:value>'+bf_encryption_type+'</ns1:value>
+</ns1:param>') else '', if nzlen bf_public_key then join('
+<ns1:param>
+<ns1:name>BF_PUBLIC_KEY</ns1:name>
+<ns1:value>'+bf_public_key+'</ns1:value>
+</ns1:param>') else '' , if nzlen bf_sip_proxy_server then join('
+<ns1:param>
+<ns1:name>BF_SIP_PROXY_SERVER</ns1:name>
+<ns1:value>'+bf_sip_proxy_server+'</ns1:value>
+</ns1:param>') else '' , if nzlen bf_model then join('
+<ns1:param>
+<ns1:name>BF_MODEL</ns1:name>
+<ns1:value>'+bf_model+'</ns1:value>
+</ns1:param>') else '' ,if nzlen bf_type then join('
+<ns1:param>
+<ns1:name>BF_TYPE</ns1:name>
+<ns1:value>'+bf_type+'</ns1:value>
+</ns1:param>') else '',if nzlen bf_line_info1_port_id then join('
+<ns1:param>
+<ns1:name>BF_LINE_INFO1_PORT_ID</ns1:name>
+<ns1:value>'+bf_line_info1_port_id+'</ns1:value>
+</ns1:param>') else '' , if nzlen bf_line_info1_sip_username then join('
+<ns1:param>
+<ns1:name>BF_LINE_INFO1_SIP_USERNAME</ns1:name>
+<ns1:value>'+bf_line_info1_sip_username+'</ns1:value>
+</ns1:param>') else '',if nzlen bf_line_info1_sip_password then join('
+<ns1:param>
+<ns1:name>BF_LINE_INFO1_SIP_PASSWORD</ns1:name>
+<ns1:value>'+bf_line_info1_sip_password+'</ns1:value>
+</ns1:param>') else '' ,if nzlen bf_line_info2_port_id then join('
+<ns1:param>
+<ns1:name>BF_LINE_INFO2_PORT_ID</ns1:name>
+<ns1:value>'+bf_line_info2_port_id+'</ns1:value>
+</ns1:param>') else '',if nzlen bf_line_info2_sip_username then join('
+<ns1:param>
+<ns1:name>BF_LINE_INFO2_SIP_USERNAME</ns1:name>
+<ns1:value>'+bf_line_info2_sip_username+'</ns1:value>
+</ns1:param>') else '',if nzlen bf_line_info2_sip_password then join('
+<ns1:param>
+<ns1:name>BF_LINE_INFO2_SIP_PASSWORD</ns1:name>
+<ns1:value>'+bf_line_info2_sip_password+'</ns1:value>
+</ns1:param>') else '','	
+</ns1:parameters>
+</ns1:provisioning_ASAPVoice>
+</soap:Body>
+</soap:Envelope>')]]></expression>
+                </assign>
+                <call function="normalizeXml" protocolName="lgosssoap" seq="4">
+                    <condition><![CDATA[!simulation_mode]]></condition>
+                    <arguments>
+                        <in argument="inxml">
+                            <expression><![CDATA[xml_request]]></expression>
+                        </in>
+                        <in argument="removeEmptyTags">
+                            <expression><![CDATA["true"]]></expression>
+                        </in>
+                        <out argument="outxml" ref="xml_withoutEmptyTags" scope="local"/>
+                    </arguments>
+                </call>
+                <call function="sendEnvelope" protocolName="lgosssoap" seq="5">
+                    <condition><![CDATA[!simulation_mode]]></condition>
+                    <arguments>
+                        <in argument="envelopeXml">
+                            <expression><![CDATA[xml_withoutEmptyTags]]></expression>
+                        </in>
+                        <in argument="attachmentContent">
+                            <expression><![CDATA[""]]></expression>
+                        </in>
+                        <in argument="attachmentAccess">
+                            <expression><![CDATA[""]]></expression>
+                        </in>
+                        <in argument="attachmentContentType">
+                            <expression><![CDATA[""]]></expression>
+                        </in>
+                        <in argument="attachmentContentId">
+                            <expression><![CDATA[""]]></expression>
+                        </in>
+                        <out argument="soapResponse" ref="xml_response" scope="local"/>
+                        <out argument="soap_error_code" ref="err_code" scope="local"/>
+                        <out argument="soap_error_desc" ref="err_reason" scope="local"/>
+                        <in argument="add_mime_header_1">
+                            <expression><![CDATA[""]]></expression>
+                        </in>
+                        <in argument="add_mime_header_1_value">
+                            <expression><![CDATA[""]]></expression>
+                        </in>
+                        <in argument="set_mime_header_1">
+                            <expression><![CDATA[""]]></expression>
+                        </in>
+                        <in argument="set_mime_header_1_value">
+                            <expression><![CDATA[""]]></expression>
+                        </in>
+                    </arguments>
+                </call>
+                <if seq="6">
+                    <condition><![CDATA[simulation_mode]]></condition>
+                    <thenBranch>
+                        <assign ref="xml_response" scope="local" seq="6">
+                            <expression><![CDATA[join(xml_response,'<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+	<soap:Body>
+		<ns1:provisioning_ASAPVoice_result xmlns:ns1="http://www.libertyglobal.com/Provisioning_ASAPVoice/Schema">
+		<ns1:header>
+				<ns1:transactionId>'+control_id+'</ns1:transactionId>
+				<ns1:errorCode>'+err_code+'</ns1:errorCode>
+		</ns1:header>
+		</ns1:provisioning_ASAPVoice_result>
+	</soap:Body>
+</soap:Envelope>')]]></expression>
+                        </assign>
+                    </thenBranch>
+                    <elseBranch/>
+                </if>
+                <if seq="7">
+                    <condition><![CDATA[nzlen xml_response]]></condition>
+                    <thenBranch>
+                        <assign ref="err_code" scope="local" seq="7">
+                            <expression><![CDATA[if strlen(xpaths(xml_response,'/Envelope/Body/provisioning_ASAPVoice_result/header/errorCode'))!=0 then xpaths(xml_response,'/Envelope/Body/provisioning_ASAPVoice_result/header/errorCode') else "-1"]]></expression>
+                        </assign>
+                    </thenBranch>
+                    <elseBranch/>
+                </if>
+                <if seq="8">
+                    <condition><![CDATA[nzlen xml_response]]></condition>
+                    <thenBranch>
+                        <assign ref="err_reason" scope="local" seq="8">
+                            <expression><![CDATA[if strlen(xpaths(xml_response,'/Envelope/Body/provisioning_ASAPVoice_result/header/errorMessage'))!=0 then xpaths(xml_response,'/Envelope/Body/provisioning_ASAPVoice_result/header/errorMessage') else "Failure"]]></expression>
+                        </assign>
+                    </thenBranch>
+                    <elseBranch/>
+                </if>
+                <if seq="9">
+                    <condition><![CDATA[nzlen xml_response && !nzlen err_code]]></condition>
+                    <thenBranch>
+                        <assign ref="err_code" scope="local" seq="9">
+                            <expression><![CDATA["0"]]></expression>
+                        </assign>
+                    </thenBranch>
+                    <elseBranch/>
+                </if>
+                <if seq="10">
+                    <condition><![CDATA[nzlen xml_response && err_code=="0"]]></condition>
+                    <thenBranch>
+                        <assign ref="err_reason" scope="local" seq="10">
+                            <expression><![CDATA["Success"]]></expression>
+                        </assign>
+                    </thenBranch>
+                    <elseBranch/>
+                </if>
+                <if seq="11">
+                    <condition><![CDATA[nzlen err_code && err_code !="0"]]></condition>
+                    <thenBranch>
+                        <error seq="11" type="app">
+                            <expression><![CDATA["Generate Bootfile Task Failed with err_code : " +err_code+" and err_reason: "+err_reason]]></expression>
+                        </error>
+                    </thenBranch>
+                    <elseBranch/>
+                </if>
+                <errorHandler hasCatchBlock="false"/>
+            </function_body>
+            <async_reply_function>
+                <functionArguments>
+                    <argument dir="in" name="async_response" required="true" type="string"/>
+                </functionArguments>
+                <function_body>
+                    <if seq="1">
+                        <condition><![CDATA[nzlen async_response]]></condition>
+                        <thenBranch>
+                            <assign ref="err_code" scope="local" seq="1">
+                                <expression><![CDATA[if strlen(xpaths(async_response,'/provisioning_ASAPVoice_result/header/errorcode'))!=0 then xpaths(async_response,'/provisioning_ASAPVoice_result/header/errorcode') else "-1"]]></expression>
+                            </assign>
+                        </thenBranch>
+                        <elseBranch/>
+                    </if>
+                    <if seq="2">
+                        <condition><![CDATA[nzlen async_response]]></condition>
+                        <thenBranch>
+                            <assign ref="err_reason" scope="local" seq="2">
+                                <expression><![CDATA[if strlen(xpaths(async_response,'/provisioning_ASAPVoice_result/header/errormessage'))!=0 then xpaths(async_response,'/provisioning_ASAPVoice_result/header/errormessage') else "Failure"]]></expression>
+                            </assign>
+                        </thenBranch>
+                        <elseBranch/>
+                    </if>
+                    <if seq="3">
+                        <condition><![CDATA[!nzlen err_code]]></condition>
+                        <thenBranch>
+                            <assign ref="err_code" scope="local" seq="3">
+                                <expression><![CDATA["0"]]></expression>
+                            </assign>
+                        </thenBranch>
+                        <elseBranch/>
+                    </if>
+                    <if seq="4">
+                        <condition><![CDATA[err_code =="0"]]></condition>
+                        <thenBranch>
+                            <assign ref="err_reason" scope="local" seq="4">
+                                <expression><![CDATA["Success"]]></expression>
+                            </assign>
+                        </thenBranch>
+                        <elseBranch/>
+                    </if>
+                    <if seq="5">
+                        <condition><![CDATA[err_code!="0"]]></condition>
+                        <thenBranch>
+                            <error seq="5" type="app">
+                                <expression><![CDATA["Generate Boot File Failed in Async Flow"]]></expression>
+                            </error>
+                        </thenBranch>
+                        <elseBranch/>
+                    </if>
+                    <errorHandler hasCatchBlock="false"/>
+                </function_body>
+            </async_reply_function>
+        </taskType>
+        <taskType name="lgoss_delete_bootfile" oneWay="false">
+            <description/>
+            <functionArguments>
+                <argument dir="in" name="service_type" required="true" type="string"/>
+                <argument dir="in" name="request_type" required="true" type="string"/>
+                <argument dir="in" name="affiliate" required="true" type="string"/>
+                <argument dir="in" name="trading_partner" required="true" type="string"/>
+                <argument dir="in" name="country_code" required="true" type="string"/>
+                <argument dir="in" name="instance" required="true" type="string"/>
+                <argument dir="in" name="cpe_mta_mac_address" required="false" type="string"/>
+                <argument dir="in" name="customer_id" required="false" type="string"/>
+                <argument dir="in" name="sw_id" required="false" type="string"/>
+                <argument dir="in" name="technology_type" required="false" type="string"/>
+                <argument dir="in" name="technology_version" required="false" type="string"/>
+                <argument dir="out" name="err_code" required="true" type="string"/>
+                <argument dir="out" name="err_reason" required="false" type="string"/>
+            </functionArguments>
+            <derived>
+                <var name="simulation_mode" type="boolean">
+                    <expression><![CDATA[jea.protocol.lgosssoap.soap_simulation_mode]]></expression>
+                </var>
+                <var name="xml_request" type="string">
+                    <expression><![CDATA[""]]></expression>
+                </var>
+                <var name="xml_response" type="string">
+                    <expression><![CDATA[""]]></expression>
+                </var>
+                <var name="requestId" type="string">
+                    <expression><![CDATA[control_id]]></expression>
+                </var>
+                <var name="xml_withoutEmptyTags" type="string">
+                    <expression><![CDATA[""]]></expression>
+                </var>
+            </derived>
+            <function_body>
+                <if seq="1">
+                    <condition><![CDATA[simulation_mode]]></condition>
+                    <thenBranch>
+                        <assign ref="err_code" scope="local" seq="1">
+                            <expression><![CDATA["0"]]></expression>
+                        </assign>
+                    </thenBranch>
+                    <elseBranch/>
+                </if>
+                <if seq="2">
+                    <condition><![CDATA[simulation_mode]]></condition>
+                    <thenBranch>
+                        <assign ref="err_reason" scope="local" seq="2">
+                            <expression><![CDATA["Success"]]></expression>
+                        </assign>
+                    </thenBranch>
+                    <elseBranch/>
+                </if>
+                <assign ref="xml_request" scope="local" seq="3">
+                    <expression><![CDATA[join('<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+<soap:Body>
+<ns1:provisioning_ASAPVoice xmlns:ns1="http://www.libertyglobal.com/Provisioning_ASAPVoice/Schema">
+<ns1:header>',if nzlen control_id then join('
+<ns1:requestId>'+control_id+'</ns1:requestId>') else '',if nzlen service_type then join('
+<ns1:serviceType>'+service_type+'</ns1:serviceType>') else '',if nzlen request_type then join('
+<ns1:requestType>'+request_type+'</ns1:requestType>') else '',if nzlen jea.property.WL_SERVER_NAME then join('
+<ns1:originator>SIGMA_SMP_Node_'+jea.property.WL_SERVER_NAME+'</ns1:originator>') else '',if nzlen affiliate then join('
+<ns1:affiliate>'+affiliate+'</ns1:affiliate>') else '',if nzlen trading_partner then join('
+<ns1:tradingPartner>'+trading_partner+'</ns1:tradingPartner>') else '',if nzlen country_code then join('
+<ns1:countryCode>'+country_code+'</ns1:countryCode>') else '',if nzlen instance then join('
+<ns1:instance>'+instance+'</ns1:instance>') else '','
+</ns1:header>
+<ns1:parameters>',if nzlen cpe_mta_mac_address then join('
+<ns1:param>
+<ns1:name>CPE_MTA_MAC_ADDRESS</ns1:name>
+<ns1:value>'+cpe_mta_mac_address+'</ns1:value>
+</ns1:param>') else '',if nzlen customer_id then join('
+<ns1:param>
+<ns1:name>CUSTOMER_ID</ns1:name>
+<ns1:value>'+customer_id+'</ns1:value>
+</ns1:param>') else '',if nzlen sw_id then join('
+<ns1:param>
+<ns1:name>SW_ID</ns1:name>
+<ns1:value>'+sw_id+'</ns1:value>
+</ns1:param>') else '',if nzlen technology_type then join('
+<ns1:param>
+<ns1:name>TECHNOLOGY_TYPE</ns1:name>
+<ns1:value>'+technology_type+'</ns1:value>
+</ns1:param>') else '',if nzlen technology_version then join('
+<ns1:param>
+<ns1:name>TECHNOLOGY_VERSION</ns1:name>
+<ns1:value>'+technology_version+'</ns1:value>
+</ns1:param>') else '','	
+</ns1:parameters>
+</ns1:provisioning_ASAPVoice>
+</soap:Body>
+</soap:Envelope>')]]></expression>
+                </assign>
+                <call function="normalizeXml" protocolName="lgosssoap" seq="4">
+                    <condition><![CDATA[!simulation_mode]]></condition>
+                    <arguments>
+                        <in argument="inxml">
+                            <expression><![CDATA[xml_request]]></expression>
+                        </in>
+                        <in argument="removeEmptyTags">
+                            <expression><![CDATA["true"]]></expression>
+                        </in>
+                        <out argument="outxml" ref="xml_withoutEmptyTags" scope="local"/>
+                    </arguments>
+                </call>
+                <call function="sendEnvelope" protocolName="lgosssoap" seq="5">
+                    <condition><![CDATA[!simulation_mode]]></condition>
+                    <arguments>
+                        <in argument="envelopeXml">
+                            <expression><![CDATA[xml_withoutEmptyTags]]></expression>
+                        </in>
+                        <in argument="attachmentContent">
+                            <expression><![CDATA[""]]></expression>
+                        </in>
+                        <in argument="attachmentAccess">
+                            <expression><![CDATA[""]]></expression>
+                        </in>
+                        <in argument="attachmentContentType">
+                            <expression><![CDATA[""]]></expression>
+                        </in>
+                        <in argument="attachmentContentId">
+                            <expression><![CDATA[""]]></expression>
+                        </in>
+                        <out argument="soapResponse" ref="xml_response" scope="local"/>
+                        <out argument="soap_error_code" ref="err_code" scope="local"/>
+                        <out argument="soap_error_desc" ref="err_reason" scope="local"/>
+                        <in argument="add_mime_header_1">
+                            <expression><![CDATA[""]]></expression>
+                        </in>
+                        <in argument="add_mime_header_1_value">
+                            <expression><![CDATA[""]]></expression>
+                        </in>
+                        <in argument="set_mime_header_1">
+                            <expression><![CDATA[""]]></expression>
+                        </in>
+                        <in argument="set_mime_header_1_value">
+                            <expression><![CDATA[""]]></expression>
+                        </in>
+                    </arguments>
+                </call>
+                <if seq="6">
+                    <condition><![CDATA[nzlen xml_response]]></condition>
+                    <thenBranch>
+                        <assign ref="err_code" scope="local" seq="6">
+                            <expression><![CDATA[if strlen(xpaths(xml_response,'/Envelope/Body/provisioning_ASAPVoice_result/header/errorCode'))!=0 then xpaths(xml_response,'/Envelope/Body/provisioning_ASAPVoice_result/header/errorCode') else "-1"]]></expression>
+                        </assign>
+                    </thenBranch>
+                    <elseBranch/>
+                </if>
+                <if seq="7">
+                    <condition><![CDATA[nzlen xml_response]]></condition>
+                    <thenBranch>
+                        <assign ref="err_reason" scope="local" seq="7">
+                            <expression><![CDATA[if strlen(xpaths(xml_response,'/Envelope/Body/provisioning_ASAPVoice_result/header/errorMessage'))!=0 then xpaths(xml_response,'/Envelope/Body/provisioning_ASAPVoice_result/header/errorMessage') else "Failure"]]></expression>
+                        </assign>
+                    </thenBranch>
+                    <elseBranch/>
+                </if>
+                <if seq="8">
+                    <condition><![CDATA[nzlen xml_response && !nzlen err_code]]></condition>
+                    <thenBranch>
+                        <assign ref="err_code" scope="local" seq="8">
+                            <expression><![CDATA["0"]]></expression>
+                        </assign>
+                    </thenBranch>
+                    <elseBranch/>
+                </if>
+                <if seq="9">
+                    <condition><![CDATA[nzlen xml_response && err_code=="0"]]></condition>
+                    <thenBranch>
+                        <assign ref="err_reason" scope="local" seq="9">
+                            <expression><![CDATA["Success"]]></expression>
+                        </assign>
+                    </thenBranch>
+                    <elseBranch/>
+                </if>
+                <if seq="10">
+                    <condition><![CDATA[nzlen err_code && err_code !="0"]]></condition>
+                    <thenBranch>
+                        <error seq="10" type="app">
+                            <expression><![CDATA["Delete Bootfile Task Failed with err_code : " +err_code+" and err_reason: "+err_reason]]></expression>
+                        </error>
+                    </thenBranch>
+                    <elseBranch/>
+                </if>
+                <errorHandler hasCatchBlock="false"/>
+            </function_body>
+            <async_reply_function>
+                <functionArguments>
+                    <argument dir="in" name="async_response" required="true" type="string"/>
+                </functionArguments>
+                <function_body>
+                    <if seq="1">
+                        <condition><![CDATA[nzlen async_response]]></condition>
+                        <thenBranch>
+                            <assign ref="err_code" scope="local" seq="1">
+                                <expression><![CDATA[if strlen(xpaths(async_response,'/provisioning_ASAPVoice_result/header/errorcode'))!=0 then xpaths(async_response,'/provisioning_ASAPVoice_result/header/errorcode') else "-1"]]></expression>
+                            </assign>
+                        </thenBranch>
+                        <elseBranch/>
+                    </if>
+                    <if seq="2">
+                        <condition><![CDATA[nzlen async_response]]></condition>
+                        <thenBranch>
+                            <assign ref="err_reason" scope="local" seq="2">
+                                <expression><![CDATA[if strlen(xpaths(async_response,'/provisioning_ASAPVoice_result/header/errormessage'))!=0 then xpaths(async_response,'/provisioning_ASAPVoice_result/header/errormessage') else "Failure"]]></expression>
+                            </assign>
+                        </thenBranch>
+                        <elseBranch/>
+                    </if>
+                    <if seq="3">
+                        <condition><![CDATA[!nzlen err_code]]></condition>
+                        <thenBranch>
+                            <assign ref="err_code" scope="local" seq="3">
+                                <expression><![CDATA["0"]]></expression>
+                            </assign>
+                        </thenBranch>
+                        <elseBranch/>
+                    </if>
+                    <if seq="4">
+                        <condition><![CDATA[err_code =="0"]]></condition>
+                        <thenBranch>
+                            <assign ref="err_reason" scope="local" seq="4">
+                                <expression><![CDATA["Success"]]></expression>
+                            </assign>
+                        </thenBranch>
+                        <elseBranch/>
+                    </if>
+                    <if seq="5">
+                        <condition><![CDATA[err_code!="0"]]></condition>
+                        <thenBranch>
+                            <error seq="5" type="app">
+                                <expression><![CDATA["Delete Boot File Failed in Async Flow"]]></expression>
+                            </error>
+                        </thenBranch>
+                        <elseBranch/>
+                    </if>
+                    <errorHandler hasCatchBlock="false"/>
+                </function_body>
+            </async_reply_function>
+        </taskType>
+    </taskTypes>
+    <internalFunctions/>
+    <scheduler/>
+    <resources>
+        <protocol callTextLanguage="null" class="com.sigma.jea.shelfProtocol.basicsoap.BasicSoapCallProtocol" defaultIdempotent="false" defaultXA="false" name="lgosssoap" selfPool="false" sharable="false" sync="true" useCallText="true">
+            <description>Basic Soap Protocol using SAAJ APIs</description>
+            <initParams>
+                <param name="multiple_message_factory_support" passOn="false" required="false" type="boolean" varSubstitute="false">
+                    <description>enable multiple message factory support or not</description>
+                    <dfltExpr constType="boolean" isConst="true"><![CDATA[false]]></dfltExpr>
+                </param>
+                <param name="call_timeout" passOn="false" required="false" type="int" varSubstitute="false">
+                    <description>soap call timeout in seconds. -1 means no timeout</description>
+                    <dfltExpr constType="int" isConst="true"><![CDATA[-1]]></dfltExpr>
+                </param>
+                <param name="set_mime_header_1_value" passOn="false" required="false" type="string" varSubstitute="false">
+                    <description>Value of mime header. The name of value parm is derived from the name of mime header name parm by appending it a suffix _value</description>
+                    <dfltExpr constType="string" isConst="true"><![CDATA[]]></dfltExpr>
+                </param>
+                <param name="set_mime_header_1" passOn="false" required="false" type="string" varSubstitute="false">
+                    <description>Set a mime header in the mime part of message, replace existing value, this parm tells the name of mime header. To set another header use a different string after set_mime_header_ and add it to the init parm list</description>
+                    <dfltExpr constType="string" isConst="true"><![CDATA[]]></dfltExpr>
+                </param>
+                <param name="add_mime_header_1_value" passOn="false" required="false" type="string" varSubstitute="false">
+                    <description>Value of mime header. The name of value parm is derived from the name of mime header name parm by appending it a suffix _value</description>
+                    <dfltExpr constType="string" isConst="true"><![CDATA[]]></dfltExpr>
+                </param>
+                <param name="add_mime_header_1" passOn="false" required="false" type="string" varSubstitute="false">
+                    <description>Add a mime header in the mime part of message, this parm tells the name of mime header. To add another header use a different string after add_mime_header_ and add it to the init parm list</description>
+                    <dfltExpr constType="string" isConst="true"><![CDATA[]]></dfltExpr>
+                </param>
+                <param name="soap_connection_factory" passOn="false" required="false" type="string" varSubstitute="false">
+                    <description>Soap connection factory implementation class name</description>
+                    <dfltExpr constType="string" isConst="true"><![CDATA[com.sun.xml.internal.messaging.saaj.client.p2p.HttpSOAPConnectionFactory]]></dfltExpr>
+                </param>
+                <param name="soap_message_factory" passOn="false" required="false" type="string" varSubstitute="false">
+                    <description>Soap message factory implementation class name</description>
+                    <dfltExpr constType="string" isConst="true"><![CDATA[com.sun.xml.internal.messaging.saaj.soap.ver1_1.SOAPMessageFactory1_1Impl]]></dfltExpr>
+                </param>
+                <param name="http_cookies_support" passOn="false" required="false" type="boolean" varSubstitute="false">
+                    <description>Enable session management through http cookies</description>
+                    <dfltExpr constType="boolean" isConst="true"><![CDATA[true]]></dfltExpr>
+                </param>
+                <param name="http_basic_authentication" passOn="false" required="false" type="string" varSubstitute="false">
+                    <description>Authentication information for http basic authentication if required by server, the format is username:password</description>
+                    <dfltExpr constType="string" isConst="true"><![CDATA[]]></dfltExpr>
+                </param>
+                <param name="private_key_password" passOn="false" required="false" type="string" varSubstitute="false">
+                    <description>Private key password</description>
+                    <dfltExpr constType="string" isConst="true"><![CDATA[]]></dfltExpr>
+                </param>
+                <param name="private_key_alias" passOn="false" required="false" type="string" varSubstitute="false">
+                    <description>Private key alias Name</description>
+                    <dfltExpr constType="string" isConst="true"><![CDATA[]]></dfltExpr>
+                </param>
+                <param name="keystore_password" passOn="false" required="false" type="string" varSubstitute="false">
+                    <description>KeyStore password</description>
+                    <dfltExpr constType="string" isConst="true"><![CDATA[]]></dfltExpr>
+                </param>
+                <param name="keystore_type" passOn="false" required="false" type="string" varSubstitute="false">
+                    <description>KeyStore type</description>
+                    <dfltExpr constType="string" isConst="true"><![CDATA[JKS]]></dfltExpr>
+                </param>
+                <param name="keystore_file" passOn="false" required="false" type="string" varSubstitute="false">
+                    <description>KeyStore file (Empty value specifies simple SOAP message transfer)</description>
+                    <dfltExpr constType="string" isConst="true"><![CDATA[]]></dfltExpr>
+                </param>
+                <param name="soap_body_xsd" passOn="false" required="false" type="string" varSubstitute="false">
+                    <description>URL of the XSD against which soap body will be validated</description>
+                    <dfltExpr constType="string" isConst="true"><![CDATA[]]></dfltExpr>
+                </param>
+                <param name="soap_simulation_mode" passOn="false" required="false" type="boolean" varSubstitute="false">
+                    <description>If true simulation mode will be on</description>
+                    <dfltExpr constType="boolean" isConst="true"><![CDATA[false]]></dfltExpr>
+                </param>
+                <param name="soap_endpoint_uri" passOn="false" required="false" type="string" varSubstitute="false">
+                    <description>End point URI for soap request to send</description>
+                    <dfltExpr constType="string" isConst="true"><![CDATA[]]></dfltExpr>
+                </param>
+            </initParams>
+            <thirdPartyLibs>
+                <lib file="jaxrpc-impl.jar" version="1.1">
+                    <description>Sun</description>
+                </lib>
+                <lib file="jaxrpc-api.jar" version="1.1">
+                    <description>Sun</description>
+                </lib>
+                <lib file="commons-discovery-0.2.jar" version="1.0">
+                    <description>Apache</description>
+                </lib>
+                <lib file="commons-logging-1.1.jar" version="1.1">
+                    <description>Apache</description>
+                </lib>
+                <lib file="xmlsec-1.3.0.jar" version="1.3.0">
+                    <description>Apache</description>
+                </lib>
+                <lib file="wss4j-1.5.0.jar" version="1.5.0">
+                    <description>Apache</description>
+                </lib>
+                <lib file="shelfProtocols.jar" version="1.0">
+                    <description>off-the-shelf protocols</description>
+                </lib>
+            </thirdPartyLibs>
+            <externalFunctions>
+                <function external="true" idempotent="false" name="sendEnvelope" xa="false">
+                    <description>Sends an envelope to the server</description>
+                    <functionArguments>
+                        <argument dir="in" name="envelopeXml" required="true" type="string">
+                            <description>Contains SOAP Envelop</description>
+                            <dfltExpr constType="string" isConst="true"><![CDATA[]]></dfltExpr>
+                        </argument>
+                        <argument dir="in" name="attachmentContent" required="true" type="string">
+                            <description>Contains content of SOAP attachment</description>
+                            <dfltExpr constType="string" isConst="true"><![CDATA[]]></dfltExpr>
+                        </argument>
+                        <argument dir="in" name="attachmentAccess" required="true" type="string">
+                            <description>Describes whether SOAP attachment to be sent is string or url</description>
+                            <dfltExpr constType="string" isConst="true"><![CDATA[]]></dfltExpr>
+                        </argument>
+                        <argument dir="in" name="attachmentContentType" required="true" type="string">
+                            <description>Describes the content type of SOAP attachment like text/plain</description>
+                            <dfltExpr constType="string" isConst="true"><![CDATA[]]></dfltExpr>
+                        </argument>
+                        <argument dir="in" name="attachmentContentId" required="true" type="string">
+                            <description>Describes the content ID of SOAP attachment</description>
+                            <dfltExpr constType="string" isConst="true"><![CDATA[]]></dfltExpr>
+                        </argument>
+                        <argument dir="out" name="soapResponse" required="true" type="string">
+                            <description>Will contain the response from the server</description>
+                            <dfltExpr constType="string" isConst="true"><![CDATA[]]></dfltExpr>
+                        </argument>
+                        <argument dir="out" name="soap_error_code" required="true" type="string">
+                            <description>SOAP Error Code</description>
+                            <dfltExpr constType="string" isConst="true"><![CDATA[]]></dfltExpr>
+                        </argument>
+                        <argument dir="out" name="soap_error_desc" required="true" type="string">
+                            <description>SOAP Error Message</description>
+                            <dfltExpr constType="string" isConst="true"><![CDATA[]]></dfltExpr>
+                        </argument>
+                        <argument dir="in" name="add_mime_header_1" required="true" type="string">
+                            <description>Add a mime header in the mime part of message, this parm tells the name of mime header. To add another header use a different string after add_mime_header_</description>
+                            <dfltExpr constType="string" isConst="true"><![CDATA[]]></dfltExpr>
+                        </argument>
+                        <argument dir="in" name="add_mime_header_1_value" required="true" type="string">
+                            <description>Value of mime header. The name of value parm is derived from the name of mime header name parm by appending it a suffix _value</description>
+                            <dfltExpr constType="string" isConst="true"><![CDATA[]]></dfltExpr>
+                        </argument>
+                        <argument dir="in" name="set_mime_header_1" required="true" type="string">
+                            <description>Set a mime header in the mime part of message, replace existing value, this parm tells the name of mime header. To set another header use a different string after add_mime_header_</description>
+                            <dfltExpr constType="string" isConst="true"><![CDATA[]]></dfltExpr>
+                        </argument>
+                        <argument dir="in" name="set_mime_header_1_value" required="true" type="string">
+                            <description>Value of mime header. The name of value parm is derived from the name of mime header name parm by appending it a suffix _value</description>
+                            <dfltExpr constType="string" isConst="true"><![CDATA[]]></dfltExpr>
+                        </argument>
+                    </functionArguments>
+                    <function_body>
+                        <errorHandler hasCatchBlock="false"/>
+                    </function_body>
+                </function>
+                <function external="true" idempotent="false" name="sendBodyAndHeader" xa="false">
+                    <description>Makes an envelope using body and header and sends it to server</description>
+                    <functionArguments>
+                        <argument dir="in" name="bodyXml" required="true" type="string">
+                            <description>Contains SOAP body</description>
+                            <dfltExpr constType="string" isConst="true"><![CDATA[]]></dfltExpr>
+                        </argument>
+                        <argument dir="in" name="headerXml" required="true" type="string">
+                            <description>Contains SOAP header</description>
+                            <dfltExpr constType="string" isConst="true"><![CDATA[]]></dfltExpr>
+                        </argument>
+                        <argument dir="in" name="attachmentContent" required="true" type="string">
+                            <description>Contains the content of SOAP attachment</description>
+                            <dfltExpr constType="string" isConst="true"><![CDATA[]]></dfltExpr>
+                        </argument>
+                        <argument dir="in" name="attachmentAccess" required="true" type="string">
+                            <description>Describes whether the SOAP attachment to be sent is string or url</description>
+                            <dfltExpr constType="string" isConst="true"><![CDATA[]]></dfltExpr>
+                        </argument>
+                        <argument dir="in" name="attachmentContentType" required="true" type="string">
+                            <description>Describes the content Type of SOAP attachment like text/plain</description>
+                            <dfltExpr constType="string" isConst="true"><![CDATA[]]></dfltExpr>
+                        </argument>
+                        <argument dir="in" name="attachmentContentId" required="true" type="string">
+                            <description>Describes the content ID of SOAP attachment</description>
+                            <dfltExpr constType="string" isConst="true"><![CDATA[]]></dfltExpr>
+                        </argument>
+                        <argument dir="out" name="soapResponse" required="true" type="string">
+                            <description>Will contain the response from the Server</description>
+                            <dfltExpr constType="string" isConst="true"><![CDATA[]]></dfltExpr>
+                        </argument>
+                        <argument dir="out" name="soap_error_code" required="true" type="string">
+                            <description>SOAP Error Code</description>
+                            <dfltExpr constType="string" isConst="true"><![CDATA[]]></dfltExpr>
+                        </argument>
+                        <argument dir="out" name="soap_error_desc" required="true" type="string">
+                            <description>SOAP Error Message</description>
+                            <dfltExpr constType="string" isConst="true"><![CDATA[]]></dfltExpr>
+                        </argument>
+                        <argument dir="in" name="add_mime_header_1" required="true" type="string">
+                            <description>Add a mime header to the mime part of message, this parm tells the name of mime header. To add another header use a different string after add_mime_header_ and add it to the external call parm list</description>
+                            <dfltExpr constType="string" isConst="true"><![CDATA[]]></dfltExpr>
+                        </argument>
+                        <argument dir="in" name="add_mime_header_1_value" required="true" type="string">
+                            <description>Value of mime header. The name of value parm is derived from the name of mime header name parm by appending it a suffix _value</description>
+                            <dfltExpr constType="string" isConst="true"><![CDATA[]]></dfltExpr>
+                        </argument>
+                        <argument dir="in" name="set_mime_header_1" required="true" type="string">
+                            <description>Set a mime header to the mime part of message, replace existing value, this parm tells the name of mime header. To set another header use a different string after set_mime_header_ and add it to the external call parm list</description>
+                            <dfltExpr constType="string" isConst="true"><![CDATA[]]></dfltExpr>
+                        </argument>
+                        <argument dir="in" name="set_mime_header_1_value" required="true" type="string">
+                            <description>Value of mime header. The name of value parm is derived from the name of mime header name parm by appending it a suffix _value</description>
+                            <dfltExpr constType="string" isConst="true"><![CDATA[]]></dfltExpr>
+                        </argument>
+                    </functionArguments>
+                    <function_body>
+                        <errorHandler hasCatchBlock="false"/>
+                    </function_body>
+                </function>
+                <function external="true" idempotent="false" name="clearCookies" xa="false">
+                    <description>Clear all cookies set by server so far, affects this connection only since each connection has its own cookie store</description>
+                    <functionArguments/>
+                    <function_body>
+                        <errorHandler hasCatchBlock="false"/>
+                    </function_body>
+                </function>
+                <function external="true" idempotent="false" name="normalizeXml" xa="false">
+                    <description>Normalize xml using normalise() method of org.w3c.dom.Node and optionally remove empty tags</description>
+                    <functionArguments>
+                        <argument dir="in" name="inxml" required="true" type="string">
+                            <description>Xml to be normalized</description>
+                            <dfltExpr constType="string" isConst="true"><![CDATA[]]></dfltExpr>
+                        </argument>
+                        <argument dir="in" name="removeEmptyTags" required="true" type="boolean">
+                            <description>Set to true or 1 if empty tags need to be removed completely</description>
+                            <dfltExpr constType="boolean" isConst="true"><![CDATA[]]></dfltExpr>
+                        </argument>
+                        <argument dir="out" name="outxml" required="true" type="string">
+                            <description>Normalized output xml</description>
+                            <dfltExpr constType="string" isConst="true"><![CDATA[]]></dfltExpr>
+                        </argument>
+                    </functionArguments>
+                    <function_body>
+                        <errorHandler hasCatchBlock="false"/>
+                    </function_body>
+                </function>
+            </externalFunctions>
+        </protocol>
+    </resources>
+</jea>

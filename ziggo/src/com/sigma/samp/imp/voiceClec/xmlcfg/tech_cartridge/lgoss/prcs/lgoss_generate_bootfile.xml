@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ 
+Patch applied 2017/07/24 17:05:43.025
+ Apply message:
+    LGOSS TC developed
+Patch applied 2017/07/26 16:50:07.341
+ Apply message:
+    LGOSS TC developed-->
+<process draft_suffix="" is_smp_order="false" name="lgoss_generate_bootfile" smp_version="4.0" suppressJoinFailure="true" syntax_id="0" version="3" xmlns="http://www.sigma-systems.com/sb/jwf_prcs" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sigma-systems.com/sb/jwf_prcs ../../../../../../xmlcfg/schemas/jwf-process.xsd">
+    <execSignature syntax_id="5">
+        <arguments>
+            <arg dir="in" name="service_type" required="true" syntax_id="8" type="string"/>
+            <arg dir="in" name="request_type" required="false" syntax_id="9" type="string">
+                <defaultExpr isConst="false"><![CDATA["GENERATE-BOOTFILE"]]></defaultExpr>
+            </arg>
+            <arg dir="in" name="affiliate" required="true" syntax_id="10" type="string"/>
+            <arg dir="in" name="trading_partner" required="true" syntax_id="11" type="string"/>
+            <arg dir="in" name="country_code" required="true" syntax_id="12" type="string"/>
+            <arg dir="in" name="instance" required="true" syntax_id="13" type="string"/>
+            <arg dir="in" name="cpe_mta_mac_address" required="false" syntax_id="14" type="string"/>
+            <arg dir="in" name="customer_id" required="false" syntax_id="15" type="string"/>
+            <arg dir="in" name="sw_id" required="false" syntax_id="16" type="string"/>
+            <arg dir="in" name="bf_vendor" required="false" syntax_id="17" type="string"/>
+            <arg dir="in" name="bf_encryption_variant" required="false" syntax_id="18" type="string"/>
+            <arg dir="in" name="bf_encryption_type" required="false" syntax_id="19" type="string"/>
+            <arg dir="in" name="bf_public_key" required="false" syntax_id="20" type="string"/>
+            <arg dir="in" name="bf_sip_proxy_server" required="false" syntax_id="21" type="string"/>
+            <arg dir="in" name="bf_model" required="false" syntax_id="22" type="string"/>
+            <arg dir="in" name="bf_type" required="false" syntax_id="23" type="string"/>
+            <arg dir="in" name="bf_line_info1_port_id" required="false" syntax_id="24" type="string"/>
+            <arg dir="in" name="bf_line_info1_sip_username" required="false" syntax_id="25" type="string"/>
+            <arg dir="in" name="bf_line_info1_sip_password" required="false" syntax_id="26" type="string"/>
+            <arg dir="in" name="bf_line_info2_port_id" required="false" syntax_id="27" type="string"/>
+            <arg dir="in" name="bf_line_info2_sip_username" required="false" syntax_id="28" type="string"/>
+            <arg dir="in" name="bf_line_info2_sip_password" required="false" syntax_id="29" type="string"/>
+            <arg dir="in" name="error_handling_method" required="false" syntax_id="30" type="string">
+                <defaultExpr isConst="false"><![CDATA["manual"]]></defaultExpr>
+            </arg>
+            <arg dir="in" name="retry_task" required="false" syntax_id="31" type="string">
+                <defaultExpr isConst="false"><![CDATA["N"]]></defaultExpr>
+            </arg>
+            <arg dir="in" name="async_timeout" required="true" syntax_id="32" type="string"/>
+            <arg dir="in" name="box_id" required="true" syntax_id="33" type="string"/>
+        </arguments>
+    </execSignature>
+    <scope ignoreLateStatus="true" name="scope_1" suppressJoinFailure="false" syntax_id="1">
+        <description><![CDATA[auto-generated SCOPE]]></description>
+        <variables>
+            <variable name="err_code" syntax_id="2" type="string">
+                <description><![CDATA[auto-generated variable: err_code]]></description>
+            </variable>
+            <variable name="err_reason" syntax_id="3" type="string">
+                <description><![CDATA[auto-generated variable: err_reason]]></description>
+            </variable>
+            <variable name="timeout_count" syntax_id="34" type="int">
+                <initExpr isConst="false"><![CDATA[1]]></initExpr>
+            </variable>
+            <variable name="smp_err_code" syntax_id="35" type="string"/>
+            <variable name="smp_err_desc" syntax_id="36" type="string"/>
+            <variable name="isTimeout" syntax_id="37" type="boolean">
+                <initExpr isConst="false"><![CDATA[false]]></initExpr>
+            </variable>
+            <variable name="smp_tech_platform" syntax_id="45" type="string">
+                <initExpr isConst="false"><![CDATA["lgoss"]]></initExpr>
+            </variable>
+        </variables>
+        <sequence ignoreLateStatus="true" suppressJoinFailure="false" syntax_id="4">
+            <description><![CDATA[auto-generated SEQUENCE]]></description>
+            <activities>
+                <assign ignoreLateStatus="true" suppressJoinFailure="false" syntax_id="7">
+                    <assignExpr destVarName="retry_task" isConst="false"><![CDATA["N"]]></assignExpr>
+                </assign>
+                <assign ignoreLateStatus="true" suppressJoinFailure="false" syntax_id="55">
+                    <assignExpr destVarName="isTimeout" isConst="false"><![CDATA[false]]></assignExpr>
+                </assign>
+                <repeatUntil ignoreLateStatus="true" suppressJoinFailure="false" syntax_id="6">
+                    <conditionExpr isConst="false"><![CDATA[mf_retry_task(retry_task)||isTimeout]]></conditionExpr>
+                    <JEATask JEAName="sbjealgoss" JEATaskTypeName="lgoss_generate_bootfile" TCName="lgoss" ignoreLateStatus="true" suppressJoinFailure="false" syntax_id="38">
+                        <invokeArguments>
+                            <inputArgExprs>
+                                <inputArgExpr inputArgName="service_type" isConst="false"><![CDATA[service_type]]></inputArgExpr>
+                                <inputArgExpr inputArgName="request_type" isConst="false"><![CDATA[request_type]]></inputArgExpr>
+                                <inputArgExpr inputArgName="affiliate" isConst="false"><![CDATA[affiliate]]></inputArgExpr>
+                                <inputArgExpr inputArgName="trading_partner" isConst="false"><![CDATA[trading_partner]]></inputArgExpr>
+                                <inputArgExpr inputArgName="country_code" isConst="false"><![CDATA[country_code]]></inputArgExpr>
+                                <inputArgExpr inputArgName="instance" isConst="false"><![CDATA[instance]]></inputArgExpr>
+                                <inputArgExpr inputArgName="cpe_mta_mac_address" isConst="false"><![CDATA[cpe_mta_mac_address]]></inputArgExpr>
+                                <inputArgExpr inputArgName="customer_id" isConst="false"><![CDATA[customer_id]]></inputArgExpr>
+                                <inputArgExpr inputArgName="sw_id" isConst="false"><![CDATA[sw_id]]></inputArgExpr>
+                                <inputArgExpr inputArgName="bf_vendor" isConst="false"><![CDATA[bf_vendor]]></inputArgExpr>
+                                <inputArgExpr inputArgName="bf_encryption_variant" isConst="false"><![CDATA[bf_encryption_variant]]></inputArgExpr>
+                                <inputArgExpr inputArgName="bf_encryption_type" isConst="false"><![CDATA[bf_encryption_type]]></inputArgExpr>
+                                <inputArgExpr inputArgName="bf_public_key" isConst="false"><![CDATA[bf_public_key]]></inputArgExpr>
+                                <inputArgExpr inputArgName="bf_sip_proxy_server" isConst="false"><![CDATA[bf_sip_proxy_server]]></inputArgExpr>
+                                <inputArgExpr inputArgName="bf_model" isConst="false"><![CDATA[bf_model]]></inputArgExpr>
+                                <inputArgExpr inputArgName="bf_type" isConst="false"><![CDATA[bf_type]]></inputArgExpr>
+                                <inputArgExpr inputArgName="bf_line_info1_port_id" isConst="false"><![CDATA[bf_line_info1_port_id]]></inputArgExpr>
+                                <inputArgExpr inputArgName="bf_line_info1_sip_username" isConst="false"><![CDATA[bf_line_info1_sip_username]]></inputArgExpr>
+                                <inputArgExpr inputArgName="bf_line_info1_sip_password" isConst="false"><![CDATA[bf_line_info1_sip_password]]></inputArgExpr>
+                                <inputArgExpr inputArgName="bf_line_info2_port_id" isConst="false"><![CDATA[bf_line_info2_port_id]]></inputArgExpr>
+                                <inputArgExpr inputArgName="bf_line_info2_sip_username" isConst="false"><![CDATA[bf_line_info2_sip_username]]></inputArgExpr>
+                                <inputArgExpr inputArgName="bf_line_info2_sip_password" isConst="false"><![CDATA[bf_line_info2_sip_password]]></inputArgExpr>
+                            </inputArgExprs>
+                            <destVariables>
+                                <destVariable argName="err_code" destVarName="err_code"/>
+                                <destVariable argName="err_reason" destVarName="err_reason"/>
+                            </destVariables>
+                        </invokeArguments>
+                        <failureHandler syntax_id="39">
+                            <sequence ignoreLateStatus="true" suppressJoinFailure="false" syntax_id="43">
+                                <activities>
+                                    <SMPTask SMPTaskTypeName="smp_prcs_workflow_err" ignoreLateStatus="true" suppressJoinFailure="false" syntax_id="44">
+                                        <invokeArguments>
+                                            <inputArgExprs>
+                                                <inputArgExpr inputArgName="spm_ordr_id" isConst="false"><![CDATA[wf.getSmpOrderId()]]></inputArgExpr>
+                                                <inputArgExpr inputArgName="spm_ordr_line_item_id" isConst="false"><![CDATA[wf.getLineItemId()]]></inputArgExpr>
+                                                <inputArgExpr inputArgName="smp_tech_platform" isConst="false"><![CDATA[smp_tech_platform]]></inputArgExpr>
+                                                <inputArgExpr inputArgName="smp_err_code_of_platform" isConst="false"><![CDATA[if nzlen err_code then err_code else  "-1"]]></inputArgExpr>
+                                                <inputArgExpr inputArgName="smp_err_reason" isConst="false"><![CDATA[if nzlen err_reason then err_reason else "Time Out - No response received"]]></inputArgExpr>
+                                                <inputArgExpr inputArgName="smp_sec_err_reason" isConst="false"><![CDATA[""]]></inputArgExpr>
+                                                <inputArgExpr inputArgName="smp_3rd_err_readon" isConst="false"><![CDATA[""]]></inputArgExpr>
+                                            </inputArgExprs>
+                                            <destVariables>
+                                                <destVariable argName="smp_err_code" destVarName="smp_err_code"/>
+                                                <destVariable argName="smp_err_desc" destVarName="smp_err_desc"/>
+                                            </destVariables>
+                                        </invokeArguments>
+                                    </SMPTask>
+                                    <sequence ignoreLateStatus="true" suppressJoinFailure="false" syntax_id="40">
+                                        <activities>
+                                            <assign ignoreLateStatus="true" suppressJoinFailure="true" syntax_id="41">
+                                                <assignExpr destVarName="retry_task" isConst="false"><![CDATA["y"]]></assignExpr>
+                                            </assign>
+                                            <alarm ignoreLateStatus="true" suppressJoinFailure="true" syntax_id="42">
+                                                <alarmMsgExpr isConst="false"><![CDATA[mf_system_alarm_manual("Execute Manual lgoss_generate_bootfile", err_code, err_reason, wf.getSmpOrderId())]]></alarmMsgExpr>
+                                                <alarmCategoryExpr isConst="false"><![CDATA["OS"]]></alarmCategoryExpr>
+                                            </alarm>
+                                            <manualTask TCName="lgoss" ignoreLateStatus="true" manualTaskTypeName="manual_lgoss_generate_bootfile" suppressJoinFailure="false" syntax_id="46">
+                                                <invokeArguments>
+                                                    <inputArgExprs>
+                                                        <inputArgExpr inputArgName="service_type" isConst="false"><![CDATA[service_type]]></inputArgExpr>
+                                                        <inputArgExpr inputArgName="request_type" isConst="false"><![CDATA[request_type]]></inputArgExpr>
+                                                        <inputArgExpr inputArgName="affiliate" isConst="false"><![CDATA[affiliate]]></inputArgExpr>
+                                                        <inputArgExpr inputArgName="trading_partner" isConst="false"><![CDATA[trading_partner]]></inputArgExpr>
+                                                        <inputArgExpr inputArgName="country_code" isConst="false"><![CDATA[country_code]]></inputArgExpr>
+                                                        <inputArgExpr inputArgName="instance" isConst="false"><![CDATA[instance]]></inputArgExpr>
+                                                        <inputArgExpr inputArgName="cpe_mta_mac_address" isConst="false"><![CDATA[cpe_mta_mac_address]]></inputArgExpr>
+                                                        <inputArgExpr inputArgName="customer_id" isConst="false"><![CDATA[customer_id]]></inputArgExpr>
+                                                        <inputArgExpr inputArgName="sw_id" isConst="false"><![CDATA[sw_id]]></inputArgExpr>
+                                                        <inputArgExpr inputArgName="bf_vendor" isConst="false"><![CDATA[bf_vendor]]></inputArgExpr>
+                                                        <inputArgExpr inputArgName="bf_encryption_variant" isConst="false"><![CDATA[bf_encryption_variant]]></inputArgExpr>
+                                                        <inputArgExpr inputArgName="bf_encryption_type" isConst="false"><![CDATA[bf_encryption_type]]></inputArgExpr>
+                                                        <inputArgExpr inputArgName="bf_public_key" isConst="false"><![CDATA[bf_public_key]]></inputArgExpr>
+                                                        <inputArgExpr inputArgName="bf_sip_proxy_server" isConst="false"><![CDATA[bf_sip_proxy_server]]></inputArgExpr>
+                                                        <inputArgExpr inputArgName="bf_model" isConst="false"><![CDATA[bf_model]]></inputArgExpr>
+                                                        <inputArgExpr inputArgName="bf_type" isConst="false"><![CDATA[bf_type]]></inputArgExpr>
+                                                        <inputArgExpr inputArgName="bf_line_info1_port_id" isConst="false"><![CDATA[bf_line_info1_port_id]]></inputArgExpr>
+                                                        <inputArgExpr inputArgName="bf_line_info1_sip_username" isConst="false"><![CDATA[bf_line_info1_sip_username]]></inputArgExpr>
+                                                        <inputArgExpr inputArgName="bf_line_info1_sip_password" isConst="false"><![CDATA[bf_line_info1_sip_password]]></inputArgExpr>
+                                                        <inputArgExpr inputArgName="bf_line_info2_port_id" isConst="false"><![CDATA[bf_line_info2_port_id]]></inputArgExpr>
+                                                        <inputArgExpr inputArgName="bf_line_info2_sip_username" isConst="false"><![CDATA[bf_line_info2_sip_username]]></inputArgExpr>
+                                                        <inputArgExpr inputArgName="bf_line_info2_sip_password" isConst="false"><![CDATA[bf_line_info2_sip_password]]></inputArgExpr>
+                                                        <inputArgExpr inputArgName="err_code" isConst="false"><![CDATA[err_code]]></inputArgExpr>
+                                                        <inputArgExpr inputArgName="err_reason" isConst="false"><![CDATA[err_reason]]></inputArgExpr>
+                                                        <inputArgExpr inputArgName="retry_task" isConst="false"><![CDATA[retry_task]]></inputArgExpr>
+                                                    </inputArgExprs>
+                                                    <destVariables>
+                                                        <destVariable argName="service_type" destVarName="service_type"/>
+                                                        <destVariable argName="request_type" destVarName="request_type"/>
+                                                        <destVariable argName="affiliate" destVarName="affiliate"/>
+                                                        <destVariable argName="trading_partner" destVarName="trading_partner"/>
+                                                        <destVariable argName="country_code" destVarName="country_code"/>
+                                                        <destVariable argName="instance" destVarName="instance"/>
+                                                        <destVariable argName="cpe_mta_mac_address" destVarName="cpe_mta_mac_address"/>
+                                                        <destVariable argName="customer_id" destVarName="customer_id"/>
+                                                        <destVariable argName="sw_id" destVarName="sw_id"/>
+                                                        <destVariable argName="bf_vendor" destVarName="bf_vendor"/>
+                                                        <destVariable argName="bf_encryption_variant" destVarName="bf_encryption_variant"/>
+                                                        <destVariable argName="bf_encryption_type" destVarName="bf_encryption_type"/>
+                                                        <destVariable argName="bf_public_key" destVarName="bf_public_key"/>
+                                                        <destVariable argName="bf_sip_proxy_server" destVarName="bf_sip_proxy_server"/>
+                                                        <destVariable argName="bf_model" destVarName="bf_model"/>
+                                                        <destVariable argName="bf_type" destVarName="bf_type"/>
+                                                        <destVariable argName="bf_line_info1_port_id" destVarName="bf_line_info1_port_id"/>
+                                                        <destVariable argName="bf_line_info1_sip_username" destVarName="bf_line_info1_sip_username"/>
+                                                        <destVariable argName="bf_line_info1_sip_password" destVarName="bf_line_info1_sip_password"/>
+                                                        <destVariable argName="bf_line_info2_port_id" destVarName="bf_line_info2_port_id"/>
+                                                        <destVariable argName="bf_line_info2_sip_username" destVarName="bf_line_info2_sip_username"/>
+                                                        <destVariable argName="bf_line_info2_sip_password" destVarName="bf_line_info2_sip_password"/>
+                                                        <destVariable argName="retry_task" destVarName="retry_task"/>
+                                                    </destVariables>
+                                                </invokeArguments>
+                                            </manualTask>
+                                        </activities>
+                                    </sequence>
+                                </activities>
+                            </sequence>
+                        </failureHandler>
+                        <timeoutHandler syntax_id="54">
+                            <timeoutExpr format="sigma">
+                                <jmfExpr isConst="false"><![CDATA[async_timeout]]></jmfExpr>
+                            </timeoutExpr>
+                            <if ignoreLateStatus="true" suppressJoinFailure="false" syntax_id="56">
+                                <conditionExpr isConst="false"><![CDATA[timeout_count > mf_timeout_count()]]></conditionExpr>
+                                <thenBranch>
+                                    <sequence ignoreLateStatus="true" suppressJoinFailure="false" syntax_id="58">
+                                        <activities>
+                                            <assign ignoreLateStatus="true" suppressJoinFailure="false" syntax_id="59">
+                                                <assignExpr destVarName="isTimeout" isConst="false"><![CDATA[false]]></assignExpr>
+                                            </assign>
+                                            <SMPTask SMPTaskTypeName="smp_prcs_workflow_err" ignoreLateStatus="true" suppressJoinFailure="false" syntax_id="60">
+                                                <invokeArguments>
+                                                    <inputArgExprs>
+                                                        <inputArgExpr inputArgName="spm_ordr_id" isConst="false"><![CDATA[wf.getSmpOrderId()]]></inputArgExpr>
+                                                        <inputArgExpr inputArgName="spm_ordr_line_item_id" isConst="false"><![CDATA[wf.getLineItemId()]]></inputArgExpr>
+                                                        <inputArgExpr inputArgName="smp_tech_platform" isConst="false"><![CDATA[smp_tech_platform]]></inputArgExpr>
+                                                        <inputArgExpr inputArgName="smp_err_code_of_platform" isConst="false"><![CDATA[if nzlen err_code then err_code else  "-1"]]></inputArgExpr>
+                                                        <inputArgExpr inputArgName="smp_err_reason" isConst="false"><![CDATA[if nzlen err_reason then err_reason else "Time Out - No response received"]]></inputArgExpr>
+                                                        <inputArgExpr inputArgName="smp_sec_err_reason" isConst="false"><![CDATA[""]]></inputArgExpr>
+                                                        <inputArgExpr inputArgName="smp_3rd_err_readon" isConst="false"><![CDATA[""]]></inputArgExpr>
+                                                    </inputArgExprs>
+                                                    <destVariables>
+                                                        <destVariable argName="smp_err_code" destVarName="smp_err_code"/>
+                                                        <destVariable argName="smp_err_desc" destVarName="smp_err_desc"/>
+                                                    </destVariables>
+                                                </invokeArguments>
+                                            </SMPTask>
+                                            <sequence ignoreLateStatus="true" suppressJoinFailure="false" syntax_id="47">
+                                                <activities>
+                                                    <assign ignoreLateStatus="true" suppressJoinFailure="true" syntax_id="48">
+                                                        <assignExpr destVarName="retry_task" isConst="false"><![CDATA["y"]]></assignExpr>
+                                                    </assign>
+                                                    <alarm ignoreLateStatus="true" suppressJoinFailure="true" syntax_id="49">
+                                                        <alarmMsgExpr isConst="false"><![CDATA[mf_system_alarm_manual("Execute Manual lgoss_generate_bootfile", err_code, err_reason, wf.getSmpOrderId())]]></alarmMsgExpr>
+                                                        <alarmCategoryExpr isConst="false"><![CDATA["OS"]]></alarmCategoryExpr>
+                                                    </alarm>
+                                                    <manualTask TCName="lgoss" ignoreLateStatus="true" manualTaskTypeName="manual_lgoss_generate_bootfile" suppressJoinFailure="false" syntax_id="50">
+                                                        <invokeArguments>
+                                                            <inputArgExprs>
+                                                                <inputArgExpr inputArgName="service_type" isConst="false"><![CDATA[service_type]]></inputArgExpr>
+                                                                <inputArgExpr inputArgName="request_type" isConst="false"><![CDATA[request_type]]></inputArgExpr>
+                                                                <inputArgExpr inputArgName="affiliate" isConst="false"><![CDATA[affiliate]]></inputArgExpr>
+                                                                <inputArgExpr inputArgName="trading_partner" isConst="false"><![CDATA[trading_partner]]></inputArgExpr>
+                                                                <inputArgExpr inputArgName="country_code" isConst="false"><![CDATA[country_code]]></inputArgExpr>
+                                                                <inputArgExpr inputArgName="instance" isConst="false"><![CDATA[instance]]></inputArgExpr>
+                                                                <inputArgExpr inputArgName="cpe_mta_mac_address" isConst="false"><![CDATA[cpe_mta_mac_address]]></inputArgExpr>
+                                                                <inputArgExpr inputArgName="customer_id" isConst="false"><![CDATA[customer_id]]></inputArgExpr>
+                                                                <inputArgExpr inputArgName="sw_id" isConst="false"><![CDATA[sw_id]]></inputArgExpr>
+                                                                <inputArgExpr inputArgName="bf_vendor" isConst="false"><![CDATA[bf_vendor]]></inputArgExpr>
+                                                                <inputArgExpr inputArgName="bf_encryption_variant" isConst="false"><![CDATA[bf_encryption_variant]]></inputArgExpr>
+                                                                <inputArgExpr inputArgName="bf_encryption_type" isConst="false"><![CDATA[bf_encryption_type]]></inputArgExpr>
+                                                                <inputArgExpr inputArgName="bf_public_key" isConst="false"><![CDATA[bf_public_key]]></inputArgExpr>
+                                                                <inputArgExpr inputArgName="bf_sip_proxy_server" isConst="false"><![CDATA[bf_sip_proxy_server]]></inputArgExpr>
+                                                                <inputArgExpr inputArgName="bf_model" isConst="false"><![CDATA[bf_model]]></inputArgExpr>
+                                                                <inputArgExpr inputArgName="bf_type" isConst="false"><![CDATA[bf_type]]></inputArgExpr>
+                                                                <inputArgExpr inputArgName="bf_line_info1_port_id" isConst="false"><![CDATA[bf_line_info1_port_id]]></inputArgExpr>
+                                                                <inputArgExpr inputArgName="bf_line_info1_sip_username" isConst="false"><![CDATA[bf_line_info1_sip_username]]></inputArgExpr>
+                                                                <inputArgExpr inputArgName="bf_line_info1_sip_password" isConst="false"><![CDATA[bf_line_info1_sip_password]]></inputArgExpr>
+                                                                <inputArgExpr inputArgName="bf_line_info2_port_id" isConst="false"><![CDATA[bf_line_info2_port_id]]></inputArgExpr>
+                                                                <inputArgExpr inputArgName="bf_line_info2_sip_username" isConst="false"><![CDATA[bf_line_info2_sip_username]]></inputArgExpr>
+                                                                <inputArgExpr inputArgName="bf_line_info2_sip_password" isConst="false"><![CDATA[bf_line_info2_sip_password]]></inputArgExpr>
+                                                                <inputArgExpr inputArgName="err_code" isConst="false"><![CDATA[err_code]]></inputArgExpr>
+                                                                <inputArgExpr inputArgName="err_reason" isConst="false"><![CDATA[err_reason]]></inputArgExpr>
+                                                                <inputArgExpr inputArgName="retry_task" isConst="false"><![CDATA[retry_task]]></inputArgExpr>
+                                                            </inputArgExprs>
+                                                            <destVariables>
+                                                                <destVariable argName="service_type" destVarName="service_type"/>
+                                                                <destVariable argName="request_type" destVarName="request_type"/>
+                                                                <destVariable argName="affiliate" destVarName="affiliate"/>
+                                                                <destVariable argName="trading_partner" destVarName="trading_partner"/>
+                                                                <destVariable argName="country_code" destVarName="country_code"/>
+                                                                <destVariable argName="instance" destVarName="instance"/>
+                                                                <destVariable argName="cpe_mta_mac_address" destVarName="cpe_mta_mac_address"/>
+                                                                <destVariable argName="customer_id" destVarName="customer_id"/>
+                                                                <destVariable argName="sw_id" destVarName="sw_id"/>
+                                                                <destVariable argName="bf_vendor" destVarName="bf_vendor"/>
+                                                                <destVariable argName="bf_encryption_variant" destVarName="bf_encryption_variant"/>
+                                                                <destVariable argName="bf_encryption_type" destVarName="bf_encryption_type"/>
+                                                                <destVariable argName="bf_public_key" destVarName="bf_public_key"/>
+                                                                <destVariable argName="bf_sip_proxy_server" destVarName="bf_sip_proxy_server"/>
+                                                                <destVariable argName="bf_model" destVarName="bf_model"/>
+                                                                <destVariable argName="bf_type" destVarName="bf_type"/>
+                                                                <destVariable argName="bf_line_info1_port_id" destVarName="bf_line_info1_port_id"/>
+                                                                <destVariable argName="bf_line_info1_sip_username" destVarName="bf_line_info1_sip_username"/>
+                                                                <destVariable argName="bf_line_info1_sip_password" destVarName="bf_line_info1_sip_password"/>
+                                                                <destVariable argName="bf_line_info2_port_id" destVarName="bf_line_info2_port_id"/>
+                                                                <destVariable argName="bf_line_info2_sip_username" destVarName="bf_line_info2_sip_username"/>
+                                                                <destVariable argName="bf_line_info2_sip_password" destVarName="bf_line_info2_sip_password"/>
+                                                                <destVariable argName="retry_task" destVarName="retry_task"/>
+                                                            </destVariables>
+                                                        </invokeArguments>
+                                                    </manualTask>
+                                                </activities>
+                                            </sequence>
+                                        </activities>
+                                    </sequence>
+                                </thenBranch>
+                                <elseBranch>
+                                    <sequence ignoreLateStatus="true" suppressJoinFailure="false" syntax_id="62">
+                                        <activities>
+                                            <assign ignoreLateStatus="true" suppressJoinFailure="false" syntax_id="63">
+                                                <assignExpr destVarName="isTimeout" isConst="false"><![CDATA[true]]></assignExpr>
+                                            </assign>
+                                            <assign ignoreLateStatus="true" suppressJoinFailure="false" syntax_id="64">
+                                                <assignExpr destVarName="timeout_count" isConst="false"><![CDATA[timeout_count + 1]]></assignExpr>
+                                            </assign>
+                                        </activities>
+                                    </sequence>
+                                </elseBranch>
+                            </if>
+                        </timeoutHandler>
+                    </JEATask>
+                </repeatUntil>
+            </activities>
+        </sequence>
+    </scope>
+</process>

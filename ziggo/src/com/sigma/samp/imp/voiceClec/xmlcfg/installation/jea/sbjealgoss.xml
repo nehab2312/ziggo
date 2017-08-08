@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ 
+Patch applied 2017/07/25 12:14:50.955
+ Apply message:
+    LGOSS TC developed
+Patch applied 2017/07/26 12:08:58.360
+ Apply message:
+    -->
+<jeaInstallation jeaFile="" name="sbjealgoss" xmlns="http://www.sigma-systems.com/schemas/4.0/jea" xmlns:dicommon="http://www.sigma-systems.com/schemas/4.0/dicommon" xmlns:dist="http://www.sigma-systems.com/schemas/4.0/distribution" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sigma-systems.com/schemas/4.0/jea com/sigma/samp/xmlcfg/schemas/jea.xsd">
+    <mdbInvocation>
+        <dicommon:initParams>
+            <dicommon:initParam name="alt_task_key" required="false" type="string">
+                <dicommon:description><![CDATA[name of the task parm that is used as alt key in async flow. If it is missing, it indicates no alt key for async tasks]]></dicommon:description>
+                <dicommon:value><![CDATA[requestId]]></dicommon:value>
+            </dicommon:initParam>
+        </dicommon:initParams>
+        <dicommon:JMSQueue jndiName="com.sigma.jms.queue.jea.sbjealgoss.request" useJMSQueueFactory="com.sigma.jms.jea.JEAQueueConnectionFactory">
+            <dicommon:attributes>
+                <dicommon:attribute final="false" name="DeliveryFailureParams.RedeliveryLimit " type="int">
+                    <dicommon:description/>
+                    <dicommon:value><![CDATA[3]]></dicommon:value>
+                </dicommon:attribute>
+                <dicommon:attribute final="false" name="DeliveryParamsOverrides.RedeliveryDelay" type="int">
+                    <dicommon:description><![CDATA[in milliseconds]]></dicommon:description>
+                    <dicommon:value><![CDATA[60000]]></dicommon:value>
+                </dicommon:attribute>
+                <dicommon:attribute final="false" name="DeliveryFailureParams.ErrorDestination" type="string">
+                    <dicommon:description/>
+                    <dicommon:value><![CDATA[com.sigma.jms.queue.jea.$PROGRAM.error]]></dicommon:value>
+                </dicommon:attribute>
+            </dicommon:attributes>
+        </dicommon:JMSQueue>
+    </mdbInvocation>
+    <validator/>
+    <persistMgr/>
+    <taskHandler/>
+    <flow/>
+    <boxRouter>
+        <boxes>
+            <box javaClass="com.sigma.jea.resource.DfltBox" name="box1">
+                <dicommon:description><![CDATA[official box implementation]]></dicommon:description>
+                <connPools>
+                    <connPool javaClass="com.sigma.jea.resource.RoundRobinConnPool" protocolNameInJEA="lgosssoap">
+                        <dicommon:description><![CDATA[Round robin connection pool]]></dicommon:description>
+                        <dicommon:initParams>
+                            <dicommon:initParam name="max_conns" required="true" type="int">
+                                <dicommon:description><![CDATA[max number of conns]]></dicommon:description>
+                                <dicommon:value><![CDATA[3]]></dicommon:value>
+                            </dicommon:initParam>
+                            <dicommon:initParam name="min_conns" required="true" type="int">
+                                <dicommon:description><![CDATA[initial number of conns]]></dicommon:description>
+                                <dicommon:value><![CDATA[0]]></dicommon:value>
+                            </dicommon:initParam>
+                            <dicommon:initParam name="retry_interval" required="true" type="int">
+                                <dicommon:description><![CDATA[borrow conn retry interval in seconds]]></dicommon:description>
+                                <dicommon:value><![CDATA[10]]></dicommon:value>
+                            </dicommon:initParam>
+                            <dicommon:initParam name="timeout" required="true" type="int">
+                                <dicommon:description><![CDATA[borrow conn timeout in seconds]]></dicommon:description>
+                                <dicommon:value><![CDATA[120]]></dicommon:value>
+                            </dicommon:initParam>
+                            <dicommon:initParam name="idle_timeout" required="true" type="int">
+                                <dicommon:description><![CDATA[conn idle timeout in seconds. idle conns will be removed from pool. -1 means no idle timeout.]]></dicommon:description>
+                                <dicommon:value><![CDATA[-1]]></dicommon:value>
+                            </dicommon:initParam>
+                        </dicommon:initParams>
+                        <conns>
+                            <conn id="1" javaClass="com.sigma.jea.resource.DfltConn">
+                                <dicommon:description><![CDATA[official conn implementation]]></dicommon:description>
+                                <dicommon:eventListeners>
+                                    <dicommon:eventListener javaClass="com.sigma.jea.resource.ConnEventCollector" seq="1">
+                                        <dicommon:description><![CDATA[put conn pool events into in-memory DB]]></dicommon:description>
+                                    </dicommon:eventListener>
+                                    <dicommon:eventListener javaClass="com.sigma.jea.resource.ConnMonitor" seq="2">
+                                        <dicommon:description><![CDATA[It monitors connection state changes and provide inactive timeout and stayalive capabilities to connection]]></dicommon:description>
+                                        <dicommon:initParams>
+                                            <dicommon:initParam name="inactive_timeout" required="true" type="int">
+                                                <dicommon:description><![CDATA[conn inactive timeout in seconds. inactive conns will be closed. -1 means no inactive timeout]]></dicommon:description>
+                                                <dicommon:value><![CDATA[-1]]></dicommon:value>
+                                            </dicommon:initParam>
+                                            <dicommon:initParam name="stayalive_interval" required="true" type="int">
+                                                <dicommon:description><![CDATA[the pool keeps conn alive every stayalive_interval seconds. -1 means no stayalive interval]]></dicommon:description>
+                                                <dicommon:value><![CDATA[-1]]></dicommon:value>
+                                            </dicommon:initParam>
+                                        </dicommon:initParams>
+                                    </dicommon:eventListener>
+                                </dicommon:eventListeners>
+                                <protocol>
+                                    <dicommon:description><![CDATA[Basic Soap Protocol using SAAJ APIs]]></dicommon:description>
+                                    <dicommon:initParams>
+                                        <dicommon:initParam name="multiple_message_factory_support" required="false" type="boolean">
+                                            <dicommon:description><![CDATA[enable multiple message factory support or not]]></dicommon:description>
+                                            <dicommon:value><![CDATA[false]]></dicommon:value>
+                                        </dicommon:initParam>
+                                        <dicommon:initParam name="call_timeout" required="false" type="int">
+                                            <dicommon:description><![CDATA[soap call timeout in seconds. -1 means no timeout]]></dicommon:description>
+                                            <dicommon:value><![CDATA[30]]></dicommon:value>
+                                        </dicommon:initParam>
+                                        <dicommon:initParam name="set_mime_header_1_value" required="false" type="string">
+                                            <dicommon:description><![CDATA[Value of mime header. The name of value parm is derived from the name of mime header name parm by appending it a suffix _value]]></dicommon:description>
+                                        </dicommon:initParam>
+                                        <dicommon:initParam name="set_mime_header_1" required="false" type="string">
+                                            <dicommon:description><![CDATA[Set a mime header in the mime part of message, replace existing value, this parm tells the name of mime header. To set another header use a different string after set_mime_header_ and add it to the init parm list]]></dicommon:description>
+                                        </dicommon:initParam>
+                                        <dicommon:initParam name="add_mime_header_1_value" required="false" type="string">
+                                            <dicommon:description><![CDATA[Value of mime header. The name of value parm is derived from the name of mime header name parm by appending it a suffix _value]]></dicommon:description>
+                                        </dicommon:initParam>
+                                        <dicommon:initParam name="add_mime_header_1" required="false" type="string">
+                                            <dicommon:description><![CDATA[Add a mime header in the mime part of message, this parm tells the name of mime header. To add another header use a different string after add_mime_header_ and add it to the init parm list]]></dicommon:description>
+                                        </dicommon:initParam>
+                                        <dicommon:initParam name="soap_connection_factory" required="false" type="string">
+                                            <dicommon:description><![CDATA[Soap connection factory implementation class name]]></dicommon:description>
+                                            <dicommon:value><![CDATA[com.sun.xml.internal.messaging.saaj.client.p2p.HttpSOAPConnectionFactory]]></dicommon:value>
+                                        </dicommon:initParam>
+                                        <dicommon:initParam name="soap_message_factory" required="false" type="string">
+                                            <dicommon:description><![CDATA[Soap message factory implementation class name]]></dicommon:description>
+                                            <dicommon:value><![CDATA[com.sun.xml.internal.messaging.saaj.soap.ver1_1.SOAPMessageFactory1_1Impl]]></dicommon:value>
+                                        </dicommon:initParam>
+                                        <dicommon:initParam name="http_cookies_support" required="false" type="boolean">
+                                            <dicommon:description><![CDATA[Enable session management through http cookies]]></dicommon:description>
+                                            <dicommon:value><![CDATA[true]]></dicommon:value>
+                                        </dicommon:initParam>
+                                        <dicommon:initParam name="http_basic_authentication" required="false" type="string">
+                                            <dicommon:description><![CDATA[Authentication information for http basic authentication if required by server, the format is username:password]]></dicommon:description>
+                                        </dicommon:initParam>
+                                        <dicommon:initParam name="private_key_password" required="false" type="string">
+                                            <dicommon:description><![CDATA[Private key password]]></dicommon:description>
+                                        </dicommon:initParam>
+                                        <dicommon:initParam name="private_key_alias" required="false" type="string">
+                                            <dicommon:description><![CDATA[Private key alias Name]]></dicommon:description>
+                                        </dicommon:initParam>
+                                        <dicommon:initParam name="keystore_password" required="false" type="string">
+                                            <dicommon:description><![CDATA[KeyStore password]]></dicommon:description>
+                                        </dicommon:initParam>
+                                        <dicommon:initParam name="keystore_type" required="false" type="string">
+                                            <dicommon:description><![CDATA[KeyStore type]]></dicommon:description>
+                                            <dicommon:value><![CDATA[JKS]]></dicommon:value>
+                                        </dicommon:initParam>
+                                        <dicommon:initParam name="keystore_file" required="false" type="string">
+                                            <dicommon:description><![CDATA[KeyStore file (Empty value specifies simple SOAP message transfer)]]></dicommon:description>
+                                        </dicommon:initParam>
+                                        <dicommon:initParam name="soap_body_xsd" required="false" type="string">
+                                            <dicommon:description><![CDATA[URL of the XSD against which soap body will be validated]]></dicommon:description>
+                                        </dicommon:initParam>
+                                        <dicommon:initParam name="soap_simulation_mode" required="false" type="boolean">
+                                            <dicommon:description><![CDATA[If true simulation mode will be on]]></dicommon:description>
+                                            <dicommon:value><![CDATA[none]]></dicommon:value>
+                                        </dicommon:initParam>
+                                        <dicommon:initParam name="soap_endpoint_uri" required="false" type="string">
+                                            <dicommon:description><![CDATA[End point URI for soap request to send]]></dicommon:description>
+                                            <dicommon:value><![CDATA[http://10.100.160.211:8181]]></dicommon:value>
+                                        </dicommon:initParam>
+                                    </dicommon:initParams>
+                                </protocol>
+                            </conn>
+                        </conns>
+                    </connPool>
+                </connPools>
+            </box>
+        </boxes>
+    </boxRouter>
+    <scheduler/>
+    <replyTaskBackupMDB>
+        <dicommon:JMSQueue jndiName="com.sigma.jms.queue.jea.sbjealgoss.backup" useJMSQueueFactory="com.sigma.jms.jea.JEAQueueConnectionFactory">
+            <dicommon:attributes>
+                <dicommon:attribute final="false" name="DeliveryParamsOverrides.RedeliveryDelay" type="int">
+                    <dicommon:description><![CDATA[in milliseconds]]></dicommon:description>
+                    <dicommon:value><![CDATA[60000]]></dicommon:value>
+                </dicommon:attribute>
+            </dicommon:attributes>
+        </dicommon:JMSQueue>
+    </replyTaskBackupMDB>
+</jeaInstallation>

@@ -1,0 +1,48 @@
+<wsdl:definitions name="provisioning_ASAPVoice"
+	targetNamespace="http://www.libertyglobal.com/provisioning_ASAPVoice"
+	xmlns:tns="http://www.libertyglobal.com/provisioning_ASAPVoice"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:ns1="http://www.libertyglobal.com/Provisioning_ASAPVoice/Schema">
+	
+	<wsdl:types>
+		<xsd:schema>
+			<xsd:import namespace="http://www.libertyglobal.com/Provisioning_ASAPVoice/Schema" schemaLocation="../XSD/Provisioning_ASAPVoice.xsd"/>
+		</xsd:schema>
+	</wsdl:types>
+	
+	<wsdl:message name="provisioning_ASAPVoice">
+		<wsdl:part element="ns1:provisioning_ASAPVoice" name="parameters"/>
+	</wsdl:message>
+	
+	<wsdl:message name="provisioning_ASAPVoice_result">
+		<wsdl:part element="ns1:provisioning_ASAPVoice_result" name="parameters"/>
+	</wsdl:message>
+	
+	<wsdl:portType name="PS_NL_Provisioning_ASAPVoice_WS">
+		<wsdl:operation name="invoke">
+			<wsdl:input message="tns:provisioning_ASAPVoice"/>
+			<wsdl:output message="tns:provisioning_ASAPVoice_result"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	
+	<wsdl:binding name="PS_NL_Provisioning_ASAPVoice_SOAP" type="tns:PS_NL_Provisioning_ASAPVoice_WS">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="invoke">
+			<soap:operation soapAction="provisioning_ASAPVoice"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>			
+		</wsdl:operation>
+	</wsdl:binding>
+	
+	<wsdl:service name="provisioning_ASAPVoice">
+		<wsdl:port binding="tns:PS_NL_Provisioning_ASAPVoice_SOAP" name="PS_NL_Provisioning_ASAPVoice_SOAP">
+			<soap:address location="http://server:port/relativeURI"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

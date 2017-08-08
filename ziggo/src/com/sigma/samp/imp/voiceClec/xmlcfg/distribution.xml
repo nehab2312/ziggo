@@ -1,0 +1,1963 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: distribution.xml,v 1.61 2010/06/02 21:46:54 dilekk Exp $ 
+Patch applied 2008/10/28 13:51:03.875
+ Apply message:
+    Upgraded from 4.0 to 41-->
+<distribution name="voiceClec" valid="false" xmlns="http://www.sigma-systems.com/schemas/4.0/distribution" xmlns:dicommon="http://www.sigma-systems.com/schemas/4.0/dicommon" xmlns:jea="http://www.sigma-systems.com/schemas/4.0/jea" xmlns:jwf="http://www.sigma-systems.com/schemas/4.0/jwf" xmlns:manifest="http://www.sigma-systems.com/schemas/4.0/manifest" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sigma-systems.com/schemas/4.0/distribution com/sigma/samp/xmlcfg/schemas/distribution.xsd http://www.sigma-systems.com/schemas/4.0/jwf com/sigma/samp/xmlcfg/schemas/jwf.xsd http://www.sigma-systems.com/schemas/4.0/jea com/sigma/samp/xmlcfg/schemas/jea.xsd">
+    <properties>
+        <property name="builtBy">
+            <dicommon:value><![CDATA[$Author: dilekk $]]></dicommon:value>
+        </property>
+        <property name="builtOn">
+            <dicommon:value><![CDATA[$Date: 2010/06/02 21:46:54 $]]></dicommon:value>
+        </property>
+    </properties>
+    <resources>
+        <jmsDestinations>
+            <jmsDestination jndiName="System/Sigma/ApplicationType/OrderManagement/Application/4-3;1-0;SMP/Comp/JVTEventTopic" name="System-Sigma-ApplicationType-OrderManagement-Application-4-3;1-0;SMP-Comp-JVTEventTopic" type="topic"/>
+            <jmsDestination jndiName="System/Sigma/ApplicationType/OrderManagement/Application/4-3;1-0;SMP/Comp/XVTEventTopic" name="System-Sigma-ApplicationType-OrderManagement-Application-4-3;1-0;SMP-Comp-XVTEventTopic" type="topic"/>
+            <jmsDestination jndiName="System/Sigma/ApplicationType/OrderManagement/Application/4-3;1-0;SMP/Comp/XmlRequestQueue" name="System-Sigma-ApplicationType-OrderManagement-Application-4-3;1-0;SMP-Comp-XmlRequestQueue" type="queue"/>
+            <jmsDestination jndiName="System/Sigma/ApplicationType/OrderManagement/Application/4-3;1-0;SMP/Comp/XmlRequestErrorQueue" name="System-Sigma-ApplicationType-OrderManagement-Application-4-3;1-0;SMP-Comp-XmlRequestErrorQueue" type="queue"/>
+            <jmsDestination jndiName="System/Sigma/ApplicationType/OrderManagement/Application/4-3;1-0;SMP/Comp/XmlResponseQueue" name="System-Sigma-ApplicationType-OrderManagement-Application-4-3;1-0;SMP-Comp-XmlResponseQueue" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.samp.ordermgr.WfRetryQueue" name="com.sigma.jms.samp.ordermgr.WfRetryQueue" type="queue"/>
+            <!-- <jmsDestination jndiName="com.sigma.jms.samp.sb.ProvQueue" name="com.sigma.jms.samp.sb.ProvQueue" type="queue"/> -->
+            <jmsDestination jndiName="com.sigma.jms.samp.sb.ProvReplyErrorQueue" name="com.sigma.jms.samp.sb.ProvReplyErrorQueue" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.samp.sb.ProvReplyQueue" name="com.sigma.jms.samp.sb.ProvReplyQueue" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.samp.ordermgr.OrderErrorQueue" name="com.sigma.jms.samp.ordermgr.OrderErrorQueue" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.samp.ordermgr.OrderReadyQueue" name="com.sigma.jms.samp.ordermgr.OrderReadyQueue" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.samp.ordermgr.XmlRequestQueue" name="com.sigma.jms.samp.ordermgr.XmlRequestQueue" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.samp.ordermgr.BatchNotifyPrcsQueue" name="com.sigma.jms.samp.ordermgr.BatchNotifyPrcsQueue" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.samp.ordermgr.XmlResponseQueue" name="com.sigma.jms.samp.ordermgr.XmlResponseQueue" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.samp.ordermgr.XmlRequestErrorQueue" name="com.sigma.jms.samp.ordermgr.XmlRequestErrorQueue" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.samp.ordermgr.ScheduledOrderHandler" name="com.sigma.jms.samp.ordermgr.ScheduledOrderHandler" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.samp.stm.SpmNotifyQueue" name="com.sigma.jms.samp.stm.SpmNotifyQueue" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.samp.ath.ReplyQueue" name="com.sigma.jms.samp.ath.ReplyQueue" type="queue"/>
+            <!--jmsDestination jndiName="com.sigma.jms.samp.stm.SyncNTDQueue" name="com.sigma.jms.samp.stm.SyncNTDQueue" type="queue"/-->
+            <jmsDestination jndiName="com.sigma.jms.samp.ispp.ReplyQueue" name="com.sigma.jms.samp.ispp.ReplyQueue" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.samp.risp.MediatorQueue" name="com.sigma.jms.samp.risp.MediatorQueue" type="queue"/>
+            <!--jmsDestination jndiName="com.sigma.jms.samp.stm.NTDSyncQueue" name="com.sigma.jms.samp.stm.NTDSyncQueue" type="queue"/-->
+            <jmsDestination jndiName="com.sigma.jms.samp.stm.ExternalSyncQueue" name="com.sigma.jms.samp.stm.ExternalSyncQueue" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.samp.stm.SSNBatchQueue" name="com.sigma.jms.samp.stm.SSNBatchQueue" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.samp.stm.SpmNotifyErrorQueue" name="com.sigma.jms.samp.stm.SpmNotifyErrorQueue" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.samp.stm.ExternalSyncErrorQueue" name="com.sigma.jms.samp.stm.ExternalSyncErrorQueue" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.samp.stm.ProjectStatusUpdateNotificationQueue" name="com.sigma.jms.samp.stm.ProjectStatusUpdateNotificationQueue" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.vframe.jnotify.AgentQueue" name="com.sigma.jms.vframe.jnotify.AgentQueue" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.samp.stm.SSNBatchErrorQueue" name="com.sigma.jms.samp.stm.SSNBatchErrorQueue" type="queue"/>
+            <jmsDestination jndiName="javatx.workermdb.queue" name="javatx.workermdb.queue" type="queue"/>
+            <!--jmsDestination jndiName="com.sigma.jms.vframe.jcfgmgr.CfgMgrTopic" name="com.sigma.jms.vframe.jcfgmgr.CfgMgrTopic" type="topic"/-->
+            <!--jmsDestination jndiName="com.sigma.jms.queue.adpt.error" name="com.sigma.jms.queue.adpt.error" type="queue"/-->
+            <jmsDestination jndiName="com.sigma.jms.queue.jwf.replytask" name="com.sigma.jms.queue.jwf.replytask" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jwf.svcOrderRequest" name="com.sigma.jms.queue.jwf.svcOrderRequest" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jwf.latestatusEvent" name="com.sigma.jms.queue.jwf.latestatusEvent" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jwf.senderBackup" name="com.sigma.jms.queue.jwf.senderBackup" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jwf.scheduler" name="com.sigma.jms.queue.jwf.scheduler" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeasprint.backup" name="com.sigma.jms.queue.jea.sbjeasprint.backup" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeasprint.error" name="com.sigma.jms.queue.jea.sbjeasprint.error" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeasprint.request" name="com.sigma.jms.queue.jea.sbjeasprint.request" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeabroadsoft.backup" name="com.sigma.jms.queue.jea.sbjeabroadsoft.backup" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeabroadsoft.error" name="com.sigma.jms.queue.jea.sbjeabroadsoft.error" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeabroadsoft.request" name="com.sigma.jms.queue.jea.sbjeabroadsoft.request" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeaconsumableresources.backup" name="com.sigma.jms.queue.jea.sbjeaconsumableresources.backup" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeaconsumableresources.error" name="com.sigma.jms.queue.jea.sbjeaconsumableresources.error" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeaconsumableresources.request" name="com.sigma.jms.queue.jea.sbjeaconsumableresources.request" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeaapache.backup" name="com.sigma.jms.queue.jea.sbjeaapache.backup" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeaapache.error" name="com.sigma.jms.queue.jea.sbjeaapache.error" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeaapache.request" name="com.sigma.jms.queue.jea.sbjeaapache.request" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeaciscobac40.backup" name="com.sigma.jms.queue.jea.sbjeaciscobac40.backup" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeaciscobac40.error" name="com.sigma.jms.queue.jea.sbjeaciscobac40.error" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeaciscobac40.request" name="com.sigma.jms.queue.jea.sbjeaciscobac40.request" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeaipunity.backup" name="com.sigma.jms.queue.jea.sbjeaipunity.backup" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeaipunity.error" name="com.sigma.jms.queue.jea.sbjeaipunity.error" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeaipunity.request" name="com.sigma.jms.queue.jea.sbjeaipunity.request" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeal3.backup" name="com.sigma.jms.queue.jea.sbjeal3.backup" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeal3.error" name="com.sigma.jms.queue.jea.sbjeal3.error" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeal3.request" name="com.sigma.jms.queue.jea.sbjeal3.request" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeanortelcs2k.backup" name="com.sigma.jms.queue.jea.sbjeanortelcs2k.backup" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeanortelcs2k.error" name="com.sigma.jms.queue.jea.sbjeanortelcs2k.error" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeanortelcs2k.request" name="com.sigma.jms.queue.jea.sbjeanortelcs2k.request" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeaopenwave.backup" name="com.sigma.jms.queue.jea.sbjeaopenwave.backup" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeaopenwave.error" name="com.sigma.jms.queue.jea.sbjeaopenwave.error" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeaopenwave.request" name="com.sigma.jms.queue.jea.sbjeaopenwave.request" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeabillingnotification.backup" name="com.sigma.jms.queue.jea.sbjeabillingnotification.backup" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeabillingnotification.error" name="com.sigma.jms.queue.jea.sbjeabillingnotification.error" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeabillingnotification.request" name="com.sigma.jms.queue.jea.sbjeabillingnotification.request" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeamotoroladac.backup" name="com.sigma.jms.queue.jea.sbjeamotoroladac.backup" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeamotoroladac.error" name="com.sigma.jms.queue.jea.sbjeamotoroladac.error" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeamotoroladac.request" name="com.sigma.jms.queue.jea.sbjeamotoroladac.request" type="queue"/>
+			<jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeatandbergbms.backup" name="com.sigma.jms.queue.jea.sbjeatandbergbms.backup" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeatandbergbms.error" name="com.sigma.jms.queue.jea.sbjeatandbergbms.error" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeatandbergbms.request" name="com.sigma.jms.queue.jea.sbjeatandbergbms.request" type="queue"/>
+			<jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeaciscodncs.backup" name="com.sigma.jms.queue.jea.sbjeaciscodncs.backup" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeaciscodncs.error" name="com.sigma.jms.queue.jea.sbjeaciscodncs.error" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeaciscodncs.request" name="com.sigma.jms.queue.jea.sbjeaciscodncs.request" type="queue"/>
+	    <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeasigmadpm10.backup" name="com.sigma.jms.queue.jea.sbjeasigmadpm10.backup" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeasigmadpm10.error" name="com.sigma.jms.queue.jea.sbjeasigmadpm10.error" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeasigmadpm10.request" name="com.sigma.jms.queue.jea.sbjeasigmadpm10.request" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeaalu5529apc.backup" name="com.sigma.jms.queue.jea.sbjeaalu5529apc.backup" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeaalu5529apc.error" name="com.sigma.jms.queue.jea.sbjeaalu5529apc.error" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjeaalu5529apc.request" name="com.sigma.jms.queue.jea.sbjeaalu5529apc.request" type="queue"/>
+			<jmsDestination jndiName="com.sigma.jms.queue.jea.sbjealgoss.backup" name="com.sigma.jms.queue.jea.sbjealgoss.backup" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjealgoss.error" name="com.sigma.jms.queue.jea.sbjealgoss.error" type="queue"/>
+            <jmsDestination jndiName="com.sigma.jms.queue.jea.sbjealgoss.request" name="com.sigma.jms.queue.jea.sbjealgoss.request" type="queue"/>
+        </jmsDestinations>
+        <jmsQueueFactories>
+            <!--jmsQueueFactory jndiName="com.sigma.jms.DefaultTopicConnectionFactory" name="com.sigma.jms.DefaultTopicConnectionFactory"/-->
+            <jmsQueueFactory jndiName="com.sigma.jms.DefaultQueueConnectionFactory" name="com.sigma.jms.DefaultQueueConnectionFactory"/>
+            <jmsQueueFactory jndiName="System/Sigma/ApplicationType/OrderManagement/Application/4-3;1-0;SMP/Comp/QueueConnectionFactory" name="System-Sigma-ApplicationType-OrderManagement-Application-4-3;1-0;SMP-Comp-QueueConnectionFactory"/>
+            <jmsQueueFactory jndiName="System/Sigma/ApplicationType/OrderManagement/Application/4-3;1-0;SMP/Comp/TopicConnectionFactory" name="System-Sigma-ApplicationType-OrderManagement-Application-4-3;1-0;SMP-Comp-TopicConnectionFactory"/>
+            <jmsQueueFactory jndiName="com.sigma.jms.QueueConnectionFactoryWithLoadBalancing" name="com.sigma.jms.QueueConnectionFactoryWithLoadBalancing">
+                <mBeanAttrs>
+                    <mBeanAttr name="LoadBalancingParams.ServerAffinityEnabled" type="bool">
+                        <dicommon:value><![CDATA[false]]></dicommon:value>
+                    </mBeanAttr>
+                </mBeanAttrs>
+            </jmsQueueFactory>
+            <jmsQueueFactory jndiName="javatx.workermdb.qcf" name="javatx.workermdb.qcf"/>
+            <jmsQueueFactory jndiName="com.sigma.jms.connfactory.adpt" name="com.sigma.jms.connfactory.adpt"/>
+            <jmsQueueFactory jndiName="com.sigma.jms.jwf.defaultJMSQFactory" name="com.sigma.jms.jwf.defaultJMSQFactory"/>
+            <jmsQueueFactory jndiName="com.sigma.jms.jea.JEAQueueConnectionFactory" name="com.sigma.jms.jea.JEAQueueConnectionFactory"/>
+        </jmsQueueFactories>
+        <dataSources>
+            <dataSource jndiName="com.sigma.jdbc.datasource.jea_non_tx" name="com.sigma.jdbc.datasource.jea_non_tx"/>
+            <dataSource jndiName="com.sigma.jdbc.datasource.jea_tx" name="com.sigma.jdbc.datasource.jea_tx"/>
+            <dataSource jndiName="com.sigma.jdbc.datasource.jwf_non_tx" name="com.sigma.jdbc.datasource.jwf_non_tx"/>
+            <dataSource jndiName="com.sigma.jdbc.datasource.jwf_tx" name="com.sigma.jdbc.datasource.jwf_tx"/>
+            <dataSource jndiName="com.sigma.jdbc.samp.am.AMNonTxDataSource" name="com.sigma.jdbc.samp.am.AMNonTxDataSource"/>
+            <dataSource jndiName="com.sigma.jdbc.samp.NonXADataSource" name="com.sigma.jdbc.samp.NonXADataSource"/>
+            <dataSource jndiName="com.sigma.jdbc.samp.stm.ReprovDataSource" name="com.sigma.jdbc.samp.stm.ReprovDataSource"/>
+            <dataSource jndiName="com.sigma.jdbc.samp.stm.SyncDataSource" name="com.sigma.jdbc.samp.stm.SyncDataSource"/>
+            <dataSource jndiName="com.sigma.jdbc.samp.XADataSource" name="com.sigma.jdbc.samp.XADataSource"/>
+        </dataSources>
+        <genericResources>
+            <genericResource jndiName="com.sigma.mail.licensing" name="mailSession">
+                <mBeanAttrs>
+                    <mBeanAttr name="mail.transport.protocol">
+                        <dicommon:value><![CDATA[smtp]]></dicommon:value>
+                    </mBeanAttr>
+                </mBeanAttrs>
+            </genericResource>
+        </genericResources>
+    </resources>
+    <components>
+        <component buildPath="com/sigma/samp/xmlcfg" name="com.sigma.samp.xmlcfg" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/xmlcfg/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/am/cmn" name="com.sigma.am.cmn" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/am/cmn/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/hframe" name="com.sigma.hframe" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/hframe/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/operational" name="com.sigma.operational" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/operational/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/am/wl/securityprovider/authentication" name="com.sigma.am.wl.securityprovider.authentication" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/am/wl/securityprovider/authentication/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/am/admin" name="com.sigma.am.admin" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/am/admin/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/am/ejb" name="com.sigma.am.ejb" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/am/ejb/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/am/pwdstrgth" name="com.sigma.am.pwdstrgth" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/am/pwdstrgth/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/am" name="com.sigma.am" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/am/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/jmf2" name="com.sigma.jmf2" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/jmf2/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/vframe/gui/logger" name="com.sigma.vframe.gui.logger" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/vframe/gui/logger/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/vframe/gui/applet" name="com.sigma.vframe.gui.applet" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/vframe/gui/applet/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/vframe/jxmlcfg/tools" name="com.sigma.vframe.jxmlcfg.tools" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/vframe/jxmlcfg/tools/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/vframe/jxmlcfg/ejb" name="com.sigma.vframe.jxmlcfg.ejb" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/vframe/jxmlcfg/ejb/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/vframe/jlabels/ejb" name="com.sigma.vframe.jlabels.ejb" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/vframe/jlabels/ejb/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/vframe/jcfgmgr/ejb" name="com.sigma.vframe.jcfgmgr.ejb" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/vframe/jcfgmgr/ejb/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/vframe" name="com.sigma.vframe" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/vframe/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/tooling/admin" name="com.sigma.tooling.admin" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/tooling/admin/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/tooling/templates" name="com.sigma.tooling.templates" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/tooling/templates/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/jea/shelfProtocol" name="com.sigma.jea.shelfProtocol" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/jea/shelfProtocol/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/jea" name="com.sigma.jea" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/jea/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.jea.mgmt.JeaMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/mdbridge" name="com.sigma.mdbridge" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/mdbridge/manifest.xml"/>
+            <properties>
+                <property name="installHandler">
+                    <dicommon:value><![CDATA[com.sigma.mdbridge.bridge.cfg.BridgeInstallHandler]]></dicommon:value>
+                </property>
+                <property name="mgmtHandler">
+                    <dicommon:description><![CDATA[Bridge Management Handler class]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.mdbridge.mgmt.MDBridgeMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+		<component
+            buildPath="com/sigma/samp/imp/voiceClec/jeaProtocols/LGOSSAsyncResp"
+            name="com.sigma.samp.imp.voiceClec.jeaProtocols.LGOSSAsyncResp"
+            needsBuild="true" type="GenericCmpntSpec">
+            <xi:include
+                href="../../../../../../com/sigma/samp/imp/voiceClec/jeaProtocols/LGOSSAsyncResp/manifest.xml" />
+        </component>
+        <component buildPath="com/sigma/samp/cmn" name="com.sigma.samp.cmn" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/cmn/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/sdp" name="com.sigma.samp.sdp" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/sdp/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/web/asset" name="com.sigma.web.asset" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/web/asset/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/web/inventory" name="com.sigma.web.inventory" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/web/inventory/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/web/resources" name="com.sigma.web.resources" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/web/resources/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/web/xcap" name="com.sigma.web.xcap" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/web/xcap/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/web" name="com.sigma.web" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/web/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/vframe/validator/ejb" name="com.sigma.samp.vframe.validator.ejb" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/vframe/validator/ejb/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/vframe/externaluser/cleartext" name="com.sigma.samp.vframe.externaluser.cleartext" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/vframe/externaluser/cleartext/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/vframe/externaluser/crypt" name="com.sigma.samp.vframe.externaluser.crypt" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/vframe/externaluser/crypt/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/vframe/externaluser/subuser" name="com.sigma.samp.vframe.externaluser.subuser" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/vframe/externaluser/subuser/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/vframe/jmfbean/user" name="com.sigma.samp.vframe.jmfbean.user" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/vframe/jmfbean/user/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:description><![CDATA[Jmf Bean Management Handler class]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/vframe/jmfbean/localizationbean" name="com.sigma.samp.vframe.jmfbean.localizationbean" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/vframe/jmfbean/localizationbean/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:description><![CDATA[Jmf Bean Management Handler class]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/vframe/jmfbean/statebean" name="com.sigma.samp.vframe.jmfbean.statebean" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/vframe/jmfbean/statebean/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:description><![CDATA[Jmf Bean Management Handler class]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/vframe/jmfbean/orderquerybean" name="com.sigma.samp.vframe.jmfbean.orderquerybean" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/vframe/jmfbean/orderquerybean/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:description><![CDATA[Jmf Bean Management Handler class]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/vframe/jmfbean/orderdupchkbean" name="com.sigma.samp.vframe.jmfbean.orderdupchkbean" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/vframe/jmfbean/orderdupchkbean/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:description><![CDATA[Jmf Bean Management Handler class]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/vframe/jmfbean/ssninfo" name="com.sigma.samp.vframe.jmfbean.ssninfo" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/vframe/jmfbean/ssninfo/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:description><![CDATA[Jmf Bean Management Handler class]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/vframe/jmfbean/nodebean" name="com.sigma.samp.vframe.jmfbean.nodebean" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/vframe/jmfbean/nodebean/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:description><![CDATA[Jmf Bean Management Handler class]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/vframe/jmfbean/newentitybean" name="com.sigma.samp.vframe.jmfbean.newentitybean" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/vframe/jmfbean/newentitybean/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:description><![CDATA[Jmf Bean Management Handler class]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/vframe" name="com.sigma.samp.vframe" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/vframe/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/sdm/svccat" name="com.sigma.samp.sdm.svccat" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/sdm/svccat/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/sdm/gui" name="com.sigma.samp.sdm.gui" needsBuild="false" type="GuiSpec">
+            <xi:include href="../../../../../../com/sigma/samp/sdm/gui/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/etrmi/sdk" name="com.sigma.etrmi.sdk" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/etrmi/sdk/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/etrmi/test" name="com.sigma.etrmi.test" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/etrmi/test/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/etrmi" name="com.sigma.etrmi" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/etrmi/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/jwf/gui/console/applet" name="com.sigma.jwf.gui.console.applet" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/jwf/gui/console/applet/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/jwf/clientapi" name="com.sigma.jwf.clientapi" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/jwf/clientapi/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/jwf/gui/console" name="com.sigma.jwf.gui.console" needsBuild="false" type="GuiSpec">
+            <xi:include href="../../../../../../com/sigma/jwf/gui/console/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/jwf/migration" name="com.sigma.jwf.migration" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/jwf/migration/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/jwf/migration/validation" name="com.sigma.jwf.migration.validation" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/jwf/migration/validation/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/jwf/test/driver" name="com.sigma.jwf.test.driver" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/jwf/test/driver/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/jwf/manualtaskweb" name="com.sigma.jwf.manualtaskweb" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/jwf/manualtaskweb/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/jwf/gui/jwfplugin" name="com.sigma.jwf.gui.jwfplugin" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/jwf/gui/jwfplugin/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/jwf/gui/designer" name="com.sigma.jwf.gui.designer" needsBuild="false" type="GuiSpec">
+            <xi:include href="../../../../../../com/sigma/jwf/gui/designer/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/jwf/gui/trainplugin" name="com.sigma.jwf.gui.trainplugin" needsBuild="false" type="GuiSpec">
+            <xi:include href="../../../../../../com/sigma/jwf/gui/trainplugin/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/gui" name="com.sigma.gui" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/gui/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/sct" name="com.sigma.sct" needsBuild="false" type="GuiSpec">
+            <xi:include href="../../../../../../com/sigma/sct/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/amweb" name="com.sigma.amweb" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/amweb/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/sdk" name="com.sigma.samp.sdk" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/sdk/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/jwf/sdk" name="com.sigma.jwf.sdk" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/jwf/sdk/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/tooling/queueadmin" name="com.sigma.tooling.queueadmin" needsBuild="false" type="GuiSpec">
+            <xi:include href="../../../../../../com/sigma/tooling/queueadmin/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/stm/test" name="com.sigma.samp.stm.test" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/stm/test/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/stm/stub" name="com.sigma.samp.stm.stub" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/stm/stub/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/stm/gui" name="com.sigma.samp.stm.gui" needsBuild="false" type="GuiSpec">
+            <xi:include href="../../../../../../com/sigma/samp/stm/gui/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/stm" name="com.sigma.samp.stm" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/stm/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/debug/gui" name="com.sigma.samp.debug.gui" needsBuild="false" type="GuiSpec">
+            <xi:include href="../../../../../../com/sigma/samp/debug/gui/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/debug/ejb" name="com.sigma.samp.debug.ejb" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/debug/ejb/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/debug" name="com.sigma.samp.debug" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/debug/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/util/licensing/admin" name="com.sigma.samp.util.licensing.admin" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/util/licensing/admin/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/util/licensing" name="com.sigma.samp.util.licensing" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/util/licensing/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/util" name="com.sigma.samp.util" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/util/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/util/public_html" name="com.sigma.samp.util.public_html" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/util/public_html/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/submgr/cmn" name="com.sigma.samp.submgr.cmn" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/submgr/cmn/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/submgr" name="com.sigma.samp.submgr" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/submgr/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/spmweb/cmn" name="com.sigma.samp.spmweb.cmn" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/spmweb/cmn/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/spmweb" name="com.sigma.samp.spmweb" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/spmweb/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/ordermgr/sdk/loadingstrategyplugin" name="com.sigma.samp.ordermgr.sdk.loadingstrategyplugin" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/ordermgr/sdk/loadingstrategyplugin/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/ordermgr/sdk/prequeuing" name="com.sigma.samp.ordermgr.sdk.prequeuing" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/ordermgr/sdk/prequeuing/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/ordermgr/sdk/preprocessor" name="com.sigma.samp.ordermgr.sdk.preprocessor" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/ordermgr/sdk/preprocessor/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/ordermgr/sdk/notification" name="com.sigma.samp.ordermgr.sdk.notification" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/ordermgr/sdk/notification/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/sdm/svccat/ejb" name="com.sigma.samp.sdm.svccat.ejb" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/sdm/svccat/ejb/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/ordermgr" name="com.sigma.samp.ordermgr" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/ordermgr/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:description><![CDATA[SMP Management Handler class]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.samp.ordermgr.mgmt.OrderMgrMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/init" name="com.sigma.samp.init" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/init/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp" name="com.sigma.samp" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/jwf/ws/server" name="com.sigma.jwf.ws.server" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/jwf/ws/server/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/jwf/cmn" name="com.sigma.jwf.cmn" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/jwf/cmn/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/jwf" name="com.sigma.jwf" needsBuild="false" type="JwfSpec">
+            <xi:include href="../../../../../../com/sigma/jwf/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:description><![CDATA[Jwf Management Handler class]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jwf.mgmt.JwfMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+            <xi:include href="distribution/jwf/jwf.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/upgrade" name="com.sigma.samp.upgrade" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/upgrade/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jea/sbjeasprint" name="sbjeasprint" needsBuild="true" type="JeaSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jea/sbjeasprint/manifest.xml"/>
+            <resources_ref>
+                <jmsDestinations>
+                    <jmsDestination name="com.sigma.jms.queue.jea.sbjeasprint.error"/>
+                </jmsDestinations>
+            </resources_ref>
+            <properties>
+                <property language="substitute" name="JEA_TX_DATASOURCE" seq="0">
+                    <dicommon:description><![CDATA[jndi name of the tx SB data source.]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jdbc.datasource.jea_tx]]></dicommon:value>
+                </property>
+                <property language="substitute" name="JEA_NON_TX_DATASOURCE" seq="1">
+                    <dicommon:description><![CDATA[jndi name of the non-tx SB data source.]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jdbc.datasource.jea_non_tx]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_ERROR_QUEUE" seq="2">
+                    <dicommon:description><![CDATA[jndi name of the default error queue name]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jms.queue.jea.$PROGRAM.error]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_JMS_CONN_FACTORY" seq="3">
+                    <dicommon:description><![CDATA[jndi name of the default jms conn factory]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jms.jea.JEAQueueConnectionFactory]]></dicommon:value>
+                </property>
+                <property language="substitute" name="BACKUP_TASK" seq="4" type="bool">
+                    <dicommon:description><![CDATA[should the framework back tasks if the adapter uses synchronous protocols?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="FAIL_TASK_ON_SOFT_STOP" seq="5" type="bool">
+                    <dicommon:description><![CDATA[should the framework fail tasks if it is soft-stopped?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="FAIL_TASK_ON_NO_CONN_AVAILABLE" seq="6" type="bool">
+                    <dicommon:description><![CDATA[should the framework fail task on TaskOnConnAvailable exception?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DISABLE_CONSOLE" seq="7" type="bool">
+                    <dicommon:description><![CDATA[disabel jea console?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="rtstate.MAX_ADPT_EVENT_ROWS" seq="8" type="int">
+                    <dicommon:description><![CDATA[max number of adapter events cached by the adapter console]]></dicommon:description>
+                    <dicommon:value><![CDATA[1000]]></dicommon:value>
+                </property>
+                <property language="substitute" name="CONSOLE_JMS_SELECTOR" seq="9">
+                    <dicommon:description><![CDATA[jms receiver selector used by the adapter console]]></dicommon:description>
+                    <dicommon:value><![CDATA[dest_cmpnt_nm = \'${PROGRAM}_console\']]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_THREAD_POOL" seq="10">
+                    <dicommon:description><![CDATA[wl thread pool name]]></dicommon:description>
+                    <dicommon:value><![CDATA[weblogic.kernel.default]]></dicommon:value>
+                </property>
+                <property language="substitute" name="mgmtHandler" seq="11">
+                    <dicommon:description><![CDATA[Jea management handler]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jea.mgmt.JeaMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+            <xi:include href="distribution/jea/sbjeasprint.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jea/sbjeabroadsoft" name="sbjeabroadsoft" needsBuild="true" type="JeaSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jea/sbjeabroadsoft/manifest.xml"/>
+            <resources_ref>
+                <jmsDestinations>
+                    <jmsDestination name="com.sigma.jms.queue.jea.sbjeabroadsoft.error"/>
+                </jmsDestinations>
+            </resources_ref>
+            <properties>
+                <property language="substitute" name="JEA_TX_DATASOURCE" seq="0">
+                    <dicommon:description><![CDATA[jndi name of the tx SB data source.]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jdbc.datasource.jea_tx]]></dicommon:value>
+                </property>
+                <property language="substitute" name="JEA_NON_TX_DATASOURCE" seq="1">
+                    <dicommon:description><![CDATA[jndi name of the non-tx SB data source.]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jdbc.datasource.jea_non_tx]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_ERROR_QUEUE" seq="2">
+                    <dicommon:description><![CDATA[jndi name of the default error queue name]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jms.queue.jea.$PROGRAM.error]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_JMS_CONN_FACTORY" seq="3">
+                    <dicommon:description><![CDATA[jndi name of the default jms conn factory]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jms.jea.JEAQueueConnectionFactory]]></dicommon:value>
+                </property>
+                <property language="substitute" name="BACKUP_TASK" seq="4" type="bool">
+                    <dicommon:description><![CDATA[should the framework back tasks if the adapter uses synchronous protocols?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="FAIL_TASK_ON_SOFT_STOP" seq="5" type="bool">
+                    <dicommon:description><![CDATA[should the framework fail tasks if it is soft-stopped?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="FAIL_TASK_ON_NO_CONN_AVAILABLE" seq="6" type="bool">
+                    <dicommon:description><![CDATA[should the framework fail task on TaskOnConnAvailable exception?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DISABLE_CONSOLE" seq="7" type="bool">
+                    <dicommon:description><![CDATA[disabel jea console?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="rtstate.MAX_ADPT_EVENT_ROWS" seq="8" type="int">
+                    <dicommon:description><![CDATA[max number of adapter events cached by the adapter console]]></dicommon:description>
+                    <dicommon:value><![CDATA[1000]]></dicommon:value>
+                </property>
+                <property language="substitute" name="CONSOLE_JMS_SELECTOR" seq="9">
+                    <dicommon:description><![CDATA[jms receiver selector used by the adapter console]]></dicommon:description>
+                    <dicommon:value><![CDATA[dest_cmpnt_nm = \'${PROGRAM}_console\']]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_THREAD_POOL" seq="10">
+                    <dicommon:description><![CDATA[wl thread pool name]]></dicommon:description>
+                    <dicommon:value><![CDATA[weblogic.kernel.default]]></dicommon:value>
+                </property>
+                <property language="substitute" name="mgmtHandler" seq="11">
+                    <dicommon:description><![CDATA[Jea management handler]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jea.mgmt.JeaMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+            <xi:include href="distribution/jea/sbjeabroadsoft.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jea/sbjeaconsumableresources" name="sbjeaconsumableresources" needsBuild="true" type="JeaSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jea/sbjeaconsumableresources/manifest.xml"/>
+            <resources_ref>
+                <jmsDestinations>
+                    <jmsDestination name="com.sigma.jms.queue.jea.sbjeaconsumableresources.error"/>
+                </jmsDestinations>
+            </resources_ref>
+            <properties>
+                <property language="substitute" name="JEA_TX_DATASOURCE" seq="0">
+                    <dicommon:description><![CDATA[jndi name of the tx SB data source.]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jdbc.datasource.jea_tx]]></dicommon:value>
+                </property>
+                <property language="substitute" name="JEA_NON_TX_DATASOURCE" seq="1">
+                    <dicommon:description><![CDATA[jndi name of the non-tx SB data source.]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jdbc.datasource.jea_non_tx]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_ERROR_QUEUE" seq="2">
+                    <dicommon:description><![CDATA[jndi name of the default error queue name]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jms.queue.jea.$PROGRAM.error]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_JMS_CONN_FACTORY" seq="3">
+                    <dicommon:description><![CDATA[jndi name of the default jms conn factory]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jms.jea.JEAQueueConnectionFactory]]></dicommon:value>
+                </property>
+                <property language="substitute" name="BACKUP_TASK" seq="4" type="bool">
+                    <dicommon:description><![CDATA[should the framework back tasks if the adapter uses synchronous protocols?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="FAIL_TASK_ON_SOFT_STOP" seq="5" type="bool">
+                    <dicommon:description><![CDATA[should the framework fail tasks if it is soft-stopped?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="FAIL_TASK_ON_NO_CONN_AVAILABLE" seq="6" type="bool">
+                    <dicommon:description><![CDATA[should the framework fail task on TaskOnConnAvailable exception?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DISABLE_CONSOLE" seq="7" type="bool">
+                    <dicommon:description><![CDATA[disabel jea console?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="rtstate.MAX_ADPT_EVENT_ROWS" seq="8" type="int">
+                    <dicommon:description><![CDATA[max number of adapter events cached by the adapter console]]></dicommon:description>
+                    <dicommon:value><![CDATA[1000]]></dicommon:value>
+                </property>
+                <property language="substitute" name="CONSOLE_JMS_SELECTOR" seq="9">
+                    <dicommon:description><![CDATA[jms receiver selector used by the adapter console]]></dicommon:description>
+                    <dicommon:value><![CDATA[dest_cmpnt_nm = \'${PROGRAM}_console\']]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_THREAD_POOL" seq="10">
+                    <dicommon:description><![CDATA[wl thread pool name]]></dicommon:description>
+                    <dicommon:value><![CDATA[weblogic.kernel.default]]></dicommon:value>
+                </property>
+                <property language="substitute" name="mgmtHandler" seq="11">
+                    <dicommon:description><![CDATA[Jea management handler]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jea.mgmt.JeaMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+            <xi:include href="distribution/jea/sbjeaconsumableresources.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jea/sbjeaapache" name="sbjeaapache" needsBuild="true" type="JeaSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jea/sbjeaapache/manifest.xml"/>
+            <resources_ref>
+                <jmsDestinations>
+                    <jmsDestination name="com.sigma.jms.queue.jea.sbjeaapache.error"/>
+                </jmsDestinations>
+            </resources_ref>
+            <properties>
+                <property language="substitute" name="JEA_TX_DATASOURCE" seq="0">
+                    <dicommon:description><![CDATA[jndi name of the tx SB data source.]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jdbc.datasource.jea_tx]]></dicommon:value>
+                </property>
+                <property language="substitute" name="JEA_NON_TX_DATASOURCE" seq="1">
+                    <dicommon:description><![CDATA[jndi name of the non-tx SB data source.]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jdbc.datasource.jea_non_tx]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_ERROR_QUEUE" seq="2">
+                    <dicommon:description><![CDATA[jndi name of the default error queue name]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jms.queue.jea.$PROGRAM.error]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_JMS_CONN_FACTORY" seq="3">
+                    <dicommon:description><![CDATA[jndi name of the default jms conn factory]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jms.jea.JEAQueueConnectionFactory]]></dicommon:value>
+                </property>
+                <property language="substitute" name="BACKUP_TASK" seq="4" type="bool">
+                    <dicommon:description><![CDATA[should the framework back tasks if the adapter uses synchronous protocols?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="FAIL_TASK_ON_SOFT_STOP" seq="5" type="bool">
+                    <dicommon:description><![CDATA[should the framework fail tasks if it is soft-stopped?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="FAIL_TASK_ON_NO_CONN_AVAILABLE" seq="6" type="bool">
+                    <dicommon:description><![CDATA[should the framework fail task on TaskOnConnAvailable exception?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DISABLE_CONSOLE" seq="7" type="bool">
+                    <dicommon:description><![CDATA[disabel jea console?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="rtstate.MAX_ADPT_EVENT_ROWS" seq="8" type="int">
+                    <dicommon:description><![CDATA[max number of adapter events cached by the adapter console]]></dicommon:description>
+                    <dicommon:value><![CDATA[1000]]></dicommon:value>
+                </property>
+                <property language="substitute" name="CONSOLE_JMS_SELECTOR" seq="9">
+                    <dicommon:description><![CDATA[jms receiver selector used by the adapter console]]></dicommon:description>
+                    <dicommon:value><![CDATA[dest_cmpnt_nm = \'${PROGRAM}_console\']]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_THREAD_POOL" seq="10">
+                    <dicommon:description><![CDATA[wl thread pool name]]></dicommon:description>
+                    <dicommon:value><![CDATA[weblogic.kernel.default]]></dicommon:value>
+                </property>
+                <property language="substitute" name="mgmtHandler" seq="11">
+                    <dicommon:description><![CDATA[Jea management handler]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jea.mgmt.JeaMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+            <xi:include href="distribution/jea/sbjeaapache.xml"/>
+        </component>
+	<component buildPath="com/sigma/samp/imp/voiceClec/jea/sbjeasigmadpm10" name="sbjeasigmadpm10" needsBuild="true" type="JeaSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jea/sbjeasigmadpm10/manifest.xml"/>
+            <resources_ref>
+                <jmsDestinations>
+                    <jmsDestination name="com.sigma.jms.queue.jea.sbjeasigmadpm10.error"/>
+                </jmsDestinations>
+            </resources_ref>
+            <properties>
+                <property language="substitute" name="JEA_TX_DATASOURCE" seq="0">
+                    <dicommon:description><![CDATA[jndi name of the tx SB data source.]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jdbc.datasource.jea_tx]]></dicommon:value>
+                </property>
+                <property language="substitute" name="JEA_NON_TX_DATASOURCE" seq="1">
+                    <dicommon:description><![CDATA[jndi name of the non-tx SB data source.]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jdbc.datasource.jea_non_tx]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_ERROR_QUEUE" seq="2">
+                    <dicommon:description><![CDATA[jndi name of the default error queue name]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jms.queue.jea.$PROGRAM.error]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_JMS_CONN_FACTORY" seq="3">
+                    <dicommon:description><![CDATA[jndi name of the default jms conn factory]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jms.jea.JEAQueueConnectionFactory]]></dicommon:value>
+                </property>
+                <property language="substitute" name="BACKUP_TASK" seq="4" type="bool">
+                    <dicommon:description><![CDATA[should the framework back tasks if the adapter uses synchronous protocols?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="FAIL_TASK_ON_SOFT_STOP" seq="5" type="bool">
+                    <dicommon:description><![CDATA[should the framework fail tasks if it is soft-stopped?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="FAIL_TASK_ON_NO_CONN_AVAILABLE" seq="6" type="bool">
+                    <dicommon:description><![CDATA[should the framework fail task on TaskOnConnAvailable exception?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+ </property>
+                <property language="substitute" name="DISABLE_CONSOLE" seq="7" type="bool">
+                    <dicommon:description><![CDATA[disabel jea console?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="rtstate.MAX_ADPT_EVENT_ROWS" seq="8" type="int">
+                    <dicommon:description><![CDATA[max number of adapter events cached by the adapter console]]></dicommon:description>
+                    <dicommon:value><![CDATA[1000]]></dicommon:value>
+                </property>
+                <property language="substitute" name="CONSOLE_JMS_SELECTOR" seq="9">
+                    <dicommon:description><![CDATA[jms receiver selector used by the adapter console]]></dicommon:description>
+                    <dicommon:value><![CDATA[dest_cmpnt_nm = \'${PROGRAM}_console\']]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_THREAD_POOL" seq="10">
+                    <dicommon:description><![CDATA[wl thread pool name]]></dicommon:description>
+                    <dicommon:value><![CDATA[weblogic.kernel.default]]></dicommon:value>
+                </property>
+                <property language="substitute" name="mgmtHandler" seq="11">
+                    <dicommon:description><![CDATA[Jea management handler]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jea.mgmt.JeaMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+            <xi:include href="distribution/jea/sbjeasigmadpm10.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jea/sbjeaciscobac40" name="sbjeaciscobac40" needsBuild="true" type="JeaSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jea/sbjeaciscobac40/manifest.xml"/>
+            <resources_ref>
+                <jmsDestinations>
+                    <jmsDestination name="com.sigma.jms.queue.jea.sbjeaciscobac40.error"/>
+                </jmsDestinations>
+            </resources_ref>
+            <properties>
+                <property language="substitute" name="JEA_TX_DATASOURCE" seq="0">
+                    <dicommon:description><![CDATA[jndi name of the tx SB data source.]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jdbc.datasource.jea_tx]]></dicommon:value>
+                </property>
+                <property language="substitute" name="JEA_NON_TX_DATASOURCE" seq="1">
+                    <dicommon:description><![CDATA[jndi name of the non-tx SB data source.]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jdbc.datasource.jea_non_tx]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_ERROR_QUEUE" seq="2">
+                    <dicommon:description><![CDATA[jndi name of the default error queue name]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jms.queue.jea.$PROGRAM.error]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_JMS_CONN_FACTORY" seq="3">
+                    <dicommon:description><![CDATA[jndi name of the default jms conn factory]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jms.jea.JEAQueueConnectionFactory]]></dicommon:value>
+                </property>
+                <property language="substitute" name="BACKUP_TASK" seq="4" type="bool">
+                    <dicommon:description><![CDATA[should the framework back tasks if the adapter uses synchronous protocols?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="FAIL_TASK_ON_SOFT_STOP" seq="5" type="bool">
+                    <dicommon:description><![CDATA[should the framework fail tasks if it is soft-stopped?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="FAIL_TASK_ON_NO_CONN_AVAILABLE" seq="6" type="bool">
+                    <dicommon:description><![CDATA[should the framework fail task on TaskOnConnAvailable exception?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DISABLE_CONSOLE" seq="7" type="bool">
+                    <dicommon:description><![CDATA[disabel jea console?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="rtstate.MAX_ADPT_EVENT_ROWS" seq="8" type="int">
+                    <dicommon:description><![CDATA[max number of adapter events cached by the adapter console]]></dicommon:description>
+                    <dicommon:value><![CDATA[1000]]></dicommon:value>
+                </property>
+                <property language="substitute" name="CONSOLE_JMS_SELECTOR" seq="9">
+                    <dicommon:description><![CDATA[jms receiver selector used by the adapter console]]></dicommon:description>
+                    <dicommon:value><![CDATA[dest_cmpnt_nm = \'${PROGRAM}_console\']]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_THREAD_POOL" seq="10">
+                    <dicommon:description><![CDATA[wl thread pool name]]></dicommon:description>
+                    <dicommon:value><![CDATA[weblogic.kernel.default]]></dicommon:value>
+                </property>
+                <property language="substitute" name="mgmtHandler" seq="11">
+                    <dicommon:description><![CDATA[Jea management handler]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jea.mgmt.JeaMgmtImpl]]></dicommon:value>
+                </property>
+                <property language="substitute" name="SIMULATION" seq="12" type="bool">
+                    <dicommon:description><![CDATA[should the framework run simulation body of the tasktype instead?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+            </properties>
+            <xi:include href="distribution/jea/sbjeaciscobac40.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jea/sbjeaipunity" name="sbjeaipunity" needsBuild="true" type="JeaSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jea/sbjeaipunity/manifest.xml"/>
+            <resources_ref>
+                <jmsDestinations>
+                    <jmsDestination name="com.sigma.jms.queue.jea.sbjeaipunity.error"/>
+                </jmsDestinations>
+            </resources_ref>
+            <properties>
+                <property language="substitute" name="JEA_TX_DATASOURCE" seq="0">
+                    <dicommon:description><![CDATA[jndi name of the tx SB data source.]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jdbc.datasource.jea_tx]]></dicommon:value>
+                </property>
+                <property language="substitute" name="JEA_NON_TX_DATASOURCE" seq="1">
+                    <dicommon:description><![CDATA[jndi name of the non-tx SB data source.]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jdbc.datasource.jea_non_tx]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_ERROR_QUEUE" seq="2">
+                    <dicommon:description><![CDATA[jndi name of the default error queue name]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jms.queue.jea.$PROGRAM.error]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_JMS_CONN_FACTORY" seq="3">
+                    <dicommon:description><![CDATA[jndi name of the default jms conn factory]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jms.jea.JEAQueueConnectionFactory]]></dicommon:value>
+                </property>
+                <property language="substitute" name="BACKUP_TASK" seq="4" type="bool">
+                    <dicommon:description><![CDATA[should the framework back tasks if the adapter uses synchronous protocols?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="FAIL_TASK_ON_SOFT_STOP" seq="5" type="bool">
+                    <dicommon:description><![CDATA[should the framework fail tasks if it is soft-stopped?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="FAIL_TASK_ON_NO_CONN_AVAILABLE" seq="6" type="bool">
+                    <dicommon:description><![CDATA[should the framework fail task on TaskOnConnAvailable exception?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DISABLE_CONSOLE" seq="7" type="bool">
+                    <dicommon:description><![CDATA[disabel jea console?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="rtstate.MAX_ADPT_EVENT_ROWS" seq="8" type="int">
+                    <dicommon:description><![CDATA[max number of adapter events cached by the adapter console]]></dicommon:description>
+                    <dicommon:value><![CDATA[1000]]></dicommon:value>
+                </property>
+                <property language="substitute" name="CONSOLE_JMS_SELECTOR" seq="9">
+                    <dicommon:description><![CDATA[jms receiver selector used by the adapter console]]></dicommon:description>
+                    <dicommon:value><![CDATA[dest_cmpnt_nm = \'${PROGRAM}_console\']]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_THREAD_POOL" seq="10">
+                    <dicommon:description><![CDATA[wl thread pool name]]></dicommon:description>
+                    <dicommon:value><![CDATA[weblogic.kernel.default]]></dicommon:value>
+                </property>
+                <property language="substitute" name="mgmtHandler" seq="11">
+                    <dicommon:description><![CDATA[Jea management handler]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jea.mgmt.JeaMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+            <xi:include href="distribution/jea/sbjeaipunity.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jea/sbjeal3" name="sbjeal3" needsBuild="true" type="JeaSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jea/sbjeal3/manifest.xml"/>
+            <resources_ref>
+                <jmsDestinations>
+                    <jmsDestination name="com.sigma.jms.queue.jea.sbjeal3.error"/>
+                </jmsDestinations>
+            </resources_ref>
+            <properties>
+                <property language="substitute" name="JEA_TX_DATASOURCE" seq="0">
+                    <dicommon:description><![CDATA[jndi name of the tx SB data source.]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jdbc.datasource.jea_tx]]></dicommon:value>
+                </property>
+                <property language="substitute" name="JEA_NON_TX_DATASOURCE" seq="1">
+                    <dicommon:description><![CDATA[jndi name of the non-tx SB data source.]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jdbc.datasource.jea_non_tx]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_ERROR_QUEUE" seq="2">
+                    <dicommon:description><![CDATA[jndi name of the default error queue name]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jms.queue.jea.$PROGRAM.error]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_JMS_CONN_FACTORY" seq="3">
+                    <dicommon:description><![CDATA[jndi name of the default jms conn factory]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jms.jea.JEAQueueConnectionFactory]]></dicommon:value>
+                </property>
+                <property language="substitute" name="BACKUP_TASK" seq="4" type="bool">
+                    <dicommon:description><![CDATA[should the framework back tasks if the adapter uses synchronous protocols?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="FAIL_TASK_ON_SOFT_STOP" seq="5" type="bool">
+                    <dicommon:description><![CDATA[should the framework fail tasks if it is soft-stopped?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="FAIL_TASK_ON_NO_CONN_AVAILABLE" seq="6" type="bool">
+                    <dicommon:description><![CDATA[should the framework fail task on TaskOnConnAvailable exception?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DISABLE_CONSOLE" seq="7" type="bool">
+                    <dicommon:description><![CDATA[disabel jea console?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="rtstate.MAX_ADPT_EVENT_ROWS" seq="8" type="int">
+                    <dicommon:description><![CDATA[max number of adapter events cached by the adapter console]]></dicommon:description>
+                    <dicommon:value><![CDATA[1000]]></dicommon:value>
+                </property>
+                <property language="substitute" name="CONSOLE_JMS_SELECTOR" seq="9">
+                    <dicommon:description><![CDATA[jms receiver selector used by the adapter console]]></dicommon:description>
+                    <dicommon:value><![CDATA[dest_cmpnt_nm = \'${PROGRAM}_console\']]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_THREAD_POOL" seq="10">
+                    <dicommon:description><![CDATA[wl thread pool name]]></dicommon:description>
+                    <dicommon:value><![CDATA[weblogic.kernel.default]]></dicommon:value>
+                </property>
+                <property language="substitute" name="mgmtHandler" seq="11">
+                    <dicommon:description><![CDATA[Jea management handler]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jea.mgmt.JeaMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+            <xi:include href="distribution/jea/sbjeal3.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jea/sbjeanortelcs2k" name="sbjeanortelcs2k" needsBuild="true" type="JeaSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jea/sbjeanortelcs2k/manifest.xml"/>
+            <resources_ref>
+                <jmsDestinations>
+                    <jmsDestination name="com.sigma.jms.queue.jea.sbjeanortelcs2k.error"/>
+                </jmsDestinations>
+            </resources_ref>
+            <properties>
+                <property language="substitute" name="JEA_TX_DATASOURCE" seq="0">
+                    <dicommon:description><![CDATA[jndi name of the tx SB data source.]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jdbc.datasource.jea_tx]]></dicommon:value>
+                </property>
+                <property language="substitute" name="JEA_NON_TX_DATASOURCE" seq="1">
+                    <dicommon:description><![CDATA[jndi name of the non-tx SB data source.]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jdbc.datasource.jea_non_tx]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_ERROR_QUEUE" seq="2">
+                    <dicommon:description><![CDATA[jndi name of the default error queue name]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jms.queue.jea.$PROGRAM.error]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_JMS_CONN_FACTORY" seq="3">
+                    <dicommon:description><![CDATA[jndi name of the default jms conn factory]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jms.jea.JEAQueueConnectionFactory]]></dicommon:value>
+                </property>
+                <property language="substitute" name="BACKUP_TASK" seq="4" type="bool">
+                    <dicommon:description><![CDATA[should the framework back tasks if the adapter uses synchronous protocols?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="FAIL_TASK_ON_SOFT_STOP" seq="5" type="bool">
+                    <dicommon:description><![CDATA[should the framework fail tasks if it is soft-stopped?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="FAIL_TASK_ON_NO_CONN_AVAILABLE" seq="6" type="bool">
+                    <dicommon:description><![CDATA[should the framework fail task on TaskOnConnAvailable exception?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DISABLE_CONSOLE" seq="7" type="bool">
+                    <dicommon:description><![CDATA[disabel jea console?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="rtstate.MAX_ADPT_EVENT_ROWS" seq="8" type="int">
+                    <dicommon:description><![CDATA[max number of adapter events cached by the adapter console]]></dicommon:description>
+                    <dicommon:value><![CDATA[1000]]></dicommon:value>
+                </property>
+                <property language="substitute" name="CONSOLE_JMS_SELECTOR" seq="9">
+                    <dicommon:description><![CDATA[jms receiver selector used by the adapter console]]></dicommon:description>
+                    <dicommon:value><![CDATA[dest_cmpnt_nm = \'${PROGRAM}_console\']]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_THREAD_POOL" seq="10">
+                    <dicommon:description><![CDATA[wl thread pool name]]></dicommon:description>
+                    <dicommon:value><![CDATA[weblogic.kernel.default]]></dicommon:value>
+                </property>
+                <property language="substitute" name="mgmtHandler" seq="11">
+                    <dicommon:description><![CDATA[Jea management handler]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jea.mgmt.JeaMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+            <xi:include href="distribution/jea/sbjeanortelcs2k.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jea/sbjeaopenwave" name="sbjeaopenwave" needsBuild="true" type="JeaSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jea/sbjeaopenwave/manifest.xml"/>
+            <resources_ref>
+                <jmsDestinations>
+                    <jmsDestination name="com.sigma.jms.queue.jea.sbjeaopenwave.error"/>
+                </jmsDestinations>
+            </resources_ref>
+            <properties>
+                <property language="substitute" name="JEA_TX_DATASOURCE" seq="0">
+                    <dicommon:description><![CDATA[jndi name of the tx SB data source.]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jdbc.datasource.jea_tx]]></dicommon:value>
+                </property>
+                <property language="substitute" name="JEA_NON_TX_DATASOURCE" seq="1">
+                    <dicommon:description><![CDATA[jndi name of the non-tx SB data source.]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jdbc.datasource.jea_non_tx]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_ERROR_QUEUE" seq="2">
+                    <dicommon:description><![CDATA[jndi name of the default error queue name]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jms.queue.jea.$PROGRAM.error]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_JMS_CONN_FACTORY" seq="3">
+                    <dicommon:description><![CDATA[jndi name of the default jms conn factory]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jms.jea.JEAQueueConnectionFactory]]></dicommon:value>
+                </property>
+                <property language="substitute" name="BACKUP_TASK" seq="4" type="bool">
+                    <dicommon:description><![CDATA[should the framework back tasks if the adapter uses synchronous protocols?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="FAIL_TASK_ON_SOFT_STOP" seq="5" type="bool">
+                    <dicommon:description><![CDATA[should the framework fail tasks if it is soft-stopped?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="FAIL_TASK_ON_NO_CONN_AVAILABLE" seq="6" type="bool">
+                    <dicommon:description><![CDATA[should the framework fail task on TaskOnConnAvailable exception?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DISABLE_CONSOLE" seq="7" type="bool">
+                    <dicommon:description><![CDATA[disabel jea console?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="rtstate.MAX_ADPT_EVENT_ROWS" seq="8" type="int">
+                    <dicommon:description><![CDATA[max number of adapter events cached by the adapter console]]></dicommon:description>
+                    <dicommon:value><![CDATA[1000]]></dicommon:value>
+                </property>
+                <property language="substitute" name="CONSOLE_JMS_SELECTOR" seq="9">
+                    <dicommon:description><![CDATA[jms receiver selector used by the adapter console]]></dicommon:description>
+                    <dicommon:value><![CDATA[dest_cmpnt_nm = \'${PROGRAM}_console\']]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_THREAD_POOL" seq="10">
+                    <dicommon:description><![CDATA[wl thread pool name]]></dicommon:description>
+                    <dicommon:value><![CDATA[weblogic.kernel.default]]></dicommon:value>
+                </property>
+                <property language="substitute" name="mgmtHandler" seq="11">
+                    <dicommon:description><![CDATA[Jea management handler]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jea.mgmt.JeaMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+            <xi:include href="distribution/jea/sbjeaopenwave.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jea/sbjeabillingnotification" name="sbjeabillingnotification" needsBuild="true" type="JeaSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jea/sbjeabillingnotification/manifest.xml"/>
+            <resources_ref>
+                <jmsDestinations>
+                    <jmsDestination name="com.sigma.jms.queue.jea.sbjeabillingnotification.error"/>
+                </jmsDestinations>
+            </resources_ref>
+            <properties>
+                <property language="substitute" name="JEA_TX_DATASOURCE" seq="0">
+                    <dicommon:description><![CDATA[jndi name of the tx SB data source.]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jdbc.datasource.jea_tx]]></dicommon:value>
+                </property>
+                <property language="substitute" name="JEA_NON_TX_DATASOURCE" seq="1">
+                    <dicommon:description><![CDATA[jndi name of the non-tx SB data source.]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jdbc.datasource.jea_non_tx]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_ERROR_QUEUE" seq="2">
+                    <dicommon:description><![CDATA[jndi name of the default error queue name]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jms.queue.jea.$PROGRAM.error]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_JMS_CONN_FACTORY" seq="3">
+                    <dicommon:description><![CDATA[jndi name of the default jms conn factory]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jms.jea.JEAQueueConnectionFactory]]></dicommon:value>
+                </property>
+                <property language="substitute" name="BACKUP_TASK" seq="4" type="bool">
+                    <dicommon:description><![CDATA[should the framework back tasks if the adapter uses synchronous protocols?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="FAIL_TASK_ON_SOFT_STOP" seq="5" type="bool">
+                    <dicommon:description><![CDATA[should the framework fail tasks if it is soft-stopped?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="FAIL_TASK_ON_NO_CONN_AVAILABLE" seq="6" type="bool">
+                    <dicommon:description><![CDATA[should the framework fail task on TaskOnConnAvailable exception?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DISABLE_CONSOLE" seq="7" type="bool">
+                    <dicommon:description><![CDATA[disabel jea console?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="rtstate.MAX_ADPT_EVENT_ROWS" seq="8" type="int">
+                    <dicommon:description><![CDATA[max number of adapter events cached by the adapter console]]></dicommon:description>
+                    <dicommon:value><![CDATA[1000]]></dicommon:value>
+                </property>
+                <property language="substitute" name="CONSOLE_JMS_SELECTOR" seq="9">
+                    <dicommon:description><![CDATA[jms receiver selector used by the adapter console]]></dicommon:description>
+                    <dicommon:value><![CDATA[dest_cmpnt_nm = \'${PROGRAM}_console\']]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_THREAD_POOL" seq="10">
+                    <dicommon:description><![CDATA[wl thread pool name]]></dicommon:description>
+                    <dicommon:value><![CDATA[weblogic.kernel.default]]></dicommon:value>
+                </property>
+                <property language="substitute" name="mgmtHandler" seq="11">
+                    <dicommon:description><![CDATA[Jea management handler]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jea.mgmt.JeaMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+            <xi:include href="distribution/jea/sbjeabillingnotification.xml"/>
+        </component>
+	    <component buildPath="com/sigma/samp/imp/voiceClec/jea/sbjeamotoroladac" name="sbjeamotoroladac" needsBuild="true" type="JeaSpec">
+	    <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jea/sbjeamotoroladac/manifest.xml"/>
+	    <resources_ref>
+		<jmsDestinations>
+		    <jmsDestination name="com.sigma.jms.queue.jea.sbjeamotoroladac.error"/>
+		</jmsDestinations>
+	    </resources_ref>
+	    <properties>
+		<property language="substitute" name="JEA_TX_DATASOURCE" seq="0">
+		    <dicommon:description><![CDATA[jndi name of the tx SB data source.]]></dicommon:description>
+		    <dicommon:value><![CDATA[com.sigma.jdbc.datasource.jea_tx]]></dicommon:value>
+		</property>
+		<property language="substitute" name="JEA_NON_TX_DATASOURCE" seq="1">
+		    <dicommon:description><![CDATA[jndi name of the non-tx SB data source.]]></dicommon:description>
+		    <dicommon:value><![CDATA[com.sigma.jdbc.datasource.jea_non_tx]]></dicommon:value>
+		</property>
+		<property language="substitute" name="DFLT_ERROR_QUEUE" seq="2">
+		    <dicommon:description><![CDATA[jndi name of the default error queue name]]></dicommon:description>
+		    <dicommon:value><![CDATA[com.sigma.jms.queue.jea.$PROGRAM.error]]></dicommon:value>
+		</property>
+		<property language="substitute" name="DFLT_JMS_CONN_FACTORY" seq="3">
+		    <dicommon:description><![CDATA[jndi name of the default jms conn factory]]></dicommon:description>
+		    <dicommon:value><![CDATA[com.sigma.jms.jea.JEAQueueConnectionFactory]]></dicommon:value>
+		</property>
+		<property language="substitute" name="BACKUP_TASK" seq="4" type="bool">
+		    <dicommon:description><![CDATA[should the framework back tasks if the adapter uses synchronous protocols?]]></dicommon:description>
+		    <dicommon:value><![CDATA[false]]></dicommon:value>
+		</property>
+		<property language="substitute" name="FAIL_TASK_ON_SOFT_STOP" seq="5" type="bool">
+		    <dicommon:description><![CDATA[should the framework fail tasks if it is soft-stopped?]]></dicommon:description>
+		    <dicommon:value><![CDATA[false]]></dicommon:value>
+		</property>
+		<property language="substitute" name="FAIL_TASK_ON_NO_CONN_AVAILABLE" seq="6" type="bool">
+		    <dicommon:description><![CDATA[should the framework fail task on TaskOnConnAvailable exception?]]></dicommon:description>
+		    <dicommon:value><![CDATA[false]]></dicommon:value>
+		</property>
+		<property language="substitute" name="DISABLE_CONSOLE" seq="7" type="bool">
+		    <dicommon:description><![CDATA[disabel jea console?]]></dicommon:description>
+		    <dicommon:value><![CDATA[false]]></dicommon:value>
+		</property>
+		<property language="substitute" name="rtstate.MAX_ADPT_EVENT_ROWS" seq="8" type="int">
+		    <dicommon:description><![CDATA[max number of adapter events cached by the adapter console]]></dicommon:description>
+		    <dicommon:value><![CDATA[1000]]></dicommon:value>
+		</property>
+		<property language="substitute" name="CONSOLE_JMS_SELECTOR" seq="9">
+		    <dicommon:description><![CDATA[jms receiver selector used by the adapter console]]></dicommon:description>
+		    <dicommon:value><![CDATA[dest_cmpnt_nm = \'${PROGRAM}_console\']]></dicommon:value>
+		</property>
+		<property language="substitute" name="DFLT_THREAD_POOL" seq="10">
+		    <dicommon:description><![CDATA[wl thread pool name]]></dicommon:description>
+		    <dicommon:value><![CDATA[weblogic.kernel.default]]></dicommon:value>
+		</property>
+		<property language="substitute" name="mgmtHandler" seq="11">
+		    <dicommon:description><![CDATA[Jea management handler]]></dicommon:description>
+		    <dicommon:value><![CDATA[com.sigma.jea.mgmt.JeaMgmtImpl]]></dicommon:value>
+		</property>
+	    </properties>
+	    <xi:include href="distribution/jea/sbjeamotoroladac.xml"/>
+	 </component>
+	 <component buildPath="com/sigma/samp/imp/voiceClec/jea/sbjeatandbergbms" name="sbjeatandbergbms" needsBuild="true" type="JeaSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jea/sbjeatandbergbms/manifest.xml"/>
+            <resources_ref>
+                <jmsDestinations>
+                    <jmsDestination name="com.sigma.jms.queue.jea.sbjeatandbergbms.error"/>
+                </jmsDestinations>
+            </resources_ref>
+            <properties>
+                <property language="substitute" name="JEA_TX_DATASOURCE" seq="0">
+                    <dicommon:description><![CDATA[jndi name of the tx SB data source.]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jdbc.datasource.jea_tx]]></dicommon:value>
+                </property>
+                <property language="substitute" name="JEA_NON_TX_DATASOURCE" seq="1">
+                    <dicommon:description><![CDATA[jndi name of the non-tx SB data source.]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jdbc.datasource.jea_non_tx]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_ERROR_QUEUE" seq="2">
+                    <dicommon:description><![CDATA[jndi name of the default error queue name]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jms.queue.jea.$PROGRAM.error]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_JMS_CONN_FACTORY" seq="3">
+                    <dicommon:description><![CDATA[jndi name of the default jms conn factory]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jms.jea.JEAQueueConnectionFactory]]></dicommon:value>
+                </property>
+                <property language="substitute" name="BACKUP_TASK" seq="4" type="bool">
+                    <dicommon:description><![CDATA[should the framework back tasks if the adapter uses synchronous protocols?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="FAIL_TASK_ON_SOFT_STOP" seq="5" type="bool">
+                    <dicommon:description><![CDATA[should the framework fail tasks if it is soft-stopped?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="FAIL_TASK_ON_NO_CONN_AVAILABLE" seq="6" type="bool">
+                    <dicommon:description><![CDATA[should the framework fail task on TaskOnConnAvailable exception?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DISABLE_CONSOLE" seq="7" type="bool">
+                    <dicommon:description><![CDATA[disabel jea console?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="rtstate.MAX_ADPT_EVENT_ROWS" seq="8" type="int">
+                    <dicommon:description><![CDATA[max number of adapter events cached by the adapter console]]></dicommon:description>
+                    <dicommon:value><![CDATA[1000]]></dicommon:value>
+                </property>
+                <property language="substitute" name="CONSOLE_JMS_SELECTOR" seq="9">
+                    <dicommon:description><![CDATA[jms receiver selector used by the adapter console]]></dicommon:description>
+                    <dicommon:value><![CDATA[dest_cmpnt_nm = \'${PROGRAM}_console\']]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_THREAD_POOL" seq="10">
+                    <dicommon:description><![CDATA[wl thread pool name]]></dicommon:description>
+                    <dicommon:value><![CDATA[weblogic.kernel.default]]></dicommon:value>
+                </property>
+                <property language="substitute" name="mgmtHandler" seq="11">
+                    <dicommon:description><![CDATA[Jea management handler]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jea.mgmt.JeaMgmtImpl]]></dicommon:value>
+                </property>
+                <property language="substitute" name="SIMULATION" seq="12" type="bool">
+                    <dicommon:description><![CDATA[should the framework run simulation body of the tasktype instead?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+            </properties>
+            <xi:include href="distribution/jea/sbjeatandbergbms.xml"/>
+       </component>
+	   <component buildPath="com/sigma/samp/imp/voiceClec/jea/sbjeaciscodncs" name="sbjeaciscodncs" needsBuild="true" type="JeaSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jea/sbjeaciscodncs/manifest.xml"/>
+            <resources_ref>
+                <jmsDestinations>
+                    <jmsDestination name="com.sigma.jms.queue.jea.sbjeaciscodncs.error"/>
+                </jmsDestinations>
+            </resources_ref>
+            <properties>
+                <property language="substitute" name="JEA_TX_DATASOURCE" seq="0">
+                    <dicommon:description><![CDATA[jndi name of the tx SB data source.]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jdbc.datasource.jea_tx]]></dicommon:value>
+                </property>
+                <property language="substitute" name="JEA_NON_TX_DATASOURCE" seq="1">
+                    <dicommon:description><![CDATA[jndi name of the non-tx SB data source.]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jdbc.datasource.jea_non_tx]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_ERROR_QUEUE" seq="2">
+                    <dicommon:description><![CDATA[jndi name of the default error queue name]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jms.queue.jea.$PROGRAM.error]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_JMS_CONN_FACTORY" seq="3">
+                    <dicommon:description><![CDATA[jndi name of the default jms conn factory]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jms.jea.JEAQueueConnectionFactory]]></dicommon:value>
+                </property>
+                <property language="substitute" name="BACKUP_TASK" seq="4" type="bool">
+                    <dicommon:description><![CDATA[should the framework back tasks if the adapter uses synchronous protocols?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="FAIL_TASK_ON_SOFT_STOP" seq="5" type="bool">
+                    <dicommon:description><![CDATA[should the framework fail tasks if it is soft-stopped?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="FAIL_TASK_ON_NO_CONN_AVAILABLE" seq="6" type="bool">
+                    <dicommon:description><![CDATA[should the framework fail task on TaskOnConnAvailable exception?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DISABLE_CONSOLE" seq="7" type="bool">
+                    <dicommon:description><![CDATA[disabel jea console?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="rtstate.MAX_ADPT_EVENT_ROWS" seq="8" type="int">
+                    <dicommon:description><![CDATA[max number of adapter events cached by the adapter console]]></dicommon:description>
+                    <dicommon:value><![CDATA[1000]]></dicommon:value>
+                </property>
+                <property language="substitute" name="CONSOLE_JMS_SELECTOR" seq="9">
+                    <dicommon:description><![CDATA[jms receiver selector used by the adapter console]]></dicommon:description>
+                    <dicommon:value><![CDATA[dest_cmpnt_nm = \'${PROGRAM}_console\']]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_THREAD_POOL" seq="10">
+                    <dicommon:description><![CDATA[wl thread pool name]]></dicommon:description>
+                    <dicommon:value><![CDATA[weblogic.kernel.default]]></dicommon:value>
+                </property>
+                <property language="substitute" name="mgmtHandler" seq="11">
+                    <dicommon:description><![CDATA[Jea management handler]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jea.mgmt.JeaMgmtImpl]]></dicommon:value>
+                </property>
+                <property language="substitute" name="SIMULATION" seq="12" type="bool">
+                    <dicommon:description><![CDATA[should the framework run simulation body of the tasktype instead?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+            </properties>
+            <xi:include href="distribution/jea/sbjeaciscodncs.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jea/sbjeaalu5529apc" name="sbjeaalu5529apc" needsBuild="true" type="JeaSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jea/sbjeaalu5529apc/manifest.xml"/>
+            <resources_ref>
+                <jmsDestinations>
+                    <jmsDestination name="com.sigma.jms.queue.jea.sbjeaalu5529apc.error"/>
+                </jmsDestinations>
+            </resources_ref>
+            <properties>
+                <property language="substitute" name="JEA_TX_DATASOURCE" seq="0">
+                    <dicommon:description><![CDATA[jndi name of the tx SB data source.]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jdbc.datasource.jea_tx]]></dicommon:value>
+                </property>
+                <property language="substitute" name="JEA_NON_TX_DATASOURCE" seq="1">
+                    <dicommon:description><![CDATA[jndi name of the non-tx SB data source.]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jdbc.datasource.jea_non_tx]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_ERROR_QUEUE" seq="2">
+                    <dicommon:description><![CDATA[jndi name of the default error queue name]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jms.queue.jea.$PROGRAM.error]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_JMS_CONN_FACTORY" seq="3">
+                    <dicommon:description><![CDATA[jndi name of the default jms conn factory]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jms.jea.JEAQueueConnectionFactory]]></dicommon:value>
+                </property>
+                <property language="substitute" name="BACKUP_TASK" seq="4" type="bool">
+                    <dicommon:description><![CDATA[should the framework back tasks if the adapter uses synchronous protocols?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="FAIL_TASK_ON_SOFT_STOP" seq="5" type="bool">
+                    <dicommon:description><![CDATA[should the framework fail tasks if it is soft-stopped?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="FAIL_TASK_ON_NO_CONN_AVAILABLE" seq="6" type="bool">
+                    <dicommon:description><![CDATA[should the framework fail task on TaskOnConnAvailable exception?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DISABLE_CONSOLE" seq="7" type="bool">
+                    <dicommon:description><![CDATA[disabel jea console?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="rtstate.MAX_ADPT_EVENT_ROWS" seq="8" type="int">
+                    <dicommon:description><![CDATA[max number of adapter events cached by the adapter console]]></dicommon:description>
+                    <dicommon:value><![CDATA[1000]]></dicommon:value>
+                </property>
+                <property language="substitute" name="CONSOLE_JMS_SELECTOR" seq="9">
+                    <dicommon:description><![CDATA[jms receiver selector used by the adapter console]]></dicommon:description>
+                    <dicommon:value><![CDATA[dest_cmpnt_nm = \'${PROGRAM}_console\']]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_THREAD_POOL" seq="10">
+                    <dicommon:description><![CDATA[wl thread pool name]]></dicommon:description>
+                    <dicommon:value><![CDATA[weblogic.kernel.default]]></dicommon:value>
+                </property>
+                <property language="substitute" name="mgmtHandler" seq="11">
+                    <dicommon:description><![CDATA[Jea management handler]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jea.mgmt.JeaMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+            <xi:include href="distribution/jea/sbjeaalu5529apc.xml"/>
+        </component>
+		
+		
+		<component buildPath="com/sigma/samp/imp/voiceClec/jea/sbjealgoss" name="sbjealgoss" needsBuild="true" type="JeaSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jea/sbjealgoss/manifest.xml"/>
+            <resources_ref>
+                <jmsDestinations>
+                    <jmsDestination name="com.sigma.jms.queue.jea.sbjealgoss.error"/>
+                </jmsDestinations>
+            </resources_ref>
+            <properties>
+                <property language="substitute" name="JEA_TX_DATASOURCE" seq="0">
+                    <dicommon:description><![CDATA[jndi name of the tx SB data source.]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jdbc.datasource.jea_tx]]></dicommon:value>
+                </property>
+                <property language="substitute" name="JEA_NON_TX_DATASOURCE" seq="1">
+                    <dicommon:description><![CDATA[jndi name of the non-tx SB data source.]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jdbc.datasource.jea_non_tx]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_ERROR_QUEUE" seq="2">
+                    <dicommon:description><![CDATA[jndi name of the default error queue name]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jms.queue.jea.$PROGRAM.error]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_JMS_CONN_FACTORY" seq="3">
+                    <dicommon:description><![CDATA[jndi name of the default jms conn factory]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jms.jea.JEAQueueConnectionFactory]]></dicommon:value>
+                </property>
+                <property language="substitute" name="BACKUP_TASK" seq="4" type="bool">
+                    <dicommon:description><![CDATA[should the framework back tasks if the adapter uses synchronous protocols?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="FAIL_TASK_ON_SOFT_STOP" seq="5" type="bool">
+                    <dicommon:description><![CDATA[should the framework fail tasks if it is soft-stopped?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="FAIL_TASK_ON_NO_CONN_AVAILABLE" seq="6" type="bool">
+                    <dicommon:description><![CDATA[should the framework fail task on TaskOnConnAvailable exception?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="DISABLE_CONSOLE" seq="7" type="bool">
+                    <dicommon:description><![CDATA[disabel jea console?]]></dicommon:description>
+                    <dicommon:value><![CDATA[false]]></dicommon:value>
+                </property>
+                <property language="substitute" name="rtstate.MAX_ADPT_EVENT_ROWS" seq="8" type="int">
+                    <dicommon:description><![CDATA[max number of adapter events cached by the adapter console]]></dicommon:description>
+                    <dicommon:value><![CDATA[1000]]></dicommon:value>
+                </property>
+                <property language="substitute" name="CONSOLE_JMS_SELECTOR" seq="9">
+                    <dicommon:description><![CDATA[jms receiver selector used by the adapter console]]></dicommon:description>
+                    <dicommon:value><![CDATA[dest_cmpnt_nm = \'${PROGRAM}_console\']]></dicommon:value>
+                </property>
+                <property language="substitute" name="DFLT_THREAD_POOL" seq="10">
+                    <dicommon:description><![CDATA[wl thread pool name]]></dicommon:description>
+                    <dicommon:value><![CDATA[weblogic.kernel.default]]></dicommon:value>
+                </property>
+                <property language="substitute" name="mgmtHandler" seq="11">
+                    <dicommon:description><![CDATA[Jea management handler]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jea.mgmt.JeaMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+            <xi:include href="distribution/jea/sbjealgoss.xml"/>
+        </component>
+		
+		
+        <component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/ISPControl" name="com.sigma.samp.imp.voiceClec.jmf_bean.ISPControl" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/ISPControl/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/SvcPkgComplexList" name="com.sigma.samp.imp.voiceClec.jmf_bean.SvcPkgComplexList" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/SvcPkgComplexList/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/CallGroupLinkDN" name="com.sigma.samp.imp.voiceClec.jmf_bean.CallGroupLinkDN" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/CallGroupLinkDN/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/XMLListGenerator" name="com.sigma.samp.imp.voiceClec.jmf_bean.XMLListGenerator" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/XMLListGenerator/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/GetDLQuantity" name="com.sigma.samp.imp.voiceClec.jmf_bean.GetDLQuantity" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/GetDLQuantity/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/ReadImplementationXML" name="com.sigma.samp.imp.voiceClec.jmf_bean.ReadImplementationXML" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/ReadImplementationXML/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/GetChildServiceParameter" name="com.sigma.samp.imp.voiceClec.jmf_bean.GetChildServiceParameter" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/GetChildServiceParameter/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/VLCompanyFeature" name="com.sigma.samp.imp.voiceClec.jmf_bean.VLCompanyFeature" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/VLCompanyFeature/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/VLFeatureValue" name="com.sigma.samp.imp.voiceClec.jmf_bean.VLFeatureValue" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/VLFeatureValue/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/GetSubnetworkParm" name="com.sigma.samp.imp.voiceClec.jmf_bean.GetSubnetworkParm" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/GetSubnetworkParm/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/LineOptionCommercial" name="com.sigma.samp.imp.voiceClec.jmf_bean.LineOptionCommercial" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/LineOptionCommercial/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/portCounter" name="com.sigma.samp.imp.voiceClec.jmf_bean.portCounter" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/portCounter/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/GetChangeAddressInfo" name="com.sigma.samp.imp.voiceClec.jmf_bean.GetChangeAddressInfo" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/GetChangeAddressInfo/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/SimpleList" name="com.sigma.samp.imp.voiceClec.jmf_bean.SimpleList" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/SimpleList/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/LineOptionDetermination" name="com.sigma.samp.imp.voiceClec.jmf_bean.LineOptionDetermination" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/LineOptionDetermination/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/GetNextSeqNum" name="com.sigma.samp.imp.voiceClec.jmf_bean.GetNextSeqNum" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/GetNextSeqNum/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/combinedServices" name="com.sigma.samp.imp.voiceClec.jmf_bean.combinedServices" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/combinedServices/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/VoiceGroups" name="com.sigma.samp.imp.voiceClec.jmf_bean.VoiceGroups" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/VoiceGroups/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/ServiceCounter" name="com.sigma.samp.imp.voiceClec.jmf_bean.ServiceCounter" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/ServiceCounter/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/COSPkgValidate" name="com.sigma.samp.imp.voiceClec.jmf_bean.COSPkgValidate" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/COSPkgValidate/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/GetSubnetworkLinkedParm" name="com.sigma.samp.imp.voiceClec.jmf_bean.GetSubnetworkLinkedParm" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/GetSubnetworkLinkedParm/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/VLFeatureLastChanged" name="com.sigma.samp.imp.voiceClec.jmf_bean.VLFeatureLastChanged" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/VLFeatureLastChanged/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/VGLastChanged" name="com.sigma.samp.imp.voiceClec.jmf_bean.VGLastChanged" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/VGLastChanged/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/imp/shelf/jmf_bean/CalendarBean" name="com.sigma.samp.imp.shelf.jmf_bean.CalendarBean" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/shelf/jmf_bean/CalendarBean/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+			<component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/GetSTBModelId" name="com.sigma.samp.imp.voiceClec.jmf_bean.GetSTBModelId" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/GetSTBModelId/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+	<component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/videoCasSubnetworkSelection" name="com.sigma.samp.imp.voiceClec.jmf_bean.videoCasSubnetworkSelection" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/videoCasSubnetworkSelection/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component> 
+	<component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/videoEntitlement" name="com.sigma.samp.imp.voiceClec.jmf_bean.videoEntitlement" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/videoEntitlement/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+	<component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/videoSTBvalidator" name="com.sigma.samp.imp.voiceClec.jmf_bean.videoSTBvalidator" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/videoSTBvalidator/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+	<component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/ValidateGCLID" name="com.sigma.samp.imp.voiceClec.jmf_bean.ValidateGCLID" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/ValidateGCLID/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+	<component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/AutoAttendantValidate" name="com.sigma.samp.imp.voiceClec.jmf_bean.AutoAttendantValidate" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/AutoAttendantValidate/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/bss/l3bss" name="com.sigma.samp.imp.voiceClec.bss.l3bss" needsBuild="true" type="BssAdapterSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/bss/l3bss/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/bss/sprint" name="com.sigma.samp.imp.voiceClec.bss.sprint" needsBuild="true" type="BssAdapterSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/bss/sprint/manifest.xml"/>
+        </component>
+		<component buildPath="com/sigma/samp/imp/voiceClec/bss/expiryDateScheduler" name="com.sigma.samp.imp.voiceClec.bss.expiryDateScheduler" needsBuild="true" type="BssAdapterSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/bss/expiryDateScheduler/manifest.xml"/>
+        </component>
+		<component buildPath="com/sigma/samp/imp/voiceClec/bss/collectionScheduler" name="com.sigma.samp.imp.voiceClec.bss.collectionScheduler" needsBuild="true" type="BssAdapterSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/bss/collectionScheduler/manifest.xml"/>
+        </component>
+         <component buildPath="com/sigma/samp/imp/voiceClec/bss/bms" name="com.sigma.samp.imp.voiceClec.bss.bms" needsBuild="true" type="BssAdapterSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/bss/bms/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/ejb/resource" name="com.sigma.samp.imp.voiceClec.ejb.resource" needsBuild="true" type="BssAdapterSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/ejb/resource/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/ejb/VP2ResMap" name="com.sigma.samp.imp.voiceClec.ejb.VP2ResMap" needsBuild="true" type="BssAdapterSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/ejb/VP2ResMap/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/ejb/VLCOSBean" name="com.sigma.samp.imp.voiceClec.ejb.VLCOSBean" needsBuild="true" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/ejb/VLCOSBean/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/gwc" name="com.sigma.samp.imp.voiceClec.gwc" needsBuild="true" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/gwc/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/bss/cmn" name="com.sigma.samp.imp.voiceClec.bss.cmn" needsBuild="true" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/bss/cmn/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/csc" name="com.sigma.samp.imp.voiceClec.csc" needsBuild="true" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/csc/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/ejb/portAvailability" name="com.sigma.samp.imp.voiceClec.ejb.portAvailability" needsBuild="true" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/ejb/portAvailability/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/tnm" name="com.sigma.samp.imp.voiceClec.tnm" needsBuild="true" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/tnm/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/webapp" name="com.sigma.samp.imp.voiceClec.webapp" needsBuild="true" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/webapp/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/order/commorderbydaterange" name="com.sigma.samp.imp.voiceClec.order.commorderbydaterange" needsBuild="true" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/order/commorderbydaterange/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/order/resorderbydaterange" name="com.sigma.samp.imp.voiceClec.order.resorderbydaterange" needsBuild="true" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/order/resorderbydaterange/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/query/ejb" name="com.sigma.samp.imp.voiceClec.query.ejb" needsBuild="true" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/query/ejb/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/shelf/jeaProtocols/freemarkerProcessor" name="com.sigma.samp.shelf.jeaProtocols.freemarkerProcessor" needsBuild="true" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/shelf/jeaProtocols/freemarkerProcessor/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/shelf/jeaProtocols/jeaFileAdapter" name="com.sigma.samp.shelf.jeaProtocols.jeaFileAdapter" needsBuild="true" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/shelf/jeaProtocols/jeaFileAdapter/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/shelf/jeaProtocols/motorolaWirelinkTCP" name="com.sigma.samp.shelf.jeaProtocols.motorolaWirelinkTCP" needsBuild="true" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/shelf/jeaProtocols/motorolaWirelinkTCP/manifest.xml"/>
+        </component>
+		<component buildPath="com/sigma/samp/shelf/jeaProtocols/BMSOncRpcProtocol" name="com.sigma.samp.shelf.jeaProtocols.BMSOncRpcProtocol" needsBuild="true" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/shelf/jeaProtocols/BMSOncRpcProtocol/manifest.xml"/>
+        </component>
+		<component buildPath="com/sigma/samp/shelf/jeaProtocols/DNCSOncRpcProtocol" name="com.sigma.samp.shelf.jeaProtocols.DNCSOncRpcProtocol" needsBuild="true" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/shelf/jeaProtocols/DNCSOncRpcProtocol/manifest.xml"/>
+        </component>
+		<component buildPath="com/sigma/samp/shelf/jeaProtocols/ciscoBAC40" name="com.sigma.samp.shelf.jeaProtocols.ciscoBAC40" needsBuild="true" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/shelf/jeaProtocols/ciscoBAC40/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/shelf/jeaProtocols/nortelcs2k" name="com.sigma.samp.shelf.jeaProtocols.nortelcs2k" needsBuild="true" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/shelf/jeaProtocols/nortelcs2k/manifest.xml"/>
+        </component>
+		<component buildPath="com/sigma/samp/shelf/jeaProtocols/ipunityProtocol" name="com.sigma.samp.shelf.jeaProtocols.ipunityProtocol" needsBuild="true" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/shelf/jeaProtocols/ipunityProtocol/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/imp/shelf" name="com.sigma.samp.imp.shelf" needsBuild="true" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/shelf/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/subentity" name="com.sigma.samp.imp.voiceClec.subentity" needsBuild="true" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/subentity/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec" name="com.sigma.samp.imp.voiceClec" needsBuild="true" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/LENManager" name="com.sigma.samp.imp.voiceClec.jmf_bean.LENManager" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/LENManager/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/SharedLineFeatureValidate" name="com.sigma.samp.imp.voiceClec.jmf_bean.SharedLineFeatureValidate" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/SharedLineFeatureValidate/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/preprocessor" name="com.sigma.samp.imp.voiceClec.jmf_bean.preprocessor" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/preprocessor/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/ejb/updtOrderState" name="com.sigma.samp.imp.voiceClec.ejb.updtOrderState" needsBuild="true" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/ejb/updtOrderState/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/caweb" name="com.sigma.samp.imp.voiceClec.caweb" needsBuild="true" type="GuiSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/caweb/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/cmn" name="com.sigma.samp.imp.voiceClec.cmn" needsBuild="true" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/cmn/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/ejb/adduserline" name="com.sigma.samp.imp.voiceClec.ejb.adduserline" needsBuild="true" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/ejb/adduserline/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/webapp/cmn" name="com.sigma.samp.imp.voiceClec.webapp.cmn" needsBuild="true" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/webapp/cmn/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/ejb/subaddress" name="com.sigma.samp.imp.voiceClec.ejb.subaddress" needsBuild="true" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/ejb/subaddress/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/ejb/subinfovalidator" name="com.sigma.samp.imp.voiceClec.ejb.subinfovalidator" needsBuild="true" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/ejb/subinfovalidator/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/ejb/prcsdepy" name="com.sigma.samp.imp.voiceClec.ejb.prcsdepy" needsBuild="true" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/ejb/prcsdepy/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/COSPkgDeleteValidate" name="com.sigma.samp.imp.voiceClec.jmf_bean.COSPkgDeleteValidate" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/COSPkgDeleteValidate/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/GroupMemberBind" name="com.sigma.samp.imp.voiceClec.jmf_bean.GroupMemberBind" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/GroupMemberBind/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/getValueFromCR" name="com.sigma.samp.imp.voiceClec.jmf_bean.getValueFromCR" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/getValueFromCR/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/SecondaryLineBind" name="com.sigma.samp.imp.voiceClec.jmf_bean.SecondaryLineBind" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/SecondaryLineBind/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/stmlabel" name="com.sigma.samp.imp.voiceClec.jmf_bean.stmlabel" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/stmlabel/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/HuntGroupValidate" name="com.sigma.samp.imp.voiceClec.jmf_bean.HuntGroupValidate" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/HuntGroupValidate/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/VLCOSPkg" name="com.sigma.samp.imp.voiceClec.jmf_bean.VLCOSPkg" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/VLCOSPkg/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/SecondaryLineList" name="com.sigma.samp.imp.voiceClec.jmf_bean.SecondaryLineList" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/SecondaryLineList/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/TimeZoneGetter" name="com.sigma.samp.imp.voiceClec.jmf_bean.TimeZoneGetter" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/TimeZoneGetter/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/collectionVideoEntitlement" name="com.sigma.samp.imp.voiceClec.jmf_bean.collectionVideoEntitlement" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/collectionVideoEntitlement/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/samp/imp/voiceClec/jmf_bean/VideoGetExpireDate" name="com.sigma.samp.imp.voiceClec.jmf_bean.VideoGetExpireDate" needsBuild="true" type="JmfBeanSpec">
+            <xi:include href="../../../../../../com/sigma/samp/imp/voiceClec/jmf_bean/VideoGetExpireDate/manifest.xml"/>
+            <properties>
+                <property name="mgmtHandler">
+                    <dicommon:value><![CDATA[com.sigma.tooling.admin.smpmgmt.impl.handlers.JmfBeanMgmtImpl]]></dicommon:value>
+                </property>
+            </properties>
+        </component>
+        <component buildPath="com/sigma/tooling/patch_framework" name="com.sigma.tooling.patch_framework" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/tooling/patch_framework/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/tooling/logs/bean" name="com.sigma.tooling.logs.bean" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/tooling/logs/bean/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/tooling/logs/web" name="com.sigma.tooling.logs.web" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/tooling/logs/web/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/tooling/logs/cmn" name="com.sigma.tooling.logs.cmn" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/tooling/logs/cmn/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/tooling/logs" name="com.sigma.tooling.logs" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/tooling/logs/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/samp/ordermgr/test/omplugins" name="com.sigma.samp.ordermgr.test.omplugins" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/samp/ordermgr/test/omplugins/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/jea/test/regplugins" name="com.sigma.jea.test.regplugins" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/jea/test/regplugins/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/tooling/regression/integration/gui" name="com.sigma.tooling.regression.integration.gui" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/tooling/regression/integration/gui/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/tooling/regression/integration" name="com.sigma.tooling.regression.integration" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/tooling/regression/integration/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/tooling/regression/integration/web" name="com.sigma.tooling.regression.integration.web" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/tooling/regression/integration/web/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/tooling/regression" name="com.sigma.tooling.regression" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/tooling/regression/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/tooling/log" name="com.sigma.tooling.log" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/tooling/log/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/web/dashboard" name="com.sigma.web.dashboard" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/web/dashboard/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/tooling/dist" name="com.sigma.tooling.dist" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/tooling/dist/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/jwf/test/driver/regplugins" name="com.sigma.jwf.test.driver.regplugins" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/jwf/test/driver/regplugins/manifest.xml"/>
+        </component>
+        <component buildPath="com/sigma/tooling/inst" name="com.sigma.tooling.inst" needsBuild="false" type="GenericCmpntSpec">
+            <xi:include href="../../../../../../com/sigma/tooling/inst/manifest.xml"/>
+        </component>
+    </components>
+</distribution>

@@ -1,0 +1,28 @@
+<!-- 
+  //=============================================================================
+  //  FILE INFO
+  //    $Id: manifest.xml,v 1.2 2010/06/11 14:02:47 rimad Exp $
+  //=============================================================================
+-->
+<manifest name="com.sigma.samp.imp.voiceClec.jeaProtocols.LGOSSAsyncResp"
+  type="GenericCmpntSpec"
+  xmlns="http://www.sigma-systems.com/schemas/4.0/manifest"
+  xmlns:dist="http://www.sigma-systems.com/schemas/4.0/distribution"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.sigma-systems.com/schemas/4.0/manifest ../../../../xmlcfg/schemas/manifest.xsd">
+  <requiredComponents>
+    <requiredComponent name="com.sigma.hframe" />
+    <requiredComponent name="com.sigma.vframe" />
+    <requiredComponent name="com.sigma.jea" />
+    <requiredComponent name="com.sigma.jea.shelfProtocol" />
+  </requiredComponents>
+  <requiredResources />
+  <requiredLibraries>
+    <library name="weblogic" />
+    <library name="jaxbapi" />
+  </requiredLibraries>
+  
+  <buildModules>
+    <module name="LGOSSreply.war" type="web" />
+  </buildModules>
+</manifest>

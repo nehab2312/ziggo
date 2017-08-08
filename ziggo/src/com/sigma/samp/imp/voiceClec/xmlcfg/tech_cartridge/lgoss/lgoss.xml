@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ 
+Patch applied 2017/07/21 19:19:42.089
+ Apply message:
+    LGOSS TC developed
+Patch applied 2017/07/21 19:24:34.912
+ Apply message:
+    LGOSS TC developed
+Patch applied 2017/07/21 19:26:50.094
+ Apply message:
+    LGOSS TC developed
+Patch applied 2017/07/21 19:29:00.591
+ Apply message:
+    LGOSS TC developed
+Patch applied 2017/07/21 19:48:47.582
+ Apply message:
+    LGOSS TC developed
+Patch applied 2017/07/21 19:50:38.896
+ Apply message:
+    LGOSS TC developed
+Patch applied 2017/07/24 13:24:43.645
+ Apply message:
+    LGOSS TC developed
+Patch applied 2017/07/24 15:29:51.642
+ Apply message:
+    LGOSS TC developed
+Patch applied 2017/07/24 16:04:20.563
+ Apply message:
+    LGOSS TC developed
+Patch applied 2017/07/24 16:09:28.261
+ Apply message:
+    LGOSS TC developed
+Patch applied 2017/07/24 16:19:20.781
+ Apply message:
+    LGOSS TC developed
+Patch applied 2017/07/24 17:05:43.025
+ Apply message:
+    LGOSS TC developed
+Patch applied 2017/07/24 17:05:57.493
+ Apply message:
+    LGOSS TC developed
+Patch applied 2017/07/24 17:31:10.707
+ Apply message:
+    LGOSS TC developed
+Patch applied 2017/07/25 14:51:20.469
+ Apply message:
+    LGOSS TC developed
+Patch applied 2017/07/26 14:47:52.868
+ Apply message:
+    LGOSS TC developed
+Patch applied 2017/07/26 16:16:08.390
+ Apply message:
+    LGOSS TC developed
+Patch applied 2017/07/26 16:50:07.341
+ Apply message:
+    LGOSS TC developed
+Patch applied 2017/08/02 09:08:12.122
+ Apply message:
+    LGOSS TC developed-->
+<tech_cartridge_cfg nm="lgoss" software_version="1.0.0" xmlns="http://www.sigma-systems.com/schemas/4.0/TechCartridge" xmlns:cm="http://www.sigma-systems.com/schemas/3.0/Common" xmlns:jea="http://www.sigma-systems.com/schemas/3.0/sb/jea" xmlns:jwf_prcs="http://www.sigma-systems.com/sb/jwf_prcs" xmlns:sb="http://www.sigma-systems.com/schemas/3.0/sb" xmlns:sbcmn="http://www.sigma-systems.com/sb/cmn" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sigma-systems.com/schemas/4.0/TechCartridge ../../../../../xmlcfg/schemas/tech_cartridge.xsd">
+    <jea_lst>
+        <xi:include href="sbjealgoss/sbjealgoss.jea"/>
+    </jea_lst>
+    <process_lst>
+        <xi:include href="prcs/lgoss_generate_bootfile.xml"/>
+        <xi:include href="prcs/lgoss_delete_bootfile.xml"/>
+    </process_lst>
+    <jmf_func_lib_lst>
+        <sbcmn:jmfFuncLib jmfFuncLibName="mf_retry_task"><![CDATA[mf boolean mf_retry_task(string retry_task) = retry_task == "y" || retry_task == "Y"]]></sbcmn:jmfFuncLib>
+        <sbcmn:jmfFuncLib jmfFuncLibName="mf_error_handling_method_manual"><![CDATA[mf boolean mf_error_handling_method_manual (string error_handling_method?) = nzlen error_handling_method && error_handling_method.equalsIgnoreCase("manual")]]></sbcmn:jmfFuncLib>
+        <sbcmn:jmfFuncLib jmfFuncLibName="mf_system_alarm_manual"><![CDATA[mf string mf_system_alarm_manual (string taskNm?, string err_code?, string err_reason?, string orderId?) = if nzlen err_code && nzlen err_reason then "Activity " + taskNm + " failed for ORDER_ID=" + orderId + " Error : " + err_code + ":" + err_reason else if nzlen err_code && !nzlen err_reason then "Activity " + taskNm + " failed for ORDER_ID=" + orderId + " Error : " + err_code else if !nzlen err_code && nzlen err_reason then "Activity " + taskNm + " failed for ORDER_ID=" + orderId + " " + " Error : " + err_reason else "Activity " + taskNm + " failed for ORDER_ID=" + orderId;]]></sbcmn:jmfFuncLib>
+        <sbcmn:jmfFuncLib jmfFuncLibName="mf_timeout_count"><![CDATA[mf int mf_timeout_count() = 0]]></sbcmn:jmfFuncLib>
+        <sbcmn:jmfFuncLib jmfFuncLibName="mf_timeout"><![CDATA[mf string mf_timeout() = "30 sec"]]></sbcmn:jmfFuncLib>
+    </jmf_func_lib_lst>
+    <manual_task_typ_lst>
+        <manualTaskType auto_complete_on_system_cancel="true" name="manual_lgoss_generate_bootfile">
+            <sbcmn:arguments>
+                <sbcmn:argument dir="inout" name="service_type" required="true" type="java.lang.String"/>
+                <sbcmn:argument dir="inout" name="request_type" required="true" type="java.lang.String">
+                    <sbcmn:defaultExpr>"GENERATE-BOOTFILE"</sbcmn:defaultExpr>
+                </sbcmn:argument>
+                <sbcmn:argument dir="inout" name="affiliate" required="true" type="java.lang.String"/>
+                <sbcmn:argument dir="inout" name="trading_partner" required="true" type="java.lang.String"/>
+                <sbcmn:argument dir="inout" name="country_code" required="true" type="java.lang.String"/>
+                <sbcmn:argument dir="inout" name="instance" required="true" type="java.lang.String"/>
+                <sbcmn:argument dir="inout" name="cpe_mta_mac_address" required="false" type="java.lang.String"/>
+                <sbcmn:argument dir="inout" name="customer_id" required="false" type="java.lang.String"/>
+                <sbcmn:argument dir="inout" name="sw_id" required="false" type="java.lang.String"/>
+                <sbcmn:argument dir="inout" name="bf_vendor" required="false" type="java.lang.String"/>
+                <sbcmn:argument dir="inout" name="bf_encryption_variant" required="false" type="java.lang.String"/>
+                <sbcmn:argument dir="inout" name="bf_encryption_type" required="false" type="java.lang.String"/>
+                <sbcmn:argument dir="inout" name="bf_public_key" required="false" type="java.lang.String"/>
+                <sbcmn:argument dir="inout" name="bf_sip_proxy_server" required="false" type="java.lang.String"/>
+                <sbcmn:argument dir="inout" name="bf_model" required="false" type="java.lang.String"/>
+                <sbcmn:argument dir="inout" name="bf_type" required="false" type="java.lang.String"/>
+                <sbcmn:argument dir="inout" name="bf_line_info1_port_id" required="false" type="java.lang.String"/>
+                <sbcmn:argument dir="inout" name="bf_line_info1_sip_username" required="false" type="java.lang.String"/>
+                <sbcmn:argument dir="inout" name="bf_line_info1_sip_password" required="false" type="java.lang.String"/>
+                <sbcmn:argument dir="inout" name="bf_line_info2_port_id" required="false" type="java.lang.String"/>
+                <sbcmn:argument dir="inout" name="bf_line_info2_sip_username" required="false" type="java.lang.String"/>
+                <sbcmn:argument dir="inout" name="bf_line_info2_sip_password" required="false" type="java.lang.String"/>
+                <sbcmn:argument dir="in" name="err_code" required="true" type="java.lang.String"/>
+                <sbcmn:argument dir="in" name="err_reason" required="false" type="java.lang.String"/>
+                <sbcmn:argument dir="inout" name="retry_task" required="true" type="java.lang.String"/>
+            </sbcmn:arguments>
+        </manualTaskType>
+        <manualTaskType auto_complete_on_system_cancel="true" name="manual_lgoss_delete_bootfile">
+            <sbcmn:arguments>
+                <sbcmn:argument dir="inout" name="service_type" required="true" type="java.lang.String"/>
+                <sbcmn:argument dir="inout" name="request_type" required="true" type="java.lang.String">
+                    <sbcmn:defaultExpr>"DELETE-BOOTFILE"</sbcmn:defaultExpr>
+                </sbcmn:argument>
+                <sbcmn:argument dir="inout" name="affiliate" required="true" type="java.lang.String"/>
+                <sbcmn:argument dir="inout" name="trading_partner" required="true" type="java.lang.String"/>
+                <sbcmn:argument dir="inout" name="country_code" required="true" type="java.lang.String"/>
+                <sbcmn:argument dir="inout" name="instance" required="true" type="java.lang.String"/>
+                <sbcmn:argument dir="inout" name="cpe_mta_mac_address" required="false" type="java.lang.String"/>
+                <sbcmn:argument dir="inout" name="customer_id" required="false" type="java.lang.String"/>
+                <sbcmn:argument dir="inout" name="sw_id" required="false" type="java.lang.String"/>
+                <sbcmn:argument dir="inout" name="technology_type" required="false" type="java.lang.String"/>
+                <sbcmn:argument dir="inout" name="technology_version" required="false" type="java.lang.String"/>
+                <sbcmn:argument dir="in" name="err_code" required="true" type="java.lang.String"/>
+                <sbcmn:argument dir="in" name="err_reason" required="false" type="java.lang.String"/>
+                <sbcmn:argument dir="inout" name="retry_task" required="true" type="java.lang.String"/>
+            </sbcmn:arguments>
+        </manualTaskType>
+    </manual_task_typ_lst>
+</tech_cartridge_cfg>

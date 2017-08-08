@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: jwf.xml,v 1.12 2009/02/16 13:54:59 rajibg Exp $ -->
+<jwfInstallation name="SmpWfEngine" xmlns="http://www.sigma-systems.com/schemas/4.0/jwf" xmlns:dicommon="http://www.sigma-systems.com/schemas/4.0/dicommon" xmlns:jnotify="http://www.sigma-systems.com/schemas/4.0/jnotify" xmlns:sbcmn="http://www.sigma-systems.com/sb/cmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sigma-systems.com/schemas/4.0/jwf com/sigma/samp/xmlcfg/schemas/jwf.xsd">
+    <jeaDests>        
+    <!-- Broadsoft -->
+     <!--<jeaDest jeaActivityName="group_dn_unassign4" processName="tmplt_bw_delete_tn">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+     <jeaDest jeaActivityName="acc_auth_code_add3" processName="tmplt_bw_add_auth_code">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="group_add4" processName="tmplt_bw_add_company">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="group_svc_modify_auth5" processName="tmplt_bw_add_company">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="grp_svc_assign7" processName="tmplt_bw_add_company">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="grp_acc_auth_cd_modify9" processName="tmplt_bw_add_company">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="grp_ext_lenght_modify10" processName="tmplt_bw_add_company">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="grp_custom_rbg_grp_modify11" processName="tmplt_bw_add_company">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="grp_ocp_modify357" processName="tmplt_bw_add_company">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="grp_thrd_vm_support_modify408" processName="tmplt_bw_add_company">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="grp_cling_line_id_modify441" processName="tmplt_bw_add_company">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="grp_access_dev_add3" processName="tmplt_bw_add_equip_comp">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="usr_shared_call_app_add4" processName="tmplt_bw_add_shared_line">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="usr_shared_call_app_modify6" processName="tmplt_bw_add_shared_line">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="grp_dn_assgn3" processName="tmplt_bw_add_tn">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+
+    <jeaDest jeaActivityName="usr_add3" processName="tmplt_bw_add_voice_line">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="usr_svc_assign6" processName="tmplt_bw_add_voice_line">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="usr_auth_mod9" processName="tmplt_bw_add_voice_line">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="grp_acc_auth_code_mod10" processName="tmplt_bw_add_voice_line">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="usr_atten_console_mod236" processName="tmplt_bw_add_voice_line">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="usr_call_fwdng_busy_mod270" processName="tmplt_bw_add_voice_line">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="usr_call_fwdng_no_ansr_mod299" processName="tmplt_bw_add_voice_line">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="usr_call_fwdng_always_mod323" processName="tmplt_bw_add_voice_line">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="usr_callLine_delivery_blockng_mod345" processName="tmplt_bw_add_voice_line">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="usr_third_party_vm_support_mod377" processName="tmplt_bw_add_voice_line">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="user_outgng_calling_plan_mod405" processName="tmplt_bw_add_voice_line">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="usr_voice_messng_mod4" processName="tmplt_bw_add_voice_mail">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="bw_user_modify3" processName="tmplt_bw_change_tn">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="bw_group_hunt_group_add3" processName="tmplt_bw_create_call_group">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="bw_group_call_pick_up_add4" processName="tmplt_bw_create_call_group">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="bw_user_delete3" processName="tmplt_bw_deactivate_voice_line">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="bw_group_acc_auth_code_delete4" processName="tmplt_bw_delete_auth_code">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="bw_group_hunt_group_delete4" processName="tmplt_bw_delete_call_group">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="bw_group_call_pick_up_delete3" processName="tmplt_bw_delete_call_group">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="bw_group_delete3" processName="tmplt_bw_delete_comp">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="grp_access_dev_del3" processName="tmplt_bw_delete_equip_comp">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="bw_user_shared_call_app_delete4" processName="tmplt_bw_delete_shared_line">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="bw_user_voice_messaging_modify3" processName="tmplt_bw_delete_voice_mail">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="bw_user_modify4" processName="tmplt_bw_edit_line">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="bw_user_service_assign6" processName="tmplt_bw_edit_line">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="bw_user_service_unassign8" processName="tmplt_bw_edit_line">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="bw_user_authentication_modify10" processName="tmplt_bw_edit_line">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="bw_user_attendant_console_modify17" processName="tmplt_bw_edit_line">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="usr_call_fwdng_busy_mod257" processName="tmplt_bw_edit_line">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="bw_user_call_fwdng_no_ansr_modify281" processName="tmplt_bw_edit_line">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="bw_user_call_fwdng_always_modify306" processName="tmplt_bw_edit_line">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="usr_calngLine_delivery_blockng_mod328" processName="tmplt_bw_edit_line">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="usr_third_party_vm_support_mod363" processName="tmplt_bw_edit_line">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="bw_group_acc_auth_code_modify446" processName="tmplt_bw_edit_line">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="usr_outgng_calling_plan_mod473" processName="tmplt_bw_edit_line">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="bw_group_hunt_group_modify3" processName="tmplt_bw_modify_call_group">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="bw_group_call_pick_up_modify6" processName="tmplt_bw_modify_call_group">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="bw_group_modify3" processName="tmplt_bw_modify_company">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="bw_group_service_modify_authorization4" processName="tmplt_bw_modify_company">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="bw_group_service_assign5" processName="tmplt_bw_modify_company">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="bw_group_service_unassign6" processName="tmplt_bw_modify_company">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="bw_group_music_on_hold_modify327" processName="tmplt_bw_modify_company">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="grp_custom_ringback_grp_mod319" processName="tmplt_bw_modify_company">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="grp_outgng_calling_plan_orig_mod413" processName="tmplt_bw_modify_company">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="bw_group_calling_line_id_modify457" processName="tmplt_bw_modify_company">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="bw_user_voice_msgng_modify_portal_pswd3" processName="tmplt_bw_reset_pin_voice_mail">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="bw_group_intercept_group_modify4" processName="tmplt_bw_resume_or_suspend_company">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+        <jeaDest jeaActivityName="call_pick_up_modify__list_67" processName="tmplt_bw_modify_group_list">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+     <jeaDest jeaActivityName="hunt_grp_modify_list_31" processName="tmplt_bw_modify_group_list">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+     <jeaDest jeaActivityName="bw_group_music_on_hold_modify489" processName="tmplt_bw_add_company">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="bw_user_modify_line28" processName="tmplt_bw_change_line">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="bw_group_access_device_modify_r14_33" processName="tmplt_bw_modify_equip_comp">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="grp_auto_atten_add3" processName="tmplt_bw_add_auto_attendant">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="grp_auto_atten_del3" processName="tmplt_bw_delete_auto_attendant">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="usr_shared_call_app_modify56" processName="tmplt_bw_add_voice_line">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>
+    <jeaDest jeaActivityName="usr_shared_call_app_modify546" processName="tmplt_bw_edit_line">
+            <jeaNameExpr><![CDATA["sbjeabroadsoft"]]></jeaNameExpr>
+            <boxNameExpr><![CDATA[switch_id]]></boxNameExpr>
+        </jeaDest>-->
+    </jeaDests>
+    <JVTWFSession>
+        <dicommon:sessionBean ejbHome="com.sigma.jwf.clientapi.ossj.JVTWFOrderManagementSessionHome" ejbRemote="com.sigma.jwf.clientapi.ossj.JVTWFSession" jndiName="com.sigma.jwf.JVTWFSession"/>
+    </JVTWFSession>
+    <manualQSessionBean>
+        <dicommon:sessionBean ejbHome="com.sigma.jwf.cmn.ManualTaskCtrlHome" ejbRemote="com.sigma.jwf.cmn.ManualTaskCtrl" jndiName="com.sigma.jwf.protocol.manualTaskCtrl.rcvr.session.ManualTaskCtrl"/>
+    </manualQSessionBean>
+    <management>
+        <registries event_type="com.sigma.jwf.clientapi.ossj.ControlStateChangeEvent">
+            <jnotify:registry name="late_status_group_notification">
+                <jnotify:included_properties>
+                    <jnotify:event_property name="lineItemId"/>
+                    <jnotify:event_property name="activityType"/>
+                </jnotify:included_properties>
+            </jnotify:registry>
+        </registries>
+    </management>
+</jwfInstallation>

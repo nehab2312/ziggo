@@ -1,0 +1,61 @@
+<xs:schema
+	targetNamespace="http://www.libertyglobal.com/Provisioning_ASAPVoice/Schema"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="qualified"
+	attributeFormDefault="unqualified">
+	
+	<xs:element name="provisioning_ASAPVoice">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="header">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="requestId" type="xs:string"/>
+							<xs:element name="serviceType" type="xs:string"/>
+							<xs:element name="requestType" type="xs:string"/>
+							<xs:element name="originator" type="xs:string"/>
+							<xs:element name="affiliate" type="xs:string"/>
+							<xs:element name="tradingPartner"  type="xs:string" minOccurs="0"/>
+							<xs:element name="countryCode" type="xs:string"/>
+							<xs:element name="instance" type="xs:string"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="parameters">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="param" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="name" type="xs:string"/>
+										<xs:element name="value" type="xs:string"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="provisioning_ASAPVoice_result" >
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="header">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element type="xs:string" name="transactionId"/>
+							<xs:element type="xs:string" name="errorCode"/>
+							<xs:element type="xs:string" name="errorMessage" minOccurs="0"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="body" minOccurs="0">
+					<xs:complexType/>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
+

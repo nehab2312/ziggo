@@ -1,0 +1,155 @@
+<!--
+//=============================================================================
+//
+// $Id: build.xml,v 1.3 2010/06/22 13:04:53 rimad Exp $
+// 
+//
+//  REVISION HISTORY
+//  *  Based on CVS log
+//=============================================================================
+-->
+
+<project name="com.sigma.samp.imp.voiceClec.jeaProtocols.LGOSSAsyncResp" default="create_dist">
+
+	<import file="${util.dir}/common-targets.xml" />
+
+	<property name="prj.build.dir" value="${build.dir}/${prj}" />
+
+	<property name="prj.core.api" value="${src.root}/../.." />
+
+	<echo>Java/JVM detail version: ${java.version}</echo> 
+	<!--property name="basedir" value="." /-->
+
+	<target name="clean_build" depends="clean_build_com.sigma.samp.imp.voiceClec.jeaProtocols.LGOSSAsyncResp">
+	</target>
+
+	<target name="clean_dist" depends="clean_dist_com.sigma.samp.imp.voiceClec.jeaProtocols.LGOSSAsyncResp" />
+
+	<target name="compile" depends="compile_com.sigma.samp.imp.voiceClec.jeaProtocols.LGOSSAsyncResp">
+	</target>
+
+	<target name="jar" depends="compile, jar_com.sigma.samp.imp.voiceClec.jeaProtocols.LGOSSAsyncResp" />
+
+	<target name="build" depends="jar" />
+
+	<target name="create_dist_only" depends="create_dist_com.sigma.samp.imp.voiceClec.jeaProtocols.LGOSSAsyncResp" />
+
+	<target name="prepare_build_com.sigma.samp.imp.voiceClec.jeaProtocols.LGOSSAsyncResp" depends="clean_build">
+		<!-- Create the time stamp -->
+		<tstamp />
+		<mkdir dir="${prj.build.dir}" />
+		<mkdir dir="${prj.build.dir}/WEB-INF" />
+		<mkdir dir="${prj.build.dir}/WEB-INF/lib" />
+		<mkdir dir="${prj.build.dir}/WEB-INF/classes" />
+
+	</target>
+
+	<target name="clean_build_com.sigma.samp.imp.voiceClec.jeaProtocols.LGOSSAsyncResp">
+		<delete dir="${prj.build.dir}/com" />
+		<delete dir="${prj.build.dir}/WEB-INF" />
+		<delete file="${prj.build.dir}/LGOSSreply.war" />
+	</target>
+
+	<target name="clean_dist_com.sigma.samp.imp.voiceClec.jeaProtocols.LGOSSAsyncResp">
+		<delete file="${dist.dir.webapp}/LGOSSreply.war" />
+	</target>
+
+	
+	<path id="weblogic_jar">
+		<pathelement path="${wl.lib.dir}/weblogic.jar" />
+	</path>
+
+	
+
+
+	<target name="compile_com.sigma.samp.imp.voiceClec.jeaProtocols.LGOSSAsyncResp" depends="prepare_build_com.sigma.samp.imp.voiceClec.jeaProtocols.LGOSSAsyncResp,generate.from.wsdl">
+		<echo>"Compling the code"</echo>
+		<javac deprecation="${deprecation}" srcdir="${src.root}" debug="true" sourcepath="" destdir="${prj.build.dir}/WEB-INF/classes/">
+			<include name="com/sigma/samp/imp/voiceClec/jeaProtocols/LGOSSAsyncResp/*.java" />
+			<classpath>
+				<path refid="build_classpath" />
+				
+				<pathelement location="${wl.lib.dir}/weblogic.jar" />
+				<pathelement location="${wl.lib.dir}/webserviceclient+ssl.jar" />
+				<pathelement location="${extjars}/wl103/modules/com.bea.core.weblogic.saaj_1.3.0.0.jar " />
+				<pathelement location="${extjars}/jaxb-api-2.1.jar" />
+				<pathelement location="${extjars}/glassfish.jaxws.tools_1.0.0.0_2-1-3.jar" />
+				<pathelement location="${extjars}/glassfish.jaxb.xjc_2.1.6.jar" />
+				<pathelement location="${extjars}/glassfish.jaxb_2.1.6.jar" />
+				<pathelement location="${extjars}/glassfish.xmlstreambuffer_0.5.221.jar" />
+				<pathelement location="${extjars}/glassfish.stax.ex_1.0.0.0_1-2.jar" />
+				<pathelement location="${extjars}/com.bea.core.apache.dom_1.0.0.0.jar" />
+				<pathelement location="${prj.build.dir}/WEB-INF/lib/Provisioning_ASAPVoiceAsyn_wsdl.jar" />
+			</classpath>
+
+		</javac>
+	</target>
+
+	<!-- Here wsdlc is used to generate jar file only.It is require to add atribute destImplDir="some path" in 
+     element wsdlc to create impl class         -->
+
+
+	<target name="generate.from.wsdl" description="Target that calls wsdlc task on golden wsdls ">
+		<echo>build_classpath is ${build_classpath}</echo>
+		<echo>ws_classpath is ${ws_classpath}</echo>
+		<taskdef name="wsdlc" classname="weblogic.wsee.tools.anttasks.WsdlcTask">
+			<classpath>
+				<pathelement location="${wl.lib.dir}/weblogic.jar" />
+				<pathelement location="${wl.lib.dir}/webserviceclient+ssl.jar" />
+				<pathelement location="${extjars}/wl103/modules/com.bea.core.weblogic.saaj_1.3.0.0.jar " />
+				<pathelement location="${extjars}/jaxb-api-2.1.jar" />
+				<pathelement location="${extjars}/glassfish.jaxws.tools_1.0.0.0_2-1-3.jar" />
+				<pathelement location="${extjars}/glassfish.jaxb.xjc_2.1.6.jar" />
+				<pathelement location="${extjars}/glassfish.jaxb_2.1.6.jar" />
+				<pathelement location="${extjars}/glassfish.xmlstreambuffer_0.5.221.jar" />
+				<pathelement location="${extjars}/glassfish.stax.ex_1.0.0.0_1-2.jar" />
+				<pathelement location="${extjars}/com.bea.core.apache.dom_1.0.0.0.jar" />
+			</classpath>
+		</taskdef>
+		<wsdlc type="JAXWS" srcWsdl="${basedir}/wsdl/Provisioning_ASAPVoiceAsyn.wsdl" destJwsDir="${prj.build.dir}/WEB-INF/lib/" packageName="com.sigma.samp.imp.voiceClec.jeaProtocols.LGOSSAsyncResp">
+			<classpath>
+				<pathelement location="${wl.lib.dir}/weblogic.jar" />
+				<pathelement location="${wl.lib.dir}/webserviceclient+ssl.jar" />
+				<pathelement location="${extjars}/wl103/modules/com.bea.core.weblogic.saaj_1.3.0.0.jar " />
+				<pathelement location="${extjars}/jaxb-api-2.1.jar" />
+				<pathelement location="${extjars}/glassfish.jaxws.tools_1.0.0.0_2-1-3.jar" />
+				<pathelement location="${extjars}/glassfish.jaxb.xjc_2.1.6.jar" />
+				<pathelement location="${extjars}/glassfish.jaxb_2.1.6.jar" />
+				<pathelement location="${extjars}/glassfish.xmlstreambuffer_0.5.221.jar" />
+				<pathelement location="${extjars}/glassfish.stax.ex_1.0.0.0_1-2.jar" />
+				<pathelement location="${extjars}/com.bea.core.apache.dom_1.0.0.0.jar" />
+			</classpath>
+
+
+		</wsdlc>
+	</target>
+
+	<target name="jar_com.sigma.samp.imp.voiceClec.jeaProtocols.LGOSSAsyncResp">
+
+		<copy todir="${prj.build.dir}/WEB-INF/">
+			<fileset dir="${src.root}/com/sigma/samp/imp/voiceClec/jeaProtocols/LGOSSAsyncResp/web" includes="*.xml" />
+		</copy>
+
+		<!--copy todir="${prj.build.dir}/WEB-INF/classes">
+			<fileset dir="${prj.build.dir}/" includes="**/*.class" />
+		</copy-->
+		<copy todir="${prj.build.dir}/WEB-INF/">
+			<fileset dir="${src.root}/com/sigma/samp/imp/voiceClec/jeaProtocols/LGOSSAsyncResp/wsdl" includes="*.wsdl,*.xsd" />
+		</copy>
+		<jar.manifest jarfile="${prj.build.dir}/LGOSSreply.war" basedir="${prj.build.dir}" compress="false" />
+
+	</target>
+
+	<target name="prepare_dist_com.sigma.samp.imp.voiceClec.jeaProtocols.LGOSSAsyncResp" depends="clean_dist">
+
+		<tstamp />
+		<mkdir dir="${dist.dir}" />
+
+
+	</target>
+
+	<target name="create_dist_com.sigma.samp.imp.voiceClec.jeaProtocols.LGOSSAsyncResp" depends="prepare_dist_com.sigma.samp.imp.voiceClec.jeaProtocols.LGOSSAsyncResp">
+		<copy todir="${dist.dir.webapp}" overwrite="yes" file="${prj.build.dir}/LGOSSreply.war" />
+
+	</target>
+</project>

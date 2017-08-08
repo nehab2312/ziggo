@@ -1,0 +1,15 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.libertyglobal.com/Provisioning_ASAPVoice/Schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:provisioning_ASAPVoice_result>
+         <sch:header>
+            <sch:transactionId>${TransactionId}</sch:transactionId>
+            <sch:errorCode>0</sch:errorCode>
+            <!--Optional:-->
+            <sch:errorMessage>Ignore</sch:errorMessage>
+         </sch:header>
+         <!--Optional:-->
+         <sch:body/>
+      </sch:provisioning_ASAPVoice_result>
+   </soapenv:Body>
+</soapenv:Envelope>

@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ 
+Patch applied 2017/07/24 19:20:36.478
+ Apply message:
+    LGOSS TC developed-->
+<jeaDistribution jeaFile="tech_cartridge/lgoss/sbjealgoss/sbjealgoss.jea" name="sbjealgoss" xmlns="http://www.sigma-systems.com/schemas/4.0/jea" xmlns:dicommon="http://www.sigma-systems.com/schemas/4.0/dicommon" xmlns:dist="http://www.sigma-systems.com/schemas/4.0/distribution" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sigma-systems.com/schemas/4.0/jea com/sigma/samp/xmlcfg/schemas/jea.xsd">
+    <mdbInvocation javaClass="com.sigma.jea.invocation.mdb.J2EEAdptMDBean">
+        <dicommon:description><![CDATA[official message-driven bean invocation]]></dicommon:description>
+        <dicommon:initParams>
+            <dicommon:initParam name="taskTimeout" required="false" type="int">
+                <dicommon:description><![CDATA[task timeout in seconds. ignore non-positive value.
+A task times out if (1)taskTimeout>0, (2)it's jms message was created more than taskTimeout seconds ago, and (3)the adapter started more than taskTimeout seconds ago.]]></dicommon:description>
+                <dicommon:value><![CDATA[-1]]></dicommon:value>
+            </dicommon:initParam>
+            <dicommon:initParam name="initBeansInPool" required="true" type="int">
+                <dicommon:description><![CDATA[initial number of beans]]></dicommon:description>
+                <dicommon:value><![CDATA[1]]></dicommon:value>
+            </dicommon:initParam>
+            <dicommon:initParam name="async_task_skip_backup" required="false" type="bool">
+                <dicommon:description><![CDATA[skip back up tasks even for async tasks]]></dicommon:description>
+                <dicommon:value><![CDATA[false]]></dicommon:value>
+            </dicommon:initParam>
+            <dicommon:initParam name="maxBeansInPool" required="true" type="int">
+                <dicommon:description><![CDATA[max number of beans]]></dicommon:description>
+                <dicommon:value><![CDATA[3]]></dicommon:value>
+            </dicommon:initParam>
+            <dicommon:initParam name="threadPool" required="true" type="string">
+                <dicommon:description><![CDATA[weblogic thread pool name]]></dicommon:description>
+                <dicommon:value><![CDATA[weblogic.kernel.default]]></dicommon:value>
+            </dicommon:initParam>
+            <dicommon:initParam language="substitute" name="backupTask" required="false" type="bool">
+                <dicommon:description><![CDATA[should the bean backup tasks in the task tables?]]></dicommon:description>
+                <dicommon:value><![CDATA[$BACKUP_TASK]]></dicommon:value>
+            </dicommon:initParam>
+            <dicommon:initParam name="redeliveryInterval" required="false" type="int">
+                <dicommon:description><![CDATA[after how much time a task for which a box is suspended should be retriedShould be specified in seconds.]]></dicommon:description>
+                <dicommon:value><![CDATA[120]]></dicommon:value>
+            </dicommon:initParam>
+            <dicommon:initParam name="alt_task_key" required="false" type="string">
+                <dicommon:description><![CDATA[name of the task parm that is used as alt key in async flow. If it is missing, it indicates no alt key for async tasks]]></dicommon:description>
+            </dicommon:initParam>
+            <dicommon:initParam language="substitute" name="failTaskOnSoftStop" required="false" type="bool">
+                <dicommon:description><![CDATA[should the bean fail tasks if the adapter is in soft-stop state?]]></dicommon:description>
+                <dicommon:value><![CDATA[$FAIL_TASK_ON_SOFT_STOP]]></dicommon:value>
+            </dicommon:initParam>
+            
+            <dicommon:initParam name="taskTxIdempotent" required="false" type="string">
+                <dicommon:description><![CDATA[task tx&idempotent property:tx_idem, tx_non_idem, non_tx_idem, non_tx_non_idem, or based_on_task]]></dicommon:description>
+                <dicommon:value><![CDATA[based_on_task]]></dicommon:value>
+            </dicommon:initParam>
+            <dicommon:initParam language="substitute" name="requestQueue" required="true" type="string">
+                <dicommon:description><![CDATA[jndi name of request jms task queue]]></dicommon:description>
+                <dicommon:value><![CDATA[com.sigma.jms.queue.jea.$PROGRAM.request]]></dicommon:value>
+            </dicommon:initParam>
+            <dicommon:initParam name="noOfRetries" required="false" type="int">
+                <dicommon:description><![CDATA[for how many times a task for which a box is suspended should be retriedAfter these no of retries the task will be moved to the default error queue.]]></dicommon:description>
+                <dicommon:value><![CDATA[1]]></dicommon:value>
+            </dicommon:initParam>
+            <dicommon:initParam language="substitute" name="jmsConnFactory" required="true" type="string">
+                <dicommon:description><![CDATA[jndi name of jms connection factory]]></dicommon:description>
+                <dicommon:value><![CDATA[com.sigma.jms.jea.JEAQueueConnectionFactory]]></dicommon:value>
+            </dicommon:initParam>
+            <dicommon:initParam name="txTimeout" required="true" type="int">
+                <dicommon:description><![CDATA[transaction timeout in seconds]]></dicommon:description>
+                <dicommon:value><![CDATA[120]]></dicommon:value>
+            </dicommon:initParam>
+            <dicommon:initParam name="mark_no_conn_available" required="false" type="bool">
+                <dicommon:description><![CDATA[mark connection pool as 'noConnAvailalbe' if task can not borrow conns]]></dicommon:description>
+                <dicommon:value><![CDATA[false]]></dicommon:value>
+            </dicommon:initParam>
+            <dicommon:initParam name="rollbackOnDBError" required="false" type="bool">
+                <dicommon:description><![CDATA[rollback the task on DB error instead of 'soft-stop' the jea?]]></dicommon:description>
+                <dicommon:value><![CDATA[true]]></dicommon:value>
+            </dicommon:initParam>
+        </dicommon:initParams>
+        <dicommon:eventListeners>
+            <dicommon:eventListener javaClass="com.sigma.jea.invocation.InvocationEventCollector" seq="1">
+                <dicommon:description><![CDATA[It collects invocation events and put them into the runtime in memory relational DB. The events may be viewed by the adapter's web console.]]></dicommon:description>
+            </dicommon:eventListener>
+        </dicommon:eventListeners>
+        <dicommon:JMSQueue jndiName="com.sigma.jms.queue.jea.sbjealgoss.request" useJMSQueueFactory="com.sigma.jms.jea.JEAQueueConnectionFactory"/>
+        <replyTaskHandler javaClass="com.sigma.jea.replyTaskHandler.JWFReplyTaskHandler">
+            <dicommon:description><![CDATA[official jea-jwf reply task handler]]></dicommon:description>
+            <dicommon:initParams>
+                <dicommon:initParam language="substitute" name="jms_reply_backup_queue" required="true" type="string">
+                    <dicommon:description><![CDATA[jndi name of jms reply task backup queue]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jms.queue.jea.$PROGRAM.backup]]></dicommon:value>
+                </dicommon:initParam>
+                <dicommon:initParam language="substitute" name="jms_conn_factory" required="true" type="string">
+                    <dicommon:description><![CDATA[jndi name of jms connection factory to the backup queue]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jms.jea.JEAQueueConnectionFactory]]></dicommon:value>
+                </dicommon:initParam>
+                <dicommon:initParam language="substitute" name="jwf_container_url" required="false" type="string">
+                    <dicommon:description><![CDATA[url to j2ee container which jwf is running,required if use_install_dist_cfg is false]]></dicommon:description>
+                    <dicommon:value><![CDATA[$JWF_CONTAINER_URL]]></dicommon:value>
+                </dicommon:initParam>
+                <dicommon:initParam name="jwf_container_user" required="false" type="string">
+                    <dicommon:description><![CDATA[user name used to connect to jwf url]]></dicommon:description>
+                </dicommon:initParam>
+                <dicommon:initParam language="substitute" name="jwf_jea_task_session_jndi" required="true" type="string">
+                    <dicommon:description><![CDATA[jndi name of jwf session bean handling jea reply task,required if use_install_dist_cfg is false]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jwf.JVTWFSession]]></dicommon:value>
+                </dicommon:initParam>
+                <dicommon:initParam name="use_install_dist_cfg" required="false" type="bool">
+                    <dicommon:description><![CDATA[false means using user defined values; true means get jwf destination from install/distribution configuration]]></dicommon:description>
+                    <dicommon:value><![CDATA[true]]></dicommon:value>
+                </dicommon:initParam>
+                <dicommon:initParam name="jwf_name" required="false" type="string">
+                    <dicommon:description><![CDATA[jwf componnet name in install config,required if use_install_dist_cfg is true]]></dicommon:description>
+                    <dicommon:value><![CDATA[SmpWfEngine]]></dicommon:value>
+                </dicommon:initParam>
+                <dicommon:initParam name="jwf_container_pwd" required="false" type="string">
+                    <dicommon:description><![CDATA[password used to connect to jwf url]]></dicommon:description>
+                </dicommon:initParam>
+            </dicommon:initParams>
+            <dicommon:preReplyFilters>
+                <dicommon:preReplyFilter javaClass="com.sigma.jea.replyTaskHandler.TaskTypeReplyTaskHandlerFilter" seq="1">
+                    <dicommon:description><![CDATA[pre-process reply tasks based on their tasktypes]]></dicommon:description>
+                    <dicommon:initParams>
+                        <dicommon:initParam name="check_required_parm" required="false" type="bool">
+                            <dicommon:description><![CDATA[check required parm in return task? 
+false means leave it to workflow engine.]]></dicommon:description>
+                            <dicommon:value><![CDATA[false]]></dicommon:value>
+                        </dicommon:initParam>
+                        <dicommon:initParam name="remove_input_only_parms" required="false" type="bool">
+                            <dicommon:description><![CDATA[remove input only arguments from reply tasks?]]></dicommon:description>
+                            <dicommon:value><![CDATA[true]]></dicommon:value>
+                        </dicommon:initParam>
+                    </dicommon:initParams>
+                </dicommon:preReplyFilter>
+            </dicommon:preReplyFilters>
+        </replyTaskHandler>
+    </mdbInvocation>
+    <validator javaClass="com.sigma.jea.validator.TaskTypeValidator">
+        <dicommon:description><![CDATA[It saves adapter alarms using log4j appender configured in jea properties]]></dicommon:description>
+    </validator>
+    <persistMgr javaClass="com.sigma.jea.dao.OraclePersMgr">
+        <dicommon:description><![CDATA[JEA persistence manager using Oracle two-phase commit data source]]></dicommon:description>
+        <dicommon:initParams>
+            <dicommon:initParam language="substitute" name="dataSource" required="true" type="string">
+                <dicommon:description><![CDATA[ServiceBroker tx data source]]></dicommon:description>
+                <dicommon:value><![CDATA[$JEA_TX_DATASOURCE]]></dicommon:value>
+            </dicommon:initParam>
+            <dicommon:initParam name="backupTaskParms" required="false" type="bool">
+                <dicommon:description><![CDATA[false means back up task w/o parameters; true means back up both task attrs and parameters.]]></dicommon:description>
+                <dicommon:value><![CDATA[true]]></dicommon:value>
+            </dicommon:initParam>
+        </dicommon:initParams>
+    </persistMgr>
+    <taskHandler javaClass="com.sigma.jea.taskHandler.CallEngineTaskHandler">
+        <dicommon:description><![CDATA[official task handler supporting JEA]]></dicommon:description>
+        <dicommon:initParams>
+            <dicommon:initParam name="simulate" required="false" type="string">
+                <dicommon:description><![CDATA[simulation mode:
+success(task succeeds without execution),
+fail(task fails without execution),or 
+none(normal execution)]]></dicommon:description>
+                <dicommon:value><![CDATA[none]]></dicommon:value>
+            </dicommon:initParam>
+            
+        </dicommon:initParams>
+    </taskHandler>
+	  <flow javaClass="com.sigma.jea.flow.AsyncFlow">
+        <dicommon:description><![CDATA[Official asynchronous flow.]]></dicommon:description>
+        <dicommon:initParams>
+            <dicommon:initParam language="substitute" name="failTaskOnNoConnAvailable" required="false" type="bool">
+                <dicommon:description><![CDATA[fail a task on TaskOnConnAvailable exception?]]></dicommon:description>
+                <dicommon:value><![CDATA[$FAIL_TASK_ON_NO_CONN_AVAILABLE]]></dicommon:value>
+            </dicommon:initParam>
+            <dicommon:initParam language="substitute" name="load_task_timeout_ms" required="false" type="int">
+                <dicommon:description><![CDATA[load matching task from db timeout in milliseconds]]></dicommon:description>
+                <dicommon:value><![CDATA[600000]]></dicommon:value>
+            </dicommon:initParam>
+            <dicommon:initParam language="substitute" name="load_task_interval_ms" required="false" type="int">
+                <dicommon:description><![CDATA[load matching task from db retry interval in milliseconds]]></dicommon:description>
+                <dicommon:value><![CDATA[6000]]></dicommon:value>
+            </dicommon:initParam>
+            <dicommon:initParam language="substitute" name="fail_task_on_resource_error" required="false" type="bool">
+                <dicommon:description><![CDATA[should it fail a task if it encounters connection error while handling async rpelies?]]></dicommon:description>
+                <dicommon:value><![CDATA[true]]></dicommon:value>
+            </dicommon:initParam>
+        </dicommon:initParams>
+    </flow>
+    <!--flow javaClass="com.sigma.jea.flow.SyncFlow">
+        <dicommon:description><![CDATA[Official synchronous flow.]]></dicommon:description>
+        <dicommon:initParams>
+            <dicommon:initParam language="substitute" name="failTaskOnNoConnAvailable" required="false" type="bool">
+                <dicommon:description><![CDATA[fail a task on TaskOnConnAvailable exception?]]></dicommon:description>
+                <dicommon:value><![CDATA[$FAIL_TASK_ON_NO_CONN_AVAILABLE]]></dicommon:value>
+            </dicommon:initParam>
+        </dicommon:initParams>
+    </flow-->
+    <boxRouter javaClass="com.sigma.jea.resource.StaticBoxRouter">
+        <dicommon:description><![CDATA[It routes tasks based the 'box_nm' parameter if there are more than one box.]]></dicommon:description>
+        <dicommon:initParams>
+            <dicommon:initParam name="handle_invalid_box_nm" required="false" type="string">
+                <dicommon:description><![CDATA[how to handle task with invalid box_nm? possible values are: TaskConfigError,TaskFailedError and TaskInvalidError]]></dicommon:description>
+                <dicommon:value><![CDATA[TaskConfigError]]></dicommon:value>
+            </dicommon:initParam>
+            <dicommon:initParam name="mark_no_conn_available" required="false" type="bool">
+                <dicommon:description><![CDATA[mark noConnAvailable of the box when catches NoConnAvailable error]]></dicommon:description>
+                <dicommon:value><![CDATA[false]]></dicommon:value>
+            </dicommon:initParam>
+        </dicommon:initParams>
+        <boxes/>
+    </boxRouter>
+    <scheduler>
+        <schedulerHandler freq="60" javaClass="com.sigma.jea.scheduler.builtin.ErrorQueueScheduler" maxOccurances="-1" name="ErrorQueueScheduler">
+            <dicommon:description><![CDATA[It scans error task queue periodically and send failed task using the reply task handler(s).
+YOU SHOULD HAVE AT LEAST ONE ErrorQueueReplier FOR EACH PHYSICAL ERROR QUEUE.]]></dicommon:description>
+            <dicommon:initParams>
+                <dicommon:initParam language="substitute" name="jms_conn_factory" required="false" type="string">
+                    <dicommon:description><![CDATA[jndi name of JMS conn factory]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jms.jea.JEAQueueConnectionFactory]]></dicommon:value>
+                </dicommon:initParam>
+                <dicommon:initParam language="substitute" name="jms_message_selector" required="false" type="string">
+                    <dicommon:description><![CDATA[selector on the error queue]]></dicommon:description>
+                    <dicommon:value><![CDATA[dest_cmpnt_nm="'$PROGRAM'"]]></dicommon:value>
+                </dicommon:initParam>
+                <dicommon:initParam name="jms_read_timeout" required="false" type="int">
+                    <dicommon:description><![CDATA[A message is logged if it couldn't read a message within the timeout(seconds)]]></dicommon:description>
+                    <dicommon:value><![CDATA[2]]></dicommon:value>
+                </dicommon:initParam>
+                <dicommon:initParam name="backup_task_in_db" required="true" type="bool">
+                    <dicommon:description><![CDATA[should it back up the task(from error queue) in DB?]]></dicommon:description>
+                    <dicommon:value><![CDATA[$BACKUP_TASK]]></dicommon:value>
+                </dicommon:initParam>
+                <dicommon:initParam name="transaction_timeout" required="false" type="int">
+                    <dicommon:description><![CDATA[user transaction timeout in seconds]]></dicommon:description>
+                    <dicommon:value><![CDATA[120]]></dicommon:value>
+                </dicommon:initParam>
+                <dicommon:initParam language="substitute" name="jms_error_queue" required="false" type="string">
+                    <dicommon:description><![CDATA[jndi name of error jms queue]]></dicommon:description>
+                    <dicommon:value><![CDATA[com.sigma.jms.queue.jea.$PROGRAM.error]]></dicommon:value>
+                </dicommon:initParam>
+                <dicommon:initParam name="reconnect_timeout" required="false" type="int">
+                    <dicommon:description><![CDATA[if the jms receiver has been connected longer than this timeout (seconds), then reconnect.]]></dicommon:description>
+                    <dicommon:value><![CDATA[3600]]></dicommon:value>
+                </dicommon:initParam>
+                <dicommon:initParam name="user" required="false" type="string">
+                    <dicommon:description><![CDATA[user name used to connect to url]]></dicommon:description>
+                </dicommon:initParam>
+                <dicommon:initParam name="password" required="false" type="string">
+                    <dicommon:description><![CDATA[password used to connect to url]]></dicommon:description>
+                </dicommon:initParam>
+                <dicommon:initParam name="url" required="false" type="string">
+                    <dicommon:description><![CDATA[url to j2ee container]]></dicommon:description>
+                </dicommon:initParam>
+            </dicommon:initParams>
+        </schedulerHandler>
+    </scheduler>
+    <replyTaskBackupMDB javaClass="com.sigma.jea.replyTaskHandler.mdb.JWFReplyBackupMDBean">
+        <dicommon:description><![CDATA[official message-driven bean for abnormal reply]]></dicommon:description>
+        <dicommon:initParams>
+            <dicommon:initParam name="initBeansInPool" required="true" type="int">
+                <dicommon:description><![CDATA[initial number of beans]]></dicommon:description>
+                <dicommon:value><![CDATA[1]]></dicommon:value>
+            </dicommon:initParam>
+            <dicommon:initParam name="maxBeansInPool" required="true" type="int">
+                <dicommon:description><![CDATA[max number of beans]]></dicommon:description>
+                <dicommon:value><![CDATA[3]]></dicommon:value>
+            </dicommon:initParam>
+            <dicommon:initParam name="threadPool" required="true" type="string">
+                <dicommon:description><![CDATA[weblogic thread pool name]]></dicommon:description>
+                <dicommon:value><![CDATA[weblogic.kernel.default]]></dicommon:value>
+            </dicommon:initParam>
+            <dicommon:initParam name="txTimeout" required="true" type="int">
+                <dicommon:description><![CDATA[transaction timeout in seconds]]></dicommon:description>
+                <dicommon:value><![CDATA[120]]></dicommon:value>
+            </dicommon:initParam>
+        </dicommon:initParams>
+        <dicommon:JMSQueue jndiName="com.sigma.jms.queue.jea.sbjealgoss.backup" useJMSQueueFactory="com.sigma.jms.jea.JEAQueueConnectionFactory"/>
+    </replyTaskBackupMDB>
+</jeaDistribution>
