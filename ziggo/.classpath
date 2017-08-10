@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JDK6"/>
+	<classpathentry kind="lib" path="build/com.sigma.samp.imp.voiceClec.jeaProtocols.LGOSSAsyncResp/WEB-INF/lib/Provisioning_ASAPVoiceAsyn_wsdl.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/extjars43"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/smpcore44"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

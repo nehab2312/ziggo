@@ -66,6 +66,7 @@
 		<echo>"Compling the code"</echo>
 		<javac deprecation="${deprecation}" srcdir="${src.root}" debug="true" sourcepath="" destdir="${prj.build.dir}/WEB-INF/classes/">
 			<include name="com/sigma/samp/imp/voiceClec/jeaProtocols/LGOSSAsyncResp/*.java" />
+			<!--include name="com/sigma/samp/imp/voiceClec/jeaProtocols/LGOSSAsyncResp/Cfg/*.java" /-->
 			<classpath>
 				<path refid="build_classpath" />
 				
